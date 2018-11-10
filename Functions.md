@@ -1,29 +1,41 @@
 
-   postUser
-   getUser
-   putUser
-   deleteUser
-
-   postGroup                                               POST     =>   Create new
-   getGroups
-   deleteGroup
-
-   postFriendRequest                                       GET      =>   Request exisiting data
-   postFriend
-   deleteFriendRequest
-   deleteFriend
-                                                           PUT      =>   Update
-   postLocation              
-   getLocation
+   |  USER    ||  GROUP    |
+   |----------||-----------|
+   |postUser  ||postGroup  |  
+   |getUser   ||getGroups  |
+   |putUser   ||deleteGroup|
+   |deleteUser|
    
-   postImageTag                                            DELETE   =>   Remove data from collection
-   getImage
-   getImages
-   getImageTags
-   putImageTags
-   deleteImage
    
-   loginWithEmail          
-   loginWithGoogle       
-   logout                
+   
+                                             
+   
+   
+
+   |     FRIENDS       |
+   |-------------------|
+   |postFriendRequest  |                                      
+   |postFriend         |
+   |deleteFriendRequest|
+   |deleteFriend
+   
+   |  LOCATION   |
+   |-------------|                                                      
+   |postLocation |             
+   |getLocation  |
+   
+   |   IMAGES    |
+   |-------------|
+   |postImageTag |                                          
+   |getImage     |
+   |getImages    |
+   |getImageTags |
+   |putImageTags |
+   |deleteImage  |
+   
+   |  LOGIN/OUT    |
+   |---------------|
+   |loginWithEmail |          
+   |loginWithGoogle|       
+   |logout         |       
 
