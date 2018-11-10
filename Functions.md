@@ -1,7 +1,7 @@
-   ## POST     =>   Create new
-   ## GET      =>   Request exisiting data
-   ## PUT      =>   Update
-   ## DELETE   =>   Remove data from collection
+   ##### POST     =>   Create new
+   ##### GET      =>   Request exisiting data
+   ##### PUT      =>   Update
+   ##### DELETE   =>   Remove data from collection
    
    
    |  USER    |  GROUP    |     FRIENDS       |  LOCATION   |   IMAGES    |  LOGIN/OUT    |
