@@ -5,9 +5,9 @@
    |getUser   |getGroups  |postFriend         |getLocation  |getImage     |loginWithGoogle| 
    |putUser   |deleteGroup|deleteFriendRequest|             |getImages    |logout         | 
    |deleteUser|           |deleteFriend       |             |getImageTags |
-              |                                             |putImageTags |
-              |                                             |deleteImage  |
-              |
+   |          |                                             |putImageTags |
+   |          |                                             |deleteImage  |
+   |          |
         
                                                        
            
