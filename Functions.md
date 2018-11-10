@@ -1,9 +1,9 @@
 
-   |  USER    ||  GROUP    |
-   |----------||-----------|
-   |postUser  ||postGroup  |  
-   |getUser   ||getGroups  |
-   |putUser   ||deleteGroup|
+   |  USER    | |  GROUP    |
+   |----------| |-----------|
+   |postUser  | |postGroup  |  
+   |getUser   | |getGroups  |
+   |putUser   | |deleteGroup|
    |deleteUser|
    
    
