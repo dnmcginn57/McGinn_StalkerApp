@@ -1,4 +1,9 @@
-
+   ##POST     =>   Create new
+   ##GET      =>   Request exisiting data
+   ##PUT      =>   Update
+   ##DELETE   =>   Remove data from collection
+   
+   
    |  USER    |  GROUP    |     FRIENDS       |  LOCATION   |   IMAGES    |  LOGIN/OUT    |
    |----------|-----------|-------------------|-------------|-------------|---------------|  
    |postUser  |postGroup  |postFriendRequest  |postLocation |postImageTag |loginWithEmail |       
