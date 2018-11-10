@@ -1,14 +1,33 @@
 
-   |  USER    |  GROUP    |     FRIENDS       |
-   |----------|-----------|-------------------|
-   |postUser  |postGroup  |postFriendRequest  |   
-   |getUser   |getGroups  |postFriend         |
-   |putUser   |deleteGroup|deleteFriendRequest|
-   |deleteUser|           |deleteFriend       |
+   |  USER    |  GROUP    |     FRIENDS       |  LOCATION   |   IMAGES    |  LOGIN/OUT    |
+   |----------|-----------|-------------------|-------------|-------------|---------------|  
+   |postUser  |postGroup  |postFriendRequest  |postLocation |postImageTag |loginWithEmail |       
+   |getUser   |getGroups  |postFriend         |getLocation  |getImage     |loginWithGoogle| 
+   |putUser   |deleteGroup|deleteFriendRequest|             |getImages    |logout         | 
+   |deleteUser|           |deleteFriend       |             |getImageTags |
+                                                            |putImageTags |
+                                                            |deleteImage  |
+   
+        
+                                                       
+           
    
    
    
-                                             
+   
+                                            
+   
+   
+   
+   
+   
+   
+   
+   
+             
+         
+         
+                                        
    
    
 
@@ -19,23 +38,4 @@
    
    
    
-   |  LOCATION   |
-   |-------------|                                                      
-   |postLocation |             
-   |getLocation  |
-   
-   |   IMAGES    |
-   |-------------|
-   |postImageTag |                                          
-   |getImage     |
-   |getImages    |
-   |getImageTags |
-   |putImageTags |
-   |deleteImage  |
-   
-   |  LOGIN/OUT    |
-   |---------------|
-   |loginWithEmail |          
-   |loginWithGoogle|       
-   |logout         |       
 
