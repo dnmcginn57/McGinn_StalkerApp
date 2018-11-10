@@ -1,10 +1,10 @@
 
-   |  USER    |  GROUP    |
-   |----------|-----------|
-   |postUser  |postGroup  |  
-   |getUser   |getGroups  |
-   |putUser   |deleteGroup|
-   |deleteUser|
+   |  USER    |  GROUP    |     FRIENDS       |
+   |----------|-----------|-------------------|
+   |postUser  |postGroup  |postFriendRequest  |   
+   |getUser   |getGroups  |postFriend         |
+   |putUser   |deleteGroup|deleteFriendRequest|
+   |deleteUser|           |deleteFriend       |
    
    
    
@@ -12,12 +12,12 @@
    
    
 
-   |     FRIENDS       |
-   |-------------------|
-   |postFriendRequest  |                                      
-   |postFriend         |
-   |deleteFriendRequest|
-   |deleteFriend
+   
+   
+                                        
+   
+   
+   
    
    |  LOCATION   |
    |-------------|                                                      
