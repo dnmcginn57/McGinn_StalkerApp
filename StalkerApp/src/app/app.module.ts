@@ -10,6 +10,7 @@ import { MapPage } from '../pages/map/map';
 import { ProfilePage } from '../pages/profile/profile';
 import { FriendPage } from '../pages/friend/friend';
 import { LocationPage } from '../pages/location/location';
+import { DatabaseProvider } from '../providers/database/database';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LocationPage } from '../pages/location/location';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DatabaseProvider
   ]
 })
 export class AppModule {}
