@@ -5,40 +5,38 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { TabsPage } from '../pages/tabs/tabs';
-import { MapPage } from '../pages/map/map';
-import { ProfilePage } from '../pages/profile/profile';
-import { FriendPage } from '../pages/friend/friend';
-import { LocationPage } from '../pages/location/location';
-import { DatabaseProvider } from '../providers/database/database';
+import { FirebaseProvider } from '../providers/firebase/firebase';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth'
+import { AngularFirestoreModule } from 'angularfire2/firestore'
+import { FIREBASE_CONFIG } from './credentials'
+
+// ionic cordova plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID=myreversedclientid
+//npm install --save @ionic-native/google-plus
+import { GooglePlus } from '@ionic-native/google-plus';
 
 @NgModule({
   declarations: [
     MyApp,
-    TabsPage,
-    MapPage,
-    ProfilePage,
-    FriendPage,
-    LocationPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    TabsPage,
-    MapPage,
-    ProfilePage,
-    FriendPage,
-    LocationPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DatabaseProvider
+    FirebaseProvider,
+    GooglePlus
   ]
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 //Firebase Authentication
 import { AngularFireAuth } from 'angularfire2/auth';
