@@ -1,13 +1,17 @@
+
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+
 /**
  * Generated class for the MapPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+
 declare var google;
+
 
 @IonicPage()
 @Component({
@@ -16,6 +20,7 @@ declare var google;
 })
 export class MapPage {
 
+
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
@@ -23,6 +28,7 @@ export class MapPage {
 
   ionViewDidLoad() {
    this.loadMap();
+    console.log('ionViewDidLoad MapPage');
   }
  
 
@@ -70,6 +76,6 @@ export class MapPage {
       infoWindow.open(this.map, marker);
     });
    
-  }
+
 
 }
