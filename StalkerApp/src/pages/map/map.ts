@@ -75,7 +75,5 @@ export class MapPage {
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
     });
-   
-
-
+  }
 }
