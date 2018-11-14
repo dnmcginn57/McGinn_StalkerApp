@@ -11,7 +11,7 @@
   |Dinh, Luong T.        |Lyte195      	 |ldinh195@gmail.com	      |
   |Glebe, Jeremy D.      |jeremyglebe    |na			      |
   |McGinn, David N.      |dnmcginn57     |nicholasmcginn57@yahoo.com  |
-  |Joseph, Jamal J.      |Jamada623      |na			      |
+  |Joseph, Jamal J.      |Jamada623      |jamal2501@hotmail.com	      |
   |Lopez, Jakob L.       |JakobLopez     |thejakoblopez@gmail.com     |			
   |Mullins, Samuel S.    |ssmullins      |na			      |
   |Patterson, Jacob W.   |jazzhandsjacob |jacobpatterson94@gmail.com  |
