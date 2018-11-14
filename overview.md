@@ -6,6 +6,7 @@
  
   |Name                  |Github Username|Email                       |
   |----------------------|---------------|----------------------------|
+  |Glebe, Jeremy D.      |jeremyglebe 	 |jeremyglebe@gmail.com	      |
   |Beaver, Sarah A.      |bluefire8421 	 |sbeaver57@yahoo.com	      |
   |Callender, Clorissa   |Rissa-CSS    	 |na			      |
   |Dinh, Luong T.        |Lyte195      	 |ldinh195@gmail.com	      |
