@@ -8,14 +8,14 @@
   |----------------------|---------------|----------------------------|
   |Beaver, Sarah A.      |bluefire8421 	 |sbeaver57@yahoo.com	      |
   |Callender, Clorissa   |Rissa-CSS    	 |na			      |
-  |Dinh, Luong T.        |Lyte195      	 |ldinh195@gmail.com			      |
+  |Dinh, Luong T.        |Lyte195      	 |ldinh195@gmail.com	      |
   |Glebe, Jeremy D.      |jeremyglebe    |na			      |
   |McGinn, David N.      |dnmcginn57     |nicholasmcginn57@yahoo.com  |
   |Joseph, Jamal J.      |Jamada623      |na			      |
   |Lopez, Jakob L.       |JakobLopez     |thejakoblopez@gmail.com     |			
   |Mullins, Samuel S.    |ssmullins      |na			      |
-  |Patterson, Jacob W.   |jazzhandsjacob |na			      |
-  |Rollerson, Keona      |Kegoma11       |na			      |
+  |Patterson, Jacob W.   |jazzhandsjacob |jacobpatterson94@gmail.com  |
+  |Rollerson, Keona      |Kegoma11       |keonarollerson@gmail.com    |
 
 
 #### Components
