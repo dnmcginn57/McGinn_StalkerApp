@@ -4,18 +4,18 @@
 #### Team Members
 
  
-  |Name                  |Github Username|
-  |----------------------|------------|
-  |Beaver, Sarah A.      |bluefire8421|
-  |Callender, Clorissa   |Rissa-CSS   |
-  |Dinh, Luong T.        |Lyte195    |
-  |Glebe, Jeremy D.      |jeremyglebe|
-  |McGinn, David N.      |dnmcginn57|
-  |Joseph, Jamal J.      |Jamada623|
-  |Lopez, Jakob L.       |JakobLopez|
-  |Mullins, Samuel S.    |ssmullins|
-  |Patterson, Jacob W.   |jazzhandsjacob|
-  |Rollerson, Keona      |Kegoma11|
+  |Name                  |Github Username|     |Email|
+  |----------------------|------------|-----------------------|
+  |Beaver, Sarah A.      |bluefire8421|sbeaver57@yahoo.com|
+  |Callender, Clorissa   |Rissa-CSS   ||
+  |Dinh, Luong T.        |Lyte195    ||
+  |Glebe, Jeremy D.      |jeremyglebe||
+  |McGinn, David N.      |dnmcginn57||
+  |Joseph, Jamal J.      |Jamada623||
+  |Lopez, Jakob L.       |JakobLopez||
+  |Mullins, Samuel S.    |ssmullins||
+  |Patterson, Jacob W.   |jazzhandsjacob||
+  |Rollerson, Keona      |Kegoma11||
 
 
 #### Components
