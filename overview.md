@@ -10,7 +10,7 @@
   |Callender, Clorissa   |Rissa-CSS    	 |na			|
   |Dinh, Luong T.        |Lyte195      	 |na			|
   |Glebe, Jeremy D.      |jeremyglebe    |na			|
-  |McGinn, David N.      |dnmcginn57     |na			|
+  |McGinn, David N.      |dnmcginn57     |nicholasmcginn57@yahoo.com|
   |Joseph, Jamal J.      |Jamada623      |na			|
   |Lopez, Jakob L.       |JakobLopez     |na			|
   |Mullins, Samuel S.    |ssmullins      |na			|
