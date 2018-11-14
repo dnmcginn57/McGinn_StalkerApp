@@ -4,15 +4,15 @@
    ##### DELETE   =>   Remove data from collection
    
    
-   |  USER    |  GROUP    |     FRIENDS       |  LOCATION   |   IMAGES    |  LOGIN/OUT    |
-   |----------|-----------|-------------------|-------------|-------------|---------------|  
-   |postUser  |postGroup  |postFriendRequest  |postLocation |postImageTag |loginWithEmail |       
-   |getUser   |getGroups  |postFriend         |getLocation  |getImage     |loginWithGoogle| 
-   |putUser   |deleteGroup|deleteFriendRequest|             |getImages    |logout         | 
-   |deleteUser|           |deleteFriend       |             |getImageTags |
-   |          |                                             |putImageTags |
-   |          |                                             |deleteImage  |
-   |          |
+   |  USER             |  GROUP    |     FRIENDS       |  LOCATION   |   IMAGES    |  LOGIN/OUT    |
+   |-------------------|-----------|-------------------|-------------|-------------|---------------|  
+   |postUser2Firebase  |postGroup  |postFriendRequest  |postLocation |postImageTag |loginWithEmail |       
+   |postUser           |getGroups  |postFriend         |getLocation  |getImage     |loginWithGoogle| 
+   |getUser            |deleteGroup|deleteFriendRequest|             |getImages    |logout         | 
+   |putUser            |           |deleteFriend       |             |getImageTags |
+   |deleteUser         |                                             |putImageTags |
+   |                   |                                             |deleteImage  |
+   |                   |
         
                                                        
            
