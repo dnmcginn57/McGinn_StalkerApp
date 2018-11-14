@@ -10,11 +10,10 @@
   - Social Media
   - Groups
 # Friend 
-  - create group 
-  - search group
-  - leave group
-  - delete group
-  - add to a group
+  - Add Friend
+  - Search Friend
+  - Delete Friend
+  - List Friends
 # Location
   -list of locations with tag
   

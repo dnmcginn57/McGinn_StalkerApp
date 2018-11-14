@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 
 /**
  * Generated class for the MapPage page.
@@ -8,6 +10,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
+declare var google;
+
+
 @IonicPage()
 @Component({
   selector: 'page-map',
@@ -15,20 +20,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MapPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
   }
 
   ionViewDidLoad() {
+   this.loadMap();
     console.log('ionViewDidLoad MapPage');
   }
+ 
 
-<<<<<<< Updated upstream
-=======
+
   loadMap(){
  
     this.geolocation.getCurrentPosition().then((position) => {
  
       let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
       
       //Array contains all styling options for google's default dark theme.
       //  it fits well with our current black and white color pallet
@@ -224,6 +234,7 @@ export class MapPage {
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         styles: stylesArray 
+
       }
  
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
@@ -258,5 +269,5 @@ export class MapPage {
       infoWindow.open(this.map, marker);
     });
   }
->>>>>>> Stashed changes
+
 }
