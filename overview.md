@@ -37,7 +37,7 @@
 
 #### Component Team Assignments
 <ul>
-<li>Team Leader
+<li>Team Leader, merging handling conflicts, parts of app doesn't fall into a group
   <br>   - Beaver, Sarah A.
 <li>Camera/Social Media/Messaging
   <br>   - Callender, Clorissa
