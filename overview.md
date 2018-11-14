@@ -8,12 +8,12 @@
   |----------------------|---------------|----------------------------|
   |Glebe, Jeremy D.      |jeremyglebe 	 |jeremyglebe@gmail.com	      |
   |Beaver, Sarah A.      |bluefire8421 	 |sbeaver57@yahoo.com	      |
-  |Callender, Clorissa   |Rissa-CSS    	 |na			      |
+  |Callender, Clorissa   |Rissa-CSS    	 |Ccallender1996@gmail.com    |
   |Dinh, Luong T.        |Lyte195      	 |ldinh195@gmail.com	      |
   |McGinn, David N.      |dnmcginn57     |nicholasmcginn57@yahoo.com  |
   |Joseph, Jamal J.      |Jamada623      |jamal2501@hotmail.com	      |
   |Lopez, Jakob L.       |JakobLopez     |thejakoblopez@gmail.com     |			
-  |Mullins, Samuel S.    |ssmullins      |na			      |
+  |Mullins, Samuel S.    |ssmullins      |samuel.s.mullins@gmail.com  |
   |Patterson, Jacob W.   |jazzhandsjacob |jacobpatterson94@gmail.com  |
   |Rollerson, Keona      |Kegoma11       |keonarollerson@gmail.com    |
 
