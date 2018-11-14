@@ -27,10 +27,12 @@
 <li>Routing/Location
   <br>   -Provides a routing service for the user. User can visualize where they are going
           and how to get there.
+  <br>   -Handles tagging and uploading tag locations
 <li>UI/UX
   <br>   -Design, theme, layout, icon, splash screen
 <li>User-Location
   <br>   -Posts a users current location so it can be shared 
+  <br>   -Shows friends locations
 </ul>
 
 #### Component Team Assignments
