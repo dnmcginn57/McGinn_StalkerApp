@@ -12,6 +12,8 @@ import { MapPage } from '../pages/map/map';
 import { ProfilePage } from '../pages/profile/profile';
 import { FriendPage } from '../pages/friend/friend';
 import { LocationPage } from '../pages/location/location';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage} from '../pages/register/register';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { LocationPage } from '../pages/location/location';
     MapPage,
     ProfilePage,
     FriendPage,
-    LocationPage
+    LocationPage,
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import { LocationPage } from '../pages/location/location';
     MapPage,
     ProfilePage,
     FriendPage,
-    LocationPage
+    LocationPage,
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
