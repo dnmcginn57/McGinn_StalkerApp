@@ -5,6 +5,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase'
+import { AuthProvider} from '../../providers/auth/auth'
 
 @IonicPage()
 @Component({
@@ -14,7 +15,7 @@ import { FirebaseProvider } from '../../providers/firebase/firebase'
 export class HomePage {
 
   //Inject firebaseProvider
-  constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
+  constructor(private auth: AuthProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
   }
 
   ionViewDidLoad() {
@@ -34,7 +35,7 @@ export class HomePage {
 
     //tries to authenticate user to firebase
     //if succesful, user is added to collection
-    this.fb.postUser2Firebase(cred).then(() => {
+    this.auth.postUser2Firebase(cred.email,cred.password).then(() => {
       this.fb.postUser(cred.username, cred.first, cred.last, cred.email)
     }, err => console.log(err));
   }
@@ -50,6 +51,8 @@ export class HomePage {
       console.log("Login was a success")
     }, error => console.log(error));
   }
+
+
 
 
   //Updates current user fields
@@ -111,4 +114,11 @@ export class HomePage {
     });
 
   }
+    //attempts to log user in wiht google account
+    google()
+    {
+      this.auth.loginInWithGoogle().then(() => {
+        console.log("signed in with google")
+      });
+    }
 }
