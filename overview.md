@@ -59,16 +59,28 @@
   <br>   - Joseph, Jamal J.
 </ul>
 
-#### Use Cases
+#### General Use Cases
 <ul>
-<li>	Joe expects his location to be tracked and shown on a map
-<li>	Joe is lonely on a Friday night and wants to see where his friends are hanging out at. When logged into a group, all members’ location should be shown
-<li>	Joe found a cool location and wants to show his image off to his friends, so he needs to be able to upload images with a tag
+<li>	Joe expects his location to be tracked and shown on a map.
+<li>	Joe is lonely on a Friday night and wants to see where his friends are hanging out at. When logged into a group, all members’ 		location should be shown.
+<li>	Joe found a cool location and wants to show his image off to his friends, so he needs to be able to upload images with a tag.
 <li>	Joe needs to be picked up. His friends can track his location and use the routing service to get to him.
-<li>	Joe wants to be able to search images of a particular tag 
+<li>	Joe wants to be able to search images of a particular tag .
 <li>	Joe should have a basic user profile that shows his favorite location, groups, picture…
 <li>	Joe got into an argument with Joe Jr. He should be able to delete Joe Jr. as a friend.
-<li>	Social Media Page should be able to get all friends of the current user
+<li>	Social Media Page should be able to get all friends of the current user.
 
+</ul>
+
+#### Firebase Use Cases
+<ul>
+<li>	Users wants to be able to create an account; there needs to be a createUser function.
+<li>	Sometimes users don't feel like going through the signup stage, so they exepect to be able to login in with social media/Google; 	 there needs to be multiple login choices.
+<li>	When leaving the app temporarily, the user should still be logged in.
+<li>	Users should have the option to login/out.
+<li>	To make sure the user signed up properly, a verification email should be sent out upon registration.
+<li>	We may need a user's information, so there needs to be a getUser that returns a document; same with location, groups, friends.	
+<li> 	A user wants to track ore than one location, so locations needs to be subcollection.
+<li>	All documents can be created,updated,retrieved and deleted.
 </ul>
 
