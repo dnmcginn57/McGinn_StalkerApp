@@ -15,6 +15,7 @@ import { FIREBASE_CONFIG } from './credentials'
 // ionic cordova plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID=myreversedclientid
 //npm install --save @ionic-native/google-plus
 import { GooglePlus } from '@ionic-native/google-plus';
+import { AuthProvider } from '../providers/auth/auth';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider,
-    GooglePlus
+    GooglePlus,
+    AuthProvider
   ]
 })
 export class AppModule {}
