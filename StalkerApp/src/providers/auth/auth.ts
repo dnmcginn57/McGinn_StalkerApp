@@ -65,7 +65,6 @@ export class AuthProvider {
       {
         console.log(e);
       }
-      
     }
 
 }

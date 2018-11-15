@@ -84,11 +84,12 @@ export class FirebaseProvider {
   }
 
   //return document to current user
-  async getUser(){
-    let usersCollection = await this.afs.collection("Users");
-    let adminDocument = await usersCollection.doc(this.user.uid);
-    
-    return adminDocument;
+  async getUser() {
+      let usersCollection = await this.afs.collection("Users");
+      let adminDocument = await usersCollection.doc(this.user.uid);
+
+      return adminDocument;
+  
   }
 
   //Updates current user's field information
@@ -103,7 +104,7 @@ export class FirebaseProvider {
   async deleteUser() {
 
     let qry = await this.afs.doc(`Users/${this.user.uid}`)
- 
+
     qry.delete().then(() => {
       console.log("Document successfully deleted!");
       this.user.delete();
@@ -183,8 +184,8 @@ export class FirebaseProvider {
   }
 
   //Signs user out
-  logout(): Promise<void> {
-    return this.afAuth.auth.signOut();
+  async logout() {
+    await this.afAuth.auth.signOut();
   }
 
 }

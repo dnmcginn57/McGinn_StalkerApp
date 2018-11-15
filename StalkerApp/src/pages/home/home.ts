@@ -87,6 +87,13 @@ export class HomePage {
     }
   }
 
+  //logs user out
+  logout(){
+    this.fb.logout().then(() => {
+      console.log("logout was successfull")
+    });
+  }
+
   //Send location to database
   uploadlocation() {
     this.fb.postLocation(2);
