@@ -84,3 +84,11 @@
 <li>	All documents can be created,updated,retrieved and deleted.
 </ul>
 
+#### UI/UX Use Cases
+<ul>
+	<li> The user will want to be able to easily access all the app's features
+	<li> The user will want an app that is pleasing to look at
+	<li> ~~the user will want to feel uneasy the entire time they are using the app~~
+	<li> the user should get the feeling that all of the elements belong together
+</ul>
+
