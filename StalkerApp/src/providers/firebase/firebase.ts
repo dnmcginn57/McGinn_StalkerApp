@@ -84,11 +84,12 @@ export class FirebaseProvider {
   }
 
   //return document to current user
-  async getUser(){
-    let usersCollection = await this.afs.collection("Users");
-    let adminDocument = await usersCollection.doc(this.user.uid);
-    
-    return adminDocument;
+  async getUser() {
+      let usersCollection = await this.afs.collection("Users");
+      let adminDocument = await usersCollection.doc(this.user.uid);
+
+      return adminDocument;
+  
   }
 
   //Updates current user's field information
@@ -103,7 +104,7 @@ export class FirebaseProvider {
   async deleteUser() {
 
     let qry = await this.afs.doc(`Users/${this.user.uid}`)
- 
+
     qry.delete().then(() => {
       console.log("Document successfully deleted!");
       this.user.delete();
@@ -160,7 +161,7 @@ export class FirebaseProvider {
       if ((<any>window).cordova) {
         this.googlePlus.login({
           'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
-          'webClientId': '264506855386-ieokeaf7hvim6dtr4nhnn0892be145mc.apps.googleusercontent.com',// optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+          'webClientId': '733520227387-jmb6ooftoiu5g4j9pg57lbeo89006fru.apps.googleusercontent.com',// optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
           'offline': true
         }).then((response) => {
           const googleCredential = firebase.auth.GoogleAuthProvider.credential(response.idToken);
@@ -183,8 +184,8 @@ export class FirebaseProvider {
   }
 
   //Signs user out
-  logout(): Promise<void> {
-    return this.afAuth.auth.signOut();
+  async logout() {
+    await this.afAuth.auth.signOut();
   }
 
 }
