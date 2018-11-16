@@ -1,91 +1,42 @@
 
 import { Injectable } from '@angular/core';
 //Firebase Authentication
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { _iterableDiffersFactory } from '@angular/core/src/application_module';
 
 @Injectable()
 export class DatabaseProvider {
 
+  _db: AngularFirestore
   constructor(
-    //Angular fire authentication for use with firebase
-    public afAuth: AngularFireAuth
+    _db: AngularFirestore
   ) {
     console.log('Hello AuthServiceProvider Provider');
+    this._db = _db;
   }
 
-  /**************************
-   * Authentication Methods *
-   **************************/
-
-  /* EmailRegister
-   * NOT YET IMPLEMENTED. COMMENT BLOCK IS FOR LATER REFERENCE. DOES THE SAME
-   * THING AS "doEmailRegister" UNTIL FURTHER DEVELOPMENT.
-   * Desc: Registers a user and adds information about them to the users
-   *     collections on firestore.
+  /* setUserDoc
+   * Desc: Asynchronous. Uploads a user document to the firestore.
    * Params:
-   *     email: string, the email they're registering with
-   *     password: string, password the user will log in with
-   *     user: {}, user document that will be sent to database, keys include
-   *         "nick": nickname for the user's profile,
-   *         "first": First name of the user,
-   *         "last": Last name of the user
-   * Returns: None (throws error on failure)
+   *     id: the id of the document being set
+   *     firstname: the first name of the user
+   *     lastname: the last name of the user
+   * returns: nothing.
    */
-  // async EmailRegister(email, password) {
-  //   try{
-  //     await this.doEmailRegister(email, password);
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
-
-  /* Logout
-   * Desc: Logs out of firebase account.
-   *     (This is also done automatically upon closing the app)
-   */
-  async Logout(){
+  async setUserDoc(id: string, firstname: string, lastname: string){
     try{
-      await this.afAuth.auth.signOut();
-    } catch(e) {
-      //IDK why there would be an error but ya know
+
+      var obj = {
+        first: firstname,
+        last: lastname
+      }
+      await this._db.collection('Users').doc(id).set(obj);
+
+    }catch(e){
+
       throw e;
+    
     }
   }
-
-  /* doEmailRegister
-   * Desc: Registers a user with the database on our firestore
-   *     Basic register with no verification process.
-   * Params:
-   *     email: string, the email they're registering with
-   *     password: string, password the user will log in with
-   * Returns: None (throws error on failure)
-   */
-  async doEmailRegister(email, password) {
-    try {
-      await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  /* doEmailLogin
-   * Desc: Attempts to login to account on firestore with given credentials
-   *     Basic login with no returns or database entries.
-   * Params:
-   *     email: string, email associated with the account
-   *     password: string, password to verify user's identity
-   * Returns: None (throws error on failure)
-   */
-  async doEmailLogin(email, password) {
-    try {
-      await this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  /***********************
-   * Database Operations *
-   ***********************/
 
 }

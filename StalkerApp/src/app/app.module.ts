@@ -5,17 +5,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { FirebaseProvider } from '../providers/firebase/firebase';
 
+//Firebase team imports
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth'
 import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { FIREBASE_CONFIG } from './credentials'
-
-// ionic cordova plugin add cordova-plugin-googleplus --variable REVERSED_CLIENT_ID=myreversedclientid
-//npm install --save @ionic-native/google-plus
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AuthProvider } from '../providers/auth/auth';
+import { DatabaseProvider } from '../providers/database/database';
 
 @NgModule({
   declarations: [
@@ -36,7 +34,7 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseProvider,
+    DatabaseProvider,
     GooglePlus,
     AuthProvider
   ]
