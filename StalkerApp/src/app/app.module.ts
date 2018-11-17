@@ -15,6 +15,15 @@ import { LocationPage } from '../pages/location/location';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
 
+//Firebase team imports
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth'
+import { AngularFirestoreModule } from 'angularfire2/firestore'
+import { FIREBASE_CONFIG } from './credentials'
+import { GooglePlus } from '@ionic-native/google-plus';
+import { AuthProvider } from '../providers/auth/auth';
+import { DatabaseProvider } from '../providers/database/database';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +37,10 @@ import { RegisterPage} from '../pages/register/register';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,6 +59,9 @@ import { RegisterPage} from '../pages/register/register';
     Geolocation,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
+    DatabaseProvider,
+    GooglePlus,
+    AuthProvider
   ]
 })
 export class AppModule {}
