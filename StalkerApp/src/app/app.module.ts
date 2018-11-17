@@ -4,7 +4,16 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { Geolocation } from '@ionic-native/geolocation';
+
 import { MyApp } from './app.component';
+import { TabsPage } from '../pages/tabs/tabs';
+import { MapPage } from '../pages/map/map';
+import { ProfilePage } from '../pages/profile/profile';
+import { FriendPage } from '../pages/friend/friend';
+import { LocationPage } from '../pages/location/location';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage} from '../pages/register/register';
 
 //Firebase team imports
 import { AngularFireModule } from 'angularfire2';
@@ -18,6 +27,13 @@ import { DatabaseProvider } from '../providers/database/database';
 @NgModule({
   declarations: [
     MyApp,
+    TabsPage,
+    MapPage,
+    ProfilePage,
+    FriendPage,
+    LocationPage,
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -29,11 +45,20 @@ import { DatabaseProvider } from '../providers/database/database';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    TabsPage,
+    MapPage,
+    ProfilePage,
+    FriendPage,
+    LocationPage,
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Geolocation,
+
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
     DatabaseProvider,
     GooglePlus,
     AuthProvider
