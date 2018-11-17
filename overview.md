@@ -97,7 +97,8 @@
 	<li> Input address then get a route from the users’ position to the address entered.
 	<li> Can tag picture to location and save them to users profile.
 </ul>
-### Camera/ Social media/ Messaging
+
+#### Camera/ Social media/ Messaging
 <ul>
 	<li>John, an instagram user, is at chik-fil-a eating a grilled chicken sandwich and wants to share a picture of it with his instagram followers.
 
