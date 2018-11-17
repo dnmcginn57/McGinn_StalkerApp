@@ -97,4 +97,25 @@
 	<li> Input address then get a route from the users’ position to the address entered.
 	<li> Can tag picture to location and save them to users profile.
 <ul>
+### Camera/ Social media/ Messaging
+<ul>
+	<li>John, an instagram user, is at chik-fil-a eating a grilled chicken sandwich and wants to share a picture of it with his instagram followers.
+
+
+<li>Alexis, who loves nature adventures, is at River Bend Nature park and wants to capture a moment that she can review later.
+
+
+<li>Jerry, a student, goes to the mall and he takes it picture and wants to geo tag it.
+
+
+<li>Chris and Chad are two friends. Chad is going to visit Chris and home but is unsure of how to get there.
+	<ul>
+	<li>Chad wants to chat with Chris to find out what time is best to pass by.
+
+	<li>Chad wants to get directions to Chris’ house based on Chris’ location.
+
+	<li>Chad wants to be sure Chris is home before Chad decides to swing by.
+	</ul>
+	<li>Jack wants to update his profile picture.
+</ul>
 
