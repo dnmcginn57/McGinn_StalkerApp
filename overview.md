@@ -92,3 +92,9 @@
 	<li> the user should get the feeling that all of the elements belong together
 </ul>
 
+#### Location/routing use cases:
+<ul>
+	<li> Input address then get a route from the users’ position to the address entered.
+	<li> Can tag picture to location and save them to users profile.
+<ul>
+
