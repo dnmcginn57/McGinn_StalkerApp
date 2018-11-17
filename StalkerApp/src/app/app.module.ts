@@ -58,7 +58,7 @@ import { DatabaseProvider } from '../providers/database/database';
     SplashScreen,
     Geolocation,
 
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
     GooglePlus,
     AuthProvider
