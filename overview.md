@@ -98,7 +98,7 @@
 	<li> Can tag picture to location and save them to users profile.
 </ul>
 
-#### Camera/ Social media/ Messaging
+#### Camera/ Social media/ Messaging use cases:
 <ul>
 	<li>John, an instagram user, is at chik-fil-a eating a grilled chicken sandwich and wants to share a picture of it with his instagram followers.
 
