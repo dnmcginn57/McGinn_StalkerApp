@@ -1,6 +1,6 @@
 
 ### Name: David McGinn
-### Date: 11/19
+# Date: 11/19
 
 ## Files Worked On
 https://github.com/bluefire8421/StalkerApp/blob/UI/UX/StalkerApp/src/pages/login/login.scss
@@ -21,7 +21,7 @@ Mostly just provided other teams tha facilities to start working on their functi
 then went back later and made the pages pretty
 
 
-### Date: 11/14
+# Date: 11/14
 
 ## Files Worked On
 https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/map/map.ts
