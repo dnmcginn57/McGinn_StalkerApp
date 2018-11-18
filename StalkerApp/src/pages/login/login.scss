@@ -1,0 +1,33 @@
+.form-content {
+    background-color: black;
+
+}
+
+.text-fields{
+    background-color: black;
+
+}
+
+#textInput{
+    color: white;
+}
+
+.submit-button{
+    background-color: color($colors, dark);
+}
+
+.logo{
+    margin: auto;
+    width: 50%;
+    
+    width: 100px;
+    height: 100px;
+    background-image: url('../../assets/imgs/icon.png');
+    background-size: cover;
+    display:block;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+}
+
+
