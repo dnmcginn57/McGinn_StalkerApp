@@ -30,8 +30,14 @@ export class LoginPage {
   }
 
   
-  tryLogin(value){
-    this.navCtrl.push(TabsPage);
+   tryLogin(value){
+    this.auth.loginWithEmail(value).then(res=>{
+      this.navCtrl.push(TabsPage);
+    }, 
+    err =>{
+      this.errorMessage="The email or password is incorrect. Please try again.";
+    })
+    
   }
 
  
