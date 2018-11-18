@@ -4,7 +4,7 @@
 
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FirebaseProvider } from '../../providers/firebase/firebase'
+import { FirebaseProvider } from '../../providers/firebase/old_firebase'
 import { AuthProvider} from '../../providers/auth/auth'
 
 @IonicPage()
@@ -35,7 +35,7 @@ export class HomePage {
 
     //tries to authenticate user to firebase
     //if succesful, user is added to collection
-    this.auth.postUser2Firebase(cred.email,cred.password).then(() => {
+    this.auth.postUser2Firebase(cred.email,cred.password,cred.first,cred.last).then(() => {
       this.fb.postUser(cred.username, cred.first, cred.last, cred.email)
     }, err => console.log(err));
   }
