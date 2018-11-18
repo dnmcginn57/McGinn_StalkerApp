@@ -2,20 +2,22 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { GooglePlus } from '@ionic-native/google-plus';
 import * as firebase from 'firebase/app';
+import { DatabaseProvider } from '../database/database';
 
 
 @Injectable()
 export class AuthProvider {
 
-  constructor(public afAuth: AngularFireAuth, public googlePlus: GooglePlus) {
+  constructor(public afAuth: AngularFireAuth, public googlePlus: GooglePlus, public database: DatabaseProvider) {
     console.log('Hello AuthProvider Provider');
   }
 
   //Creates a new Firebase user with email and password
-  async postUser2Firebase(email, password) {
+  async postUser2Firebase(email, password, firstname, lastname) {
     try {
       let newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
-
+      //Add the user to the collection
+      this.database.setUserDoc(newUser.user.uid, firstname, lastname);
       console.log(`${newUser.user.email} 's UID: ${newUser.user.uid}`);
     }
     catch (e) {
