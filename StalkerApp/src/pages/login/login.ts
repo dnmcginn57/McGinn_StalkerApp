@@ -23,28 +23,26 @@ export class LoginPage {
     public auth: AuthProvider
   ) {}
 
-  ionViewWillLoad(){
+  ionViewWillLoad() {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(),
       password: new FormControl(),
     });
   }
 
-  
 
-  tryLogin(value){
-    this.auth.loginWithEmail(value).then(res=>{
+  async tryLogin(value) {
+    try {
+      await this.auth.loginWithEmail(value);
       this.navCtrl.push(TabsPage);
-    }, 
-    err =>{
-      this.errorMessage="The email or password is incorrect. Please try again.";
-    })
-    
+    } catch (e) {
+      console.log(e);
+    }
+
   }
 
- 
 
-  goRegisterPage(){
+  goRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
 
