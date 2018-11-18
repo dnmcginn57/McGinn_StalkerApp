@@ -31,14 +31,9 @@ export class AuthProvider {
   //        email:String,
   //        password:String
   //      };
-  async loginWithEmail(credentials) {
-    try {
-      await this.afAuth.auth.signInWithEmailAndPassword(credentials.email,
-        credentials.password);
-    }
-    catch (e) {
-      console.log(e);
-    }
+  loginWithEmail(credentials) {
+    return this.afAuth.auth.signInWithEmailAndPassword(credentials.email,
+			credentials.password);
   }
 
   //Signs user in with google account

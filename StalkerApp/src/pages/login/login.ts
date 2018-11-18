@@ -31,6 +31,7 @@ export class LoginPage {
   }
 
   
+
   tryLogin(value){
     this.auth.loginWithEmail(value).then(res=>{
       this.navCtrl.push(TabsPage);
