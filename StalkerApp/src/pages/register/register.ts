@@ -53,7 +53,7 @@ export class RegisterPage {
        this.successMessage = "";
     } 
   }
-  
+
 /*
   registerTest(){
     this.auth.postUser2Firebase("me@website.com", "password1234", "Me", "Not you");

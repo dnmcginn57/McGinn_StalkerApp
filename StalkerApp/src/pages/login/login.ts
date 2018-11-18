@@ -8,7 +8,6 @@ import { TabsPage } from '../tabs/tabs';
 import { AuthProvider } from '../../providers/auth/auth';
 
 
-
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -22,7 +21,7 @@ export class LoginPage {
     public navCtrl: NavController,
     public formBuilder: FormBuilder,
     public auth: AuthProvider
-  ) { }
+  ) {}
 
   ionViewWillLoad() {
     this.loginForm = this.formBuilder.group({
