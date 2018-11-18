@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
-
+import { AuthProvider } from '../../providers/auth/auth';
 
 
 @Component({
@@ -19,7 +19,8 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public auth: AuthProvider
   ) {}
 
   ionViewWillLoad(){
@@ -31,7 +32,13 @@ export class LoginPage {
 
   
   tryLogin(value){
-    this.navCtrl.push(TabsPage);
+    this.auth.loginWithEmail(value).then(res=>{
+      this.navCtrl.push(TabsPage);
+    }, 
+    err =>{
+      this.errorMessage="The email or password is incorrect. Please try again.";
+    })
+    
   }
 
  
