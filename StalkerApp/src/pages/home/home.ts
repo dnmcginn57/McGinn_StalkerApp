@@ -1,7 +1,7 @@
 //This is a testing page
 //Functions are called upon button clicks
 //These functions show the firebase-service can be called
-
+/*
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/old_firebase'
@@ -122,3 +122,4 @@ export class HomePage {
       });
     }
 }
+*/
