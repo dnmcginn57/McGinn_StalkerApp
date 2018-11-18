@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
-
+import { AuthProvider } from '../../providers/auth/auth';
 
 
 @Component({
@@ -19,7 +19,8 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public auth: AuthProvider
   ) {}
 
   ionViewWillLoad(){
@@ -30,7 +31,8 @@ export class LoginPage {
   }
 
   
-   tryLogin(value){
+
+  tryLogin(value){
     this.auth.loginWithEmail(value).then(res=>{
       this.navCtrl.push(TabsPage);
     }, 
