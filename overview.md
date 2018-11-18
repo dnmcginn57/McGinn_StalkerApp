@@ -117,4 +117,10 @@
 	</ul>
 <li>Jack wants to update his profile picture.
 </ul>
+#### User-Location
+<ul>
+	<li>Joe while walking on the street wants to see his location in relation to his destination.
+	<li>Joe wants to know where his friends are in relation to where he is.
+	<li>Joe has found a restaurant he likes and wants to leave a marker on his map toremind him where it is.
+</ul>
 
