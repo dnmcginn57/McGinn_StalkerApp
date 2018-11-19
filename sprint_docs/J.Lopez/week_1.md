@@ -6,7 +6,7 @@
 - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/providers/firebase/old_firebase.ts
 - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/providers/database/old_database_provider.ts
 
-- https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/pages/home/home.html
+- https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/pages/home/home.html (THIS WAS REMOVED)
 - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/pages/home/home.ts
 
 - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/app/app.module.ts
