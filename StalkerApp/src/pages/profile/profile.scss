@@ -7,7 +7,10 @@
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    height: 30vh;
+    height: 20vh;
+    width:20vh;
+    display: inline-block;
+    
 
 }
 
@@ -16,9 +19,12 @@ ion-fab{
 }
 
 ion-fab[bottom][edge]{
-    bottom: -20vh;
+    bottom: -15vh;
 }
 
 .fab {
     margin-right: 3vw;
+}
+h3{
+    display: inline-block;
 }
