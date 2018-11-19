@@ -16,10 +16,13 @@ https://github.com/bluefire8421/StalkerApp/blob/BluefireBranch/StalkerApp/src/pa
 | Merged UI/UX map styling, fix file | 1    |
 | Team Meeting, posted use cases     | 1    |
 | Getting UI to work with Firebase   | 2    |
-| Total                              | 4.5  |
+| worked profile page ui/ux help     |.5    |
+| Total                              | 5    |
 
 ## Description of Sprint
 
 Created a team firebase account. Merged and fixed conflicts and files.
 Team meeting discussed the use cases, posted peoples use cases, 
 working on the login and registration page using the firebase methods
+Merged login/registration
+worked on profile page
