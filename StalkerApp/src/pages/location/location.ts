@@ -1,15 +1,19 @@
+
 import { Component, } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //import { ViewChild, ElementRef } from '@angular/core';
 
 declare var google;
+
 /**
  * Generated class for the LocationPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
+
  * https://github.com/ramsatt/Ionic-3-Direction-Between-MyLocation-to-A-Particular-Place
  * https://www.joshmorony.com/implementing-turn-by-turn-navigation-with-google-maps-in-ionic/
+
  */
 
 @IonicPage()
@@ -18,8 +22,10 @@ declare var google;
   templateUrl: 'location.html',
 })
 export class LocationPage {
+
   Destination: any = '';
   MyLocation: any;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -27,6 +33,7 @@ export class LocationPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LocationPage');
   }
+
   calculateAndDisplayRoute() {
     let that = this;
     let directionsService = new google.maps.DirectionsService;
@@ -65,4 +72,5 @@ export class LocationPage {
     }
   });
 }
+
 }
