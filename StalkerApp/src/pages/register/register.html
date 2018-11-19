@@ -19,7 +19,7 @@
       <ion-input type="text" formControlName="last" id ="textInput"></ion-input>
     </ion-item>
 
-    <button ion-button block class="submit-button" type="submit">Register</button>
+    <button ion-button block class="submit-button" type="submit" (click)="registerForm.value">Register</button>
     <label class="error-message">{{errorMessage}}</label>
     <label class="success-message">{{successMessage}}</label>
     <br>

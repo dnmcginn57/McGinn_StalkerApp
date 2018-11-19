@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
-
+import { AuthProvider } from '../../providers/auth/auth';
 
 
 @Component({
@@ -19,24 +19,30 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public auth: AuthProvider
   ) {}
 
-  ionViewWillLoad(){
+  ionViewWillLoad() {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(),
       password: new FormControl(),
     });
   }
 
-  
-  tryLogin(value){
-    this.navCtrl.push(TabsPage);
+
+  async tryLogin(value) {
+    try {
+      await this.auth.loginWithEmail(value);
+      this.navCtrl.push(TabsPage);
+    } catch (e) {
+      console.log(e);
+    }
+
   }
 
- 
 
-  goRegisterPage(){
+  goRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
 

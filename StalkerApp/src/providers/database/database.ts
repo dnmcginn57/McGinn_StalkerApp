@@ -1,8 +1,6 @@
 
 import { Injectable } from '@angular/core';
-//Firebase Authentication
 import { AngularFirestore } from 'angularfire2/firestore';
-import { _iterableDiffersFactory } from '@angular/core/src/application_module';
 
 @Injectable()
 export class DatabaseProvider {
@@ -33,7 +31,7 @@ export class DatabaseProvider {
       await this._db.collection('Users').doc(id).set(obj);
 
     }catch(e){
-
+  
       throw e;
     
     }
