@@ -1,0 +1,24 @@
+.profileContent {
+    background-color: black;
+}
+
+#profPicture{
+    background-image: url('../../assets/imgs/logo.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 30vh;
+
+}
+
+ion-fab{
+    position: relative;
+}
+
+ion-fab[bottom][edge]{
+    bottom: -20vh;
+}
+
+.fab {
+    margin-right: 3vw;
+}
