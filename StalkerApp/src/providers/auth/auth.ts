@@ -48,7 +48,7 @@ export class AuthProvider {
   //User does not need to sign up for Stalker App
   //If user doesn't exist when signing in with Google,
   //function automatically creates account in Firebase
-  async loginInWithGoogle() {
+  async loginWithGoogle() {
     try {
       if ((<any>window).cordova) {
         let response = await this.googlePlus.login({
@@ -64,7 +64,7 @@ export class AuthProvider {
       }
     }
     catch (e) {
-      console.log(e);
+      throw(e);
     }
   }
 

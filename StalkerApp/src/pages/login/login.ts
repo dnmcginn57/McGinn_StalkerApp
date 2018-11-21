@@ -42,6 +42,16 @@ export class LoginPage {
 
   }
 
+  async tryLoginWithGoogle() {
+    try {
+      await this.auth.loginWithGoogle();
+      this.navCtrl.setRoot(TabsPage);
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
+
 
   goRegisterPage() {
     this.navCtrl.push(RegisterPage);
