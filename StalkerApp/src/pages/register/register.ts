@@ -35,25 +35,29 @@ export class RegisterPage {
     });
   }
 
-  //connected to the register button
-  //right now it just boots back to the Login Page
-  tryRegister(value){
-    this.auth.postUser2Firebase(value.email, value.password, value.first, value.last)
-    .then(res=>{
+  //Attempts to register user
+  //Params:
+  //      value - a form with an email, password, first and last (names)
+  async tryRegister(value){
+    try{
+      await this.auth.postUser2Firebase(value.email, value.password, value.first, value.last);
+
       this.successMessage="Your account has been created.";
+      console.log(this.successMessage);
+
       this.goLoginPage();
-    },
-    err=>{
-      console.log(err.message);
-       this.errorMessage = err.message;
+    }
+    catch(e){
+      console.log(e);
+       this.errorMessage = e;
        this.successMessage = "";
-    })
-    
+    } 
   }
 
+/*
   registerTest(){
     this.auth.postUser2Firebase("me@website.com", "password1234", "Me", "Not you");
-  }
+  }*/
 
   goLoginPage(){
     this.navCtrl.pop();

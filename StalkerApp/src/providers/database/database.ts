@@ -31,7 +31,7 @@ export class DatabaseProvider {
       await this._db.collection('Users').doc(id).set(obj);
 
     }catch(e){
-
+  
       throw e;
     
     }
