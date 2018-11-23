@@ -23,14 +23,45 @@
     </button>
     <label class="error-message">{{errorMessage}}</label>
 
+    
+
+    <button ion-button full class = "register-button" (click)="goRegisterPage()">
+      Register
+    </button>
+
     <br>
-    <div>
-      <p>No account yet? <a (click)="goRegisterPage()">Create an account</a></p>
-    </div>
     <br>
 
-    <ion-content>
-    <ion-fab>
+
+    <ion-fab bottom left>
+      <ion-row>
+        <ion-col>
+          <button ion-fab color = light>
+            <ion-icon name = "logo-facebook"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-fab color = light>
+            <ion-icon name = "logo-google"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-fab color = light>
+            <ion-icon name = "logo-twitter"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-fab>
+
+
+
+
+  </form>
+
+</ion-content>
+
+<!--
+  <ion-fab>
       <button ion-fab color = light>
         <ion-icon name="logo-facebook"></ion-icon>
       </button>
@@ -45,8 +76,4 @@
         <ion-icon name="logo-google"></ion-icon>
       </button>
     </ion-fab>
-  </ion-content>
-
-  </form>
-
-</ion-content>
+-->

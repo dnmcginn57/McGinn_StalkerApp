@@ -49,7 +49,7 @@ export class RegisterPage {
     }
     catch(e){
       console.log(e);
-       this.errorMessage = e;
+       this.errorMessage = e.message;
        this.successMessage = "";
     } 
   }

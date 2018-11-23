@@ -16,6 +16,10 @@
     background-color: color($colors, dark);
 }
 
+.register-button{
+    background-color: color($colors, dark);
+}
+
 .logo{
     margin: auto;
     width: 50%;
@@ -28,4 +32,8 @@
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
+}
+
+.error-message{
+    color: red;
 }

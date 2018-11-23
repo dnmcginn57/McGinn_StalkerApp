@@ -37,6 +37,7 @@ export class LoginPage {
       this.navCtrl.push(TabsPage);
     } catch (e) {
       console.log(e);
+      this.errorMessage=e.message;
     }
 
   }
