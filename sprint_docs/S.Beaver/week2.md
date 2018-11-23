@@ -4,6 +4,7 @@
 ## Files Worked On
 https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/login/login.html
 https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/friend/friend.html
+https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/profile/profile.html
 
 
 ## Approximate Time Worked
