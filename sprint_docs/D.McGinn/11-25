@@ -1,0 +1,23 @@
+### Name: David McGinn
+# Date: 11/25
+
+## Files Worked On
+https://github.com/bluefire8421/StalkerApp/blob/UI/UX/StalkerApp/src/pages/login/login.scss
+https://github.com/bluefire8421/StalkerApp/blob/UI/UX/StalkerApp/src/pages/login/login.html
+https://github.com/bluefire8421/StalkerApp/blob/UI/UX/StalkerApp/src/pages/login/login.ts
+https://github.com/bluefire8421/StalkerApp/blob/UI/UX/StalkerApp/src/pages/register/register.html
+https://github.com/bluefire8421/StalkerApp/blob/UI/UX/StalkerApp/src/pages/friend/friend.html
+https://github.com/bluefire8421/StalkerApp/blob/UI/UX/StalkerApp/src/pages/friend/friend.scss
+
+
+## Approximate Time Worked
+
+| Description                             | Hrs  |
+| :---------------------------------------| ---: |
+| Gave Login Page a major facelift        | 2    |
+| Created a Mock-Up of the friend page    | .5   |
+
+
+## Description of Sprint
+Finalized the login page, positioned social media buttons, displayed the error for bad logins properly.
+Created a mock-up of the friends page so that we have a sample of what it may look like in the future
