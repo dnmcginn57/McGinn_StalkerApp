@@ -16,6 +16,10 @@
     background-color: color($colors, dark);
 }
 
+.register-button{
+    background-color: color($colors, dark);
+}
+
 .logo{
     margin: auto;
     width: 50%;
@@ -30,6 +34,8 @@
     -moz-border-radius: 50px;
 }
 
-ion-fab button {
-    background-color: aqua;
+
+.error-message{
+    color: red;
+
 }
