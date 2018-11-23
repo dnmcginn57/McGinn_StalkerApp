@@ -23,6 +23,7 @@ export class LoginPage {
     public auth: AuthProvider
   ) {}
 
+
   ionViewWillLoad() {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(),
@@ -34,7 +35,7 @@ export class LoginPage {
   async tryLogin(value) {
     try {
       await this.auth.loginWithEmail(value);
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.setRoot(TabsPage);
     } catch (e) {
       console.log(e);
       this.errorMessage=e.message;
