@@ -7,13 +7,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { MyApp } from './app.component';
-import { TabsPage } from '../pages/tabs/tabs';
-import { MapPage } from '../pages/map/map';
-import { ProfilePage } from '../pages/profile/profile';
-import { FriendPage } from '../pages/friend/friend';
-import { LocationPage } from '../pages/location/location';
-import { LoginPage } from '../pages/login/login';
-import { RegisterPage} from '../pages/register/register';
+import { TabsPageModule  } from '../pages/tabs/tabs.module';
+import { MapPageModule  } from '../pages/map/map.module';
+import { ProfilePageModule  } from '../pages/profile/profile.module';
+import { FriendPageModule } from '../pages/friend/friend.module';
+import { LocationPageModule  } from '../pages/location/location.module';
+import { LoginPageModule  } from '../pages/login/login.module';
+import { RegisterPageModule } from '../pages/register/register.module';
 
 //Firebase team imports
 import { AngularFireModule } from 'angularfire2';
@@ -23,17 +23,18 @@ import { FIREBASE_CONFIG } from './credentials'
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AuthProvider } from '../providers/auth/auth';
 import { DatabaseProvider } from '../providers/database/database';
+import { TwitterConnect } from '@ionic-native/twitter-connect';
 
 @NgModule({
   declarations: [
     MyApp,
-    TabsPage,
-    MapPage,
-    ProfilePage,
-    FriendPage,
-    LocationPage,
-    LoginPage,
-    RegisterPage
+    //TabsPage,
+    //MapPage,
+    //ProfilePage,
+    //FriendPage,
+    //LocationPage,
+    //LoginPage,
+    //RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -41,23 +42,30 @@ import { DatabaseProvider } from '../providers/database/database';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    FriendPageModule,
+    LocationPageModule,
+    LoginPageModule,
+    RegisterPageModule,
+    TabsPageModule,
+    MapPageModule,
+    ProfilePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    TabsPage,
+    /*TabsPage,
     MapPage,
     ProfilePage,
-    FriendPage,
+    //FriendPage,
     LocationPage,
     LoginPage,
-    RegisterPage
+    RegisterPage*/
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
-
+    TwitterConnect,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
     GooglePlus,

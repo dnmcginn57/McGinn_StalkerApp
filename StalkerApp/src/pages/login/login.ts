@@ -52,7 +52,14 @@ export class LoginPage {
 
   }
 
-
+  async tryLoginWithTwitter() {
+    try {
+      await this.auth.loginWithTwitter();
+      this.navCtrl.setRoot(TabsPage);
+    } catch (e) {
+      console.log(e);
+    }
+  }
   goRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
