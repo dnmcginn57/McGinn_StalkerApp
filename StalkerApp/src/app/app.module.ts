@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -57,6 +58,7 @@ import { DatabaseProvider } from '../providers/database/database';
     StatusBar,
     SplashScreen,
     Geolocation,
+    Camera,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
