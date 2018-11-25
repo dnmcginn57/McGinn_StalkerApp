@@ -28,7 +28,7 @@
     "@ionic-native/twitter-connect": "^4.17.0",
     "@ionic/storage": "2.2.0",
     "angularfire2": "^5.1.0",
-    "cordova-android": "7.0.0",
+    "cordova-android": "^7.0.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-googleplus": "^5.3.2",
