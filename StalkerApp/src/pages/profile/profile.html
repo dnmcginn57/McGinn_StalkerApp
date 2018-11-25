@@ -1,7 +1,27 @@
 
 
 
-<ion-content padding>
-    <body>profile awaiting implimentation</body>
+<ion-content padding class = "profileContent">
+    
+    <div id="profPicture">
+            <img src="{{ myPhoto }}" />
+        <ion-fab bottom right edge>
+            <button ion-fab color="dark" (click)="takePicture()"><ion-icon name = "camera"></ion-icon></button>
+        </ion-fab>
+    </div>
 
+
+        <h3 style="color: white">Name</h3>
+
+    <br>
+    <br>
+    <!–- Merge the following two buttons to one where label changes from start to stop -->
+    <button ion-button>Start Tracking</button>
+    <button ion-button>Stop tracking</button>
+<br><br>
+    <button ion-button>Tag my current location</button>
+    <br>
+    <div>
+        <button ion-button (click)="Logout()">Log out</button>
+    </div>
 </ion-content>
