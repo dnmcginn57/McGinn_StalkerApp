@@ -4,8 +4,9 @@
 <ion-content padding class = "profileContent">
     
     <div id="profPicture">
+            <img src="{{ myPhoto }}" />
         <ion-fab bottom right edge>
-            <button ion-fab color="dark"><ion-icon name = "camera"></ion-icon></button>
+            <button ion-fab color="dark" (click)="takePicture()"><ion-icon name = "camera"></ion-icon></button>
         </ion-fab>
     </div>
 
