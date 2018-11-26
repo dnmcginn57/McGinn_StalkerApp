@@ -18,11 +18,12 @@ import { RegisterPage} from '../pages/register/register';
 //Firebase team imports
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth'
-import { AngularFirestoreModule } from 'angularfire2/firestore'
-import { FIREBASE_CONFIG } from './credentials'
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { FIREBASE_CONFIG } from './credentials';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AuthProvider } from '../providers/auth/auth';
 import { DatabaseProvider } from '../providers/database/database';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DatabaseProvider } from '../providers/database/database';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
