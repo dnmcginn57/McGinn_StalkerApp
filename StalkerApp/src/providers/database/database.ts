@@ -26,13 +26,17 @@ export class DatabaseProvider {
       this.users = collection;
       //For each user in the users collection
       this.users.forEach((user) => {
-        //Get the download url of the file listed as its picture
-        this.store.storage.ref(user.Picture).getDownloadURL().then((url) => {
-          //Store that url in an object, keyed with the name of the file
-          this.image_urls[user.Picture] = url;
-        });
-      })
 
+        //If the user has a picture
+        if (user.Picture != null) {
+          //Get the download url of the file listed as its picture
+          this.store.storage.ref(user.Picture).getDownloadURL().then((url) => {
+            //Store that url in an object, keyed with the name of the file
+            this.image_urls[user.Picture] = url;
+          });
+        }
+
+      })
 
     });
 
