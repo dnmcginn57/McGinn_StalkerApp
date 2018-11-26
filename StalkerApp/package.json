@@ -85,15 +85,11 @@
       "cordova-plugin-ionic-keyboard": {},
       "com-badrit-base64": {}
     },
-    "platforms": [
-      "android"
-
-      "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
-    },
+    
     "platforms": [
       "ios"
 
     ]
   }
 }
+
