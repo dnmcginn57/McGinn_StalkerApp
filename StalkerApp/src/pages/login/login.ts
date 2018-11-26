@@ -1,3 +1,4 @@
+import { DatabaseProvider } from './../../providers/database/database';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -20,8 +21,9 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public formBuilder: FormBuilder,
-    public auth: AuthProvider
-  ) {}
+    public auth: AuthProvider,
+    public database: DatabaseProvider
+  ) { }
 
 
   ionViewWillLoad() {
@@ -39,7 +41,6 @@ export class LoginPage {
     } catch (e) {
       console.log(e);
     }
-
   }
 
   async tryLoginWithGoogle() {
