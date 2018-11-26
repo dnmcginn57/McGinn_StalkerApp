@@ -40,7 +40,6 @@ export class LoginPage {
       console.log(e);
       this.errorMessage=e.message;
     }
-
   }
 
 

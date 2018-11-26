@@ -19,7 +19,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  myPhoto:any;
+  myPhoto:any=null;
   options: CameraOptions = {
     quality: 75,
     destinationType: this.camera.DestinationType.DATA_URL,
