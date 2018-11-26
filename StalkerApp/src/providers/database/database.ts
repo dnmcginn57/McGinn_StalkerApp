@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { Base64 } from '@ionic-native/base64';
 
 @Injectable()
 export class DatabaseProvider {
@@ -16,7 +17,8 @@ export class DatabaseProvider {
 
   constructor(
     public db: AngularFirestore,
-    public store: AngularFireStorage
+    public store: AngularFireStorage,
+    private base64: Base64
   ) {
 
     //Track any changes to the Users collection
@@ -68,40 +70,19 @@ export class DatabaseProvider {
   /* storeImg
    * Desc: Asynchronous. Stores an image to the firebase storage.
    * Params:
-   *     uri: the data uri of the image
+   *     image64: a base 64 encoded image (uri?)
    *     filename: the name the user wishes to give the file
    * returns: nothing.
    */
-  async storeImg(uri: string, filename: string) {
+  async storeImg(image64: string, filename: string) {
     try {
       let image_folder = this.store.ref('images/' + filename);
 
-      try {
-        await this.encodeImageUri(uri, function (image64) {
-          image_folder.putString(image64, 'data_url');
-        });
-      } catch (e) {
-        console.log(e);
-      }
+      image_folder.putString(image64, 'data_url');
+
     } catch (e) {
       console.log(e);
     }
   }
-
-  // Retrieved from https://ionicthemes.com/tutorials/about/ionic-firebase-image-upload
-  async encodeImageUri(imageUri, callback) {
-    var c = document.createElement('canvas');
-    var ctx = c.getContext("2d");
-    var img = new Image();
-    img.onload = function () {
-      var aux: any = this;
-      c.width = aux.width;
-      c.height = aux.height;
-      ctx.drawImage(img, 0, 0);
-      var dataURL = c.toDataURL("image/jpeg");
-      callback(dataURL);
-    };
-    img.src = imageUri;
-  };
 
 }

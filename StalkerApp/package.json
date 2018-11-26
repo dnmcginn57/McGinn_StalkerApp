@@ -20,6 +20,7 @@
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
+    "@ionic-native/base64": "^4.17.0",
     "@ionic-native/core": "~4.15.0",
     "@ionic-native/geolocation": "^4.17.0",
     "@ionic-native/google-plus": "^4.17.0",
@@ -28,6 +29,7 @@
     "@ionic-native/twitter-connect": "^4.17.0",
     "@ionic/storage": "2.2.0",
     "angularfire2": "^5.1.0",
+    "com-badrit-base64": "0.2.0",
     "cordova-android": "^7.0.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-geolocation": "^4.0.1",
@@ -68,7 +70,8 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "com-badrit-base64": {}
     },
     "platforms": [
       "android"
