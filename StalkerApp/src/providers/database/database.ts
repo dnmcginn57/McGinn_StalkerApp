@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
-import { Base64 } from '@ionic-native/base64';
 
 @Injectable()
 export class DatabaseProvider {
@@ -17,8 +16,7 @@ export class DatabaseProvider {
 
   constructor(
     public db: AngularFirestore,
-    public store: AngularFireStorage,
-    private base64: Base64
+    public store: AngularFireStorage
   ) {
 
     //Track any changes to the Users collection
