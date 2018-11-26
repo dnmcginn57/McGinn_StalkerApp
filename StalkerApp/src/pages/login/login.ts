@@ -1,3 +1,4 @@
+import { DatabaseProvider } from './../../providers/database/database';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -20,8 +21,9 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public formBuilder: FormBuilder,
-    public auth: AuthProvider
-  ) {}
+    public auth: AuthProvider,
+    public database: DatabaseProvider
+  ) { }
 
 
   ionViewWillLoad() {
@@ -40,10 +42,26 @@ export class LoginPage {
       console.log(e);
       this.errorMessage=e.message;
     }
+  }
+
+  async tryLoginWithGoogle() {
+    try {
+      await this.auth.loginWithGoogle();
+      this.navCtrl.setRoot(TabsPage);
+    } catch (e) {
+      console.log(e);
+    }
 
   }
 
-
+  async tryLoginWithTwitter() {
+    try {
+      await this.auth.loginWithTwitter();
+      this.navCtrl.setRoot(TabsPage);
+    } catch (e) {
+      console.log(e);
+    }
+  }
   goRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
