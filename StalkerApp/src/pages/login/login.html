@@ -33,35 +33,28 @@
     <br>
 
 
-    <ion-content>
-    <ion-fab style="display:inline-block">
-      <button ion-fab color = light>
-        <ion-icon name="logo-facebook"></ion-icon>
-      </button>
+
+    <ion-fab bottom left>
+      <ion-row>
+        <ion-col>
+          <button ion-fab color = light>
+            <ion-icon name = "logo-facebook"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-fab color = light>
+            <ion-icon name = "logo-google"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-fab color = light>
+            <ion-icon name = "logo-twitter"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
     </ion-fab>
 
-    <ion-fab style="display:inline-block">
-      <button ion-fab color = light (click)='tryLoginWithTwitter()'>
-        <ion-icon name="logo-twitter"></ion-icon>
-      </button>
-    </ion-fab>
 
-
-    <ion-fab style="display:inline-block">
-      <button ion-fab (click)='tryLoginWithGoogle()'>
-        <ion-icon name="logo-google" color="pink"></ion-icon>
-      </button>
-    </ion-fab>
-
-    
-    <ion-item *ngIf="user">
-      <ion-avatar item-left>
-        <img [src]="user.photoURL">
-      </ion-avatar>
-      <h2>{{ user.displayName }}</h2>
-      <h3>{{ user.twName }}</h3>
-    </ion-item>
-  </ion-content>
 
 
   </form>
