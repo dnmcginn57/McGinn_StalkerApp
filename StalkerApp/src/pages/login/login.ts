@@ -40,6 +40,7 @@ export class LoginPage {
       this.navCtrl.setRoot(TabsPage);
     } catch (e) {
       console.log(e);
+      this.errorMessage=e.message;
     }
   }
 

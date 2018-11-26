@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 
 import { RegisterPage } from './../pages/register/register';
 import { LoginPage } from './../pages/login/login';
@@ -61,7 +62,11 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
     StatusBar,
     SplashScreen,
     Geolocation,
+
     TwitterConnect,
+
+    Camera,
+
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
     GooglePlus,
