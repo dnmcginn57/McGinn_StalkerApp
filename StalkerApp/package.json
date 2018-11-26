@@ -20,11 +20,8 @@
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
-
-   "@ionic-native/base64": "^4.17.0",
-
+    "@ionic-native/base64": "^4.17.0",
     "@ionic-native/camera": "^4.17.0",
-
     "@ionic-native/core": "~4.15.0",
     "@ionic-native/geolocation": "^4.17.0",
     "@ionic-native/google-plus": "^4.17.0",
@@ -35,7 +32,6 @@
     "angularfire2": "^5.1.0",
     "com-badrit-base64": "0.2.0",
     "cordova-android": "^7.0.0",
-
     "cordova-ios": "^4.5.5",
     "cordova-plugin-camera": "4.0.3",
     "cordova-plugin-device": "^2.0.2",
@@ -64,21 +60,17 @@
     "plugins": {
       "cordova-plugin-geolocation": {},
       "cordova-plugin-googleplus": {
-
         "REVERSED_CLIENT_ID": "myreversedclientid",
         "PLAY_SERVICES_VERSION": "11.8.0"
       },
       "twitter-connect-plugin": {
         "FABRIC_KEY": "cdbefca9a74ac22d5644dd958b8ccf998b904d9f"
       },
-
       "cordova-plugin-camera": {},
-
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
@@ -86,14 +78,8 @@
       "com-badrit-base64": {}
     },
     "platforms": [
-      "android"
-
-      "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
-    },
-    "platforms": [
+      "android",
       "ios"
-
     ]
   }
 }
