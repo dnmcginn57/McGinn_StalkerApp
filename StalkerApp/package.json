@@ -28,7 +28,7 @@
     "@ionic-native/twitter-connect": "^4.17.0",
     "@ionic/storage": "2.2.0",
     "angularfire2": "^5.1.0",
-    "cordova-android": "^7.0.0",
+    "cordova-android": "7.0.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-googleplus": "^5.3.2",
@@ -55,8 +55,7 @@
     "plugins": {
       "cordova-plugin-geolocation": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "myreversedclientid",
-        "PLAY_SERVICES_VERSION": "11.8.0"
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.733520227387-jvsr894cig1o3o8t13ojpkj0lqpnnpje"
       },
       "twitter-connect-plugin": {
         "FABRIC_KEY": "cdbefca9a74ac22d5644dd958b8ccf998b904d9f"

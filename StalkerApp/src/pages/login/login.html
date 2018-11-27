@@ -22,6 +22,7 @@
       Login
     </button>
     <label class="error-message">{{errorMessage}}</label>
+ 
 
     <br>
     <div>
@@ -48,17 +49,7 @@
         <ion-icon name="logo-google" color="pink"></ion-icon>
       </button>
     </ion-fab>
-
-    
-    <ion-item *ngIf="user">
-      <ion-avatar item-left>
-        <img [src]="user.photoURL">
-      </ion-avatar>
-      <h2>{{ user.displayName }}</h2>
-      <h3>{{ user.twName }}</h3>
-    </ion-item>
   </ion-content>
 
-  </form>
-
+</form>
 </ion-content>
