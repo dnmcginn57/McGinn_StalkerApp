@@ -11,6 +11,7 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
 export class AuthProvider {
 
   userProfile: any = null;
+  uid: string;
 
   constructor(public afAuth: AngularFireAuth,
     public googlePlus: GooglePlus,
@@ -43,6 +44,7 @@ export class AuthProvider {
   async loginWithEmail(credentials) {
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
+      this.uid = this.afAuth.auth.currentUser.uid;
     }
     catch (e) {
       throw (e);

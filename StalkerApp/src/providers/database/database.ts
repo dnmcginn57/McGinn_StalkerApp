@@ -1,6 +1,9 @@
+import { AuthProvider } from './../auth/auth';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 
 @Injectable()
 export class DatabaseProvider {
@@ -14,10 +17,14 @@ export class DatabaseProvider {
   //}
   image_urls: any = {};
 
+  private fire: any;
+
   constructor(
     public db: AngularFirestore,
     public store: AngularFireStorage
   ) {
+
+    this.fire = firebase.firestore()
 
     //Track any changes to the Users collection
     this.db.collection('Users').valueChanges().subscribe((collection) => {
@@ -79,8 +86,47 @@ export class DatabaseProvider {
       image_folder.putString(image64, 'data_url');
 
     } catch (e) {
-      console.log(e);
+      throw e;
     }
+  }
+
+  async setUserImg(id: string, filename: string){
+    try{
+      let temp = {};
+      temp["Picture"] = 'images/' + filename;
+      await this.db.collection("Users").doc(id).update(temp);
+    }catch(e){
+      throw e;
+    }
+  }
+
+  async usersObj(){
+
+    try{
+      var query = await this.fire.collection("Users").get();
+      var collection_obj = {};
+      query.forEach(
+        (doc: any) => {
+          var doc_obj = {};
+          var doc_data = doc.data();
+          for (var field in doc_data){
+            doc_obj[field] = doc_data[field];
+          }
+          collection_obj[doc.id] = doc_obj;
+        }
+      );
+
+      return collection_obj;
+
+    }
+    catch(e){
+      throw e;
+    }
+  }
+
+  async profilePic(id: string){
+    let allUsers = await this.usersObj();
+    return this.image_urls[allUsers[id]['Picture']];
   }
 
 }
