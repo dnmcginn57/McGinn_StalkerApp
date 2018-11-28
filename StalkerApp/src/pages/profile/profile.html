@@ -3,23 +3,27 @@
 
 <ion-content padding class = "profileContent">
     
-    <div (click)="takePicture()" id="profPicture" [ngStyle]="{'background-image': 'url(' + myPhoto + ')'}">
-            
-        <!-- leaving this code here incase it's needed in an emergency
+
+    <div id="profPicture">
+        <img src="{{ myPhoto }}" />
         <ion-fab bottom right edge>
-            <button ion-fab color="dark" (click)="takePicture()"><ion-icon name = "camera"></ion-icon></button>
+            <button ion-fab color="dark" (click)="takePicture()">
+                <ion-icon name="camera"></ion-icon>
+            </button>
         </ion-fab>
         -->
     </div>
 
 
-        <h3 style="color: white">Name</h3>
+    <h3 style="color: white">Name</h3>
 
     <br>
     <br>
+
     <!-- Merge the following two buttons to one where label changes from start to stop -->
     <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
 <br><br>
+
     <button ion-button>Tag my current location</button>
     <br>
     <div>
