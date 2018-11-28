@@ -61,12 +61,11 @@ export class AuthProvider {
   async loginWithGoogle() {
     try {
       if ((<any>window).cordova) {
-        console.log("before");
         let response = await this.googlePlus.login({
           'webClientId': '733520227387-jmb6ooftoiu5g4j9pg57lbeo89006fru.apps.googleusercontent.com',// optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
           'offline': true
         })
-        console.log("after");
+
         const googleCredential = await firebase.auth.GoogleAuthProvider.credential(response.idToken);
         await firebase.auth().signInWithCredential(googleCredential);
       }

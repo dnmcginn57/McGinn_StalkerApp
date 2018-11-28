@@ -62,8 +62,7 @@
     "plugins": {
       "cordova-plugin-geolocation": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "myreversedclientid",
-        "PLAY_SERVICES_VERSION": "11.8.0"
+        "REVERSED_CLIENT_ID": "myreversedclientid"
       },
       "twitter-connect-plugin": {
         "FABRIC_KEY": "cdbefca9a74ac22d5644dd958b8ccf998b904d9f"
