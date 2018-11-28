@@ -10,17 +10,29 @@
 <ion-header>
   <ion-navbar color = "dark">
 
-    <ion-title>
-      Map
-    </ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon>Add Marker</button>
-    </ion-buttons> 
+    <ion-item class = "searchLabel">
+      <ion-label floating>Destination</ion-label>
+      <ion-input type="text" id = "textInput" [(ngModel)]="Destination"></ion-input>
+    </ion-item>
+    <button ion-button round class="searchButton" color = "light" (click)="calculateAndDisplayRoute()">
+      <ion-icon name="compass"></ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
  
 
 <ion-content>
+
+  <ion-fab class ="unmoveableFAB">
+    <button ion-fab color = light (click)="addMarker()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
   <div #map id="map"></div> 
 
 </ion-content>
+
+<!--
+  <button ion-fab color = light>
+            <ion-icon name = "logo-facebook"></ion-icon>
+  </button>
+-->

@@ -31,6 +31,8 @@ export class ProfilePage {
     targetHeight: 300,
     saveToPhotoAlbum: false
   }
+  trackingState: string = "Start Tracking"
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public auth: AuthProvider, public camera:Camera) {
@@ -41,8 +43,7 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
   }
 
-  takePicture(){
-   
+  takePicture(){   
     this.camera.getPicture(this.options).then((imageData) => {
       this.myPhoto = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
@@ -54,4 +55,11 @@ export class ProfilePage {
     this.auth.logout();
     this.navCtrl.setRoot(LoginPage);
   }
+
+  toggleTracking()
+  {
+    if(this.trackingState == "Start Tracking") this.trackingState = "Stop Tracking";
+    else this.trackingState = "Start Tracking";
+  }
+
 }
