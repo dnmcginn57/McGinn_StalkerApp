@@ -41,6 +41,14 @@ export class LoginPage {
     }
   }
 
+  async tryLoginWithGoogle() {
+    try {
+      await this.auth.loginWithGoogle();
+      this.navCtrl.setRoot(TabsPage);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   async tryLoginWithTwitter() {
     try {
