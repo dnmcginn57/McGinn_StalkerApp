@@ -24,6 +24,8 @@ import { FIREBASE_CONFIG } from './credentials'
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AuthProvider } from '../providers/auth/auth';
 import { DatabaseProvider } from '../providers/database/database';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { TwitterConnect } from '@ionic-native/twitter-connect';
 
 @NgModule({
   declarations: [
@@ -59,11 +61,13 @@ import { DatabaseProvider } from '../providers/database/database';
     SplashScreen,
     Geolocation,
     Camera,
+    AngularFireStorage,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
     GooglePlus,
-    AuthProvider
+    AuthProvider,
+    TwitterConnect
   ]
 })
 export class AppModule {}
