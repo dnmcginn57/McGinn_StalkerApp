@@ -4,7 +4,7 @@
 
   </div>
 
-  <form class="form" [formGroup]="loginForm">
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="tryLogin(loginForm.value)">
 
     <ion-item class="text-fields">
       <ion-label floating>Email</ion-label>
@@ -18,7 +18,7 @@
 
     <br>
 
-    <button ion-button full class="submit-button" type="submit" (click)=tryLogin(loginForm.value)>
+    <button ion-button full class="submit-button" type="submit">
       Login
     </button>
     <label class="error-message">{{errorMessage}}</label> 
@@ -30,24 +30,28 @@
     <br>
     <br>
 
+
+
     <ion-fab bottom left>
       <ion-row>
         <ion-col>
-          <button ion-fab color = light (click)='tryLoginWithFacebook()'>
+          <button ion-fab color = light>
             <ion-icon name = "logo-facebook"></ion-icon>
           </button>
         </ion-col>
         <ion-col>
-          <button ion-fab color = light (click)='tryLoginWithGoogle()'>
+          <button ion-fab color = light>
             <ion-icon name = "logo-google"></ion-icon>
           </button>
         </ion-col>
         <ion-col>
-          <button ion-fab color = light (click)='tryLoginWithTwitter()'>
+          <button ion-fab color = light>
             <ion-icon name = "logo-twitter"></ion-icon>
           </button>
         </ion-col>
       </ion-row>
     </ion-fab>
+    
   </form>
+
 </ion-content>

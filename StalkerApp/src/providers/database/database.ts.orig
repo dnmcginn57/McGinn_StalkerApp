@@ -20,8 +20,7 @@ export class DatabaseProvider {
   private fire: any;
 
   constructor(
-    public db: AngularFirestore,
-    public store: AngularFireStorage
+    _db: AngularFirestore
   ) {
 
     this.fire = firebase.firestore()
@@ -57,17 +56,17 @@ export class DatabaseProvider {
    *     lastname: the last name of the user
    * returns: nothing.
    */
-  async setUserDoc(id: string, firstname: string, lastname: string) {
-    try {
+  async setUserDoc(id: string, firstname: string, lastname: string){
+    try{
 
       var obj = {
         first: firstname,
         last: lastname
       }
+      await this._db.collection('Users').doc(id).set(obj);
 
-      await this.db.collection('Users').doc(id).set(obj);
-
-    } catch (e) {
+    }catch(e){
+  
       throw e;
     }
   }
