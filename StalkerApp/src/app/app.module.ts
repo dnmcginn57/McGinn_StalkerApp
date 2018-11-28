@@ -26,6 +26,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { DatabaseProvider } from '../providers/database/database';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
+import { Facebook } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [
@@ -60,9 +61,10 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
     StatusBar,
     SplashScreen,
     Geolocation,
+    Facebook,
+    TwitterConnect,
     Camera,
     AngularFireStorage,
-
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
     GooglePlus,
