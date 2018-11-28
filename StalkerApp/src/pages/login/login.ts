@@ -33,7 +33,6 @@ export class LoginPage {
     });
   }
 
-
   async tryLogin(value) {
     try {
       await this.auth.loginWithEmail(value);
@@ -62,8 +61,19 @@ export class LoginPage {
       console.log(e);
     }
   }
+
+  async tryLoginWithFacebook() {
+    try {
+      await this.auth.loginWithFacebook();
+      this.navCtrl.setRoot(TabsPage);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   goRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
+
 
 }
