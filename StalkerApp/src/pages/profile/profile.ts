@@ -30,7 +30,7 @@ export class ProfilePage {
     targetHeight: 300,
     saveToPhotoAlbum: false
   }
-  prof_pic: string = '';
+  prof_pic: string = '../../assets/imgs/logo.png';
 
   constructor(
     public navCtrl: NavController,
@@ -39,7 +39,7 @@ export class ProfilePage {
     public camera: Camera,
     public database: DatabaseProvider
   ) { 
-    database.profilePic(auth.uid).then((pic)=>{this.prof_pic = pic;});
+    database.profilePic(auth.uid).then((pic)=>{this.myPhoto = pic;});
   }
 
   ionViewDidLoad() {
@@ -53,7 +53,7 @@ export class ProfilePage {
       this.myPhoto = 'data:image/jpeg;base64,' + imageData;
       await this.database.storeImg(this.myPhoto, this.auth.uid + '_profile.jpg');
       await this.database.setUserImg(this.auth.uid, this.auth.uid + '_profile.jpg');
-      this.prof_pic = await this.database.profilePic(this.auth.uid);
+      this.myPhoto = await this.database.profilePic(this.auth.uid);
     } catch (e) {
       console.log(e);
     }
