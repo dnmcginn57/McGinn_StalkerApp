@@ -41,7 +41,7 @@ export class ProfilePage {
     public camera: Camera,
     public database: DatabaseProvider
   ) { 
-    database.profilePic(auth.uid).then((pic)=>{this.myPhoto = pic;});
+    database.userGetPic(auth.uid).then((pic)=>{this.myPhoto = pic;});
   }
 
   ionViewDidLoad() {
@@ -54,8 +54,8 @@ export class ProfilePage {
       let imageData: string = await this.camera.getPicture(this.options);
       this.myPhoto = 'data:image/jpeg;base64,' + imageData;
       await this.database.storeImg(this.myPhoto, this.auth.uid + '_profile.jpg');
-      await this.database.setUserImg(this.auth.uid, this.auth.uid + '_profile.jpg');
-      this.myPhoto = await this.database.profilePic(this.auth.uid);
+      await this.database.userSetPic(this.auth.uid, this.auth.uid + '_profile.jpg');
+      this.myPhoto = await this.database.userGetPic(this.auth.uid);
     } catch (e) {
       console.log(e);
     }
@@ -80,6 +80,14 @@ export class ProfilePage {
   {
     if(this.trackingState == "Start Tracking") this.trackingState = "Stop Tracking";
     else this.trackingState = "Start Tracking";
+  }
+
+  async tagLoc(){
+    try{
+      await this.database.userAddTag(this.auth.uid, 100, 100);
+    }catch(e){
+      console.log(e);
+    }
   }
 
 }
