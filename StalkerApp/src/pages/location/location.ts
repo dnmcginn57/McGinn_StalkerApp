@@ -75,7 +75,9 @@ export class LocationPage {
 
 
 start(){
+  console.log("before");
   this.locationTracker.startTracking();
+  console.log("after");
 }
 
 stop(){

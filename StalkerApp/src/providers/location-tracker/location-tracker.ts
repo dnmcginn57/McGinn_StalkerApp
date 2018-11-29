@@ -1,7 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
-import 'rxjs/add/operator/filter';
+// import 'rxjs/add/operator/filter';
+import {filter} from 'rxjs/operators';
  
 @Injectable()
 export class LocationTracker {
@@ -10,9 +11,9 @@ export class LocationTracker {
   public lat: number = 0;
   public lng: number = 0;
   backgroundGeolocation: any;
-  geolocation: any;
  
-  constructor(public zone: NgZone) {
+ 
+  constructor(public zone: NgZone, public geolocation:Geolocation) {
  
   }
  
@@ -20,42 +21,42 @@ export class LocationTracker {
 
       // Background Tracking
  
-  let config = {
-    desiredAccuracy: 0,
-    stationaryRadius: 20,
-    distanceFilter: 10,
-    debug: true,
-    interval: 2000
-  };
+  // let config:any = {
+  //   desiredAccuracy: 0,
+  //   stationaryRadius: 20,
+  //   distanceFilter: 10,
+  //   debug: true,
+  //   interval: 2000
+  // };
  
-  this.backgroundGeolocation.configure(config).subscribe((location) => {
+  // this.backgroundGeolocation.configure(config).subscribe((location) => {
  
-    console.log('BackgroundGeolocation:  ' + location.latitude + ',' + location.longitude);
+  //   console.log('BackgroundGeolocation:  ' + location.latitude + ',' + location.longitude);
  
-    // Run update inside of Angular's zone
-    this.zone.run(() => {
-      this.lat = location.latitude;
-      this.lng = location.longitude;
-    });
+  //   // Run update inside of Angular's zone
+  //   this.zone.run(() => {
+  //     this.lat = location.latitude;
+  //     this.lng = location.longitude;
+  //   });
  
-  }, (err) => {
+  // }, (err) => {
  
-    console.log(err);
+  //   console.log(err);
  
-  });
+  // });
  
-  // Turn ON the background-geolocation system.
-  this.backgroundGeolocation.start();
+  // // Turn ON the background-geolocation system.
+  // this.backgroundGeolocation.start();
  
  
   // Foreground Tracking
  
-let options = {
+let options:any = {
   frequency: 3000,
   enableHighAccuracy: true
 };
  
-this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
+this.watch = this.geolocation.watchPosition(options).pipe(filter((p: any) => p.code === undefined)).subscribe((position: Geoposition) => {
  
   console.log(position);
  
@@ -71,8 +72,12 @@ this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code =
  
   stopTracking() {
     console.log('stopTracking');
+    this.zone.run(() => {
+      this.lat = 0;
+      this.lng = 0;
+    });
  
-  this.backgroundGeolocation.finish();
+  //this.backgroundGeolocation.finish();
   this.watch.unsubscribe();
   
   }
