@@ -12,6 +12,8 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 export class AuthProvider {
 
   userProfile: any = null;
+
+  //id where user is stored in Firebase
   uid: string;
 
   constructor(public afAuth: AngularFireAuth,
@@ -20,20 +22,42 @@ export class AuthProvider {
     public twitterConnect: TwitterConnect,
     public facebook: Facebook) {
     console.log('Hello AuthProvider Provider');
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        console.log(user.email + " is signed in")
+      } else {
+        console.log("Nobody is signed in")
+      }
+    });
+  }
+
+  async trySetUserDoc(uid, firstname, lastname) {
+    try {
+      let metadata = await firebase.auth().currentUser.metadata;
+      if (metadata.creationTime == metadata.lastSignInTime) {
+        // The user is new
+        //Add the user to the collection
+        console.log("This user was just created...adding to database");
+        await this.database.setUserDoc(uid, firstname, lastname);
+      }
+    } catch (e) {
+      throw (e);
+    }
   }
 
   //Creates a new Firebase user with email and password
   async postUser2Firebase(email, password, firstname, lastname) {
     try {
+
       let newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
 
-      //Add the user to the collection
-      await this.database.setUserDoc(newUser.user.uid, firstname, lastname);
-      
+      await this.trySetUserDoc(newUser.user.uid, firstname, lastname);
+
       console.log(`${newUser.user.email} 's UID: ${newUser.user.uid}`);
     }
-    catch(e) {
-      throw(e);
+    catch (e) {
+      throw (e);
     }
   }
 
@@ -44,14 +68,13 @@ export class AuthProvider {
   //        password:String
   //      };
   async loginWithEmail(credentials) {
-    try{
-      await this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
+    try {
+      this.userProfile = await this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
       this.uid = this.afAuth.auth.currentUser.uid;
     }
-    catch(e)
-    {
-       throw(e);
-    } 
+    catch (e) {
+      throw (e);
+    }
   }
 
   //Signs user in with google account
@@ -66,11 +89,35 @@ export class AuthProvider {
           'offline': true
         })
 
+        //Waits to get Google account's credentials, so user can get logged in
         const googleCredential = await firebase.auth.GoogleAuthProvider.credential(response.idToken);
-        await firebase.auth().signInWithCredential(googleCredential);
+        let profile = await firebase.auth().signInWithCredential(googleCredential);
+        this.userProfile = profile;
+
+        this.uid = this.afAuth.auth.currentUser.uid;
+
+        //displayName is in format "first last"
+        //.split() allows to seperate first from last
+        let names = profile.displayName.split(" ");
+
+        //If this is user's 1st time logging in, adds them to database
+        await this.trySetUserDoc(this.uid, names[0], names[1]);
+
       }
       else {
+        //If on web browser, use popup window
         await this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+
+        this.uid = this.afAuth.auth.currentUser.uid;
+
+        //displayName is in format "first last"
+        //.split() allows to seperate first from last
+        let name = this.afAuth.auth.currentUser.displayName;
+        let names = name.split(" ");
+
+
+        //If this is user's 1st time logging in, adds them to database
+        await this.trySetUserDoc(this.uid, names[0], names[1]);
       }
     }
     catch (e) {
@@ -78,6 +125,10 @@ export class AuthProvider {
     }
   }
 
+  //Signs user in with Twitter account
+  //User does not need to sign up for Stalker App.
+  //If user doesn't exist when signing in with Twitter,
+  //function automatically authenticates account in Firebase
   async loginWithTwitter() {
     try {
       if ((<any>window).cordova) {
@@ -92,16 +143,23 @@ export class AuthProvider {
         this.userProfile.twName = response.userName;
         console.log(this.userProfile);
 
+        this.uid = this.afAuth.auth.currentUser.uid;
+
         return this.userProfile;
       }
       else {
         await this.afAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+        this.uid = this.afAuth.auth.currentUser.uid;
       }
     } catch (e) {
       throw (e);
     }
   }
 
+  //Signs user in with Facebook account
+  //User does not need to sign up for Stalker App.
+  //If user doesn't exist when signing in with Facebook,
+  //function automatically authenticates account in Firebase
   async loginWithFacebook() {
     try {
       if ((<any>window).cordova) {
@@ -113,11 +171,12 @@ export class AuthProvider {
         if (res.status == "connected") {
 
           // Get user ID and Token
-          let fb_id = await res.authResponse.userID;
-          let fb_token = await res.authResponse.accessToken;
+          //let fb_id = await res.authResponse.userID;
+          //let fb_token = await res.authResponse.accessToken;
 
           // Get user infos from the API
           let user = await this.facebook.api("/me?fields=name,gender,birthday,email", []);
+          this.userProfile = user;
 
           // Get the connected user details
           let gender = user.gender;
@@ -130,16 +189,42 @@ export class AuthProvider {
           console.log("Birthday : " + birthday);
           console.log("Name : " + name);
           console.log("Email : " + email);
+
+          this.uid = this.afAuth.auth.currentUser.uid;
+
         }
       }
       else {
         await this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+        this.uid = this.afAuth.auth.currentUser.uid;
 
       }
 
     } catch (e) {
       throw (e);
     }
+  }
+
+  //Returns currently signed in user
+  async getUser() {
+    try {
+      let user = await this.afAuth.auth.currentUser;
+
+      if (user != null) {
+        user.providerData.forEach(function (profile) {
+          console.log("Sign-in provider: " + profile.providerId);
+          console.log("  Provider-specific UID: " + profile.uid);
+          console.log("  Name: " + profile.displayName);
+          console.log("  Email: " + profile.email);
+          console.log("  Photo URL: " + profile.photoURL);
+        });
+      }
+      return user;
+    }
+    catch (e) {
+      throw (e);
+    }
+
   }
 
   //Logs user out

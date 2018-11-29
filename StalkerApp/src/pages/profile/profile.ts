@@ -32,6 +32,15 @@ export class ProfilePage {
   }
   prof_pic: string = '../../assets/imgs/logo.png';
 
+  userInfo:any = {
+    email:null,
+    name:null,
+    photoUrl:null,
+    emailVerified:null,
+    uid:null
+  };
+
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -40,6 +49,7 @@ export class ProfilePage {
     public database: DatabaseProvider
   ) { 
     database.profilePic(auth.uid).then((pic)=>{this.myPhoto = pic;});
+    this.getCurrentUserInfo();
   }
 
   ionViewDidLoad() {
@@ -66,6 +76,23 @@ export class ProfilePage {
     });
     */
 
+  }
+
+  async getCurrentUserInfo()
+  {
+    try{
+      let user = await this.auth.getUser();
+
+      this.userInfo.name = user.displayName;
+      this.userInfo.email = user.email;
+      this.userInfo.photoUrl = user.photoURL;
+      this.userInfo.emailVerified = user.emailVerified;
+      this.userInfo.uid = user.uid;
+    }
+     catch(e)
+     {
+       console.log(e);
+     }
   }
 
   Logout() {
