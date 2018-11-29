@@ -3,6 +3,7 @@
 
 <ion-content padding class = "profileContent">
     
+
     <div id="profPicture">
         <img src="{{ myPhoto }}" />
         <ion-fab bottom right edge>
@@ -10,6 +11,7 @@
                 <ion-icon name="camera"></ion-icon>
             </button>
         </ion-fab>
+        -->
     </div>
 
 
@@ -17,10 +19,11 @@
 
     <br>
     <br>
-    <!–- Merge the following two buttons to one where label changes from start to stop -->
-    <button ion-button>Start Tracking</button>
-    <button ion-button>Stop tracking</button>
-    <br><br>
+
+    <!-- Merge the following two buttons to one where label changes from start to stop -->
+    <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
+<br><br>
+
     <button ion-button>Tag my current location</button>
     <br>
     <div>
