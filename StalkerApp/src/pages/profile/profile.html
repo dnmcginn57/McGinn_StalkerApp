@@ -1,6 +1,3 @@
-
-
-
 <ion-content padding class = "profileContent">
     
     <div id="profPicture">
@@ -13,9 +10,20 @@
     </div>
 
 
-    <h3 style="color: white">Email: {{userInfo.email}}</h3>
-    <br>
-    <h3 style="color: white">Name: {{userInfo.name}}</h3>
+    <div class="edit">
+        <h3 style="color: white">Email: {{userInfo.email}}</h3>
+
+        <br>
+
+        <h3 style="color: white">Name: {{userInfo.name}}
+        <ion-fab >
+            <button ion-fab (click)='presentPrompt()'>
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-fab>
+    </h3>
+    </div>
+
 
 
     <br>

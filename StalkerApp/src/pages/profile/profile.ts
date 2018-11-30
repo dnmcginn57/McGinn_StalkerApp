@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the ProfilePage page.
@@ -46,7 +47,8 @@ export class ProfilePage {
     public navParams: NavParams,
     public auth: AuthProvider,
     public camera: Camera,
-    public database: DatabaseProvider
+    public database: DatabaseProvider,
+    private alertCtrl: AlertController
   ) { 
     database.profilePic(auth.uid).then((pic)=>{this.myPhoto = pic;});
     this.getCurrentUserInfo();
@@ -88,11 +90,44 @@ export class ProfilePage {
       this.userInfo.photoUrl = user.photoURL;
       this.userInfo.emailVerified = user.emailVerified;
       this.userInfo.uid = user.uid;
+
     }
      catch(e)
      {
        console.log(e);
      }
+  }
+
+  presentPrompt() {
+    let alert = this.alertCtrl.create({
+      title: 'Edit name',
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'New Name'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data =>{
+            console.log(data.name);
+            this.userInfo.name = data.name;
+            this.auth.updateUser(this.userInfo.name);
+            
+          }
+
+        }
+      ]
+    });
+    alert.present();
   }
 
   Logout() {

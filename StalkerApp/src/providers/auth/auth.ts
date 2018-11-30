@@ -61,6 +61,21 @@ export class AuthProvider {
     }
   }
 
+  async updateUser(name) {
+    try {
+      let user = firebase.auth().currentUser;
+
+      await user.updateProfile({
+        displayName: name,
+        photoURL: ""
+      });
+    } catch (e) {
+      throw (e);
+    }
+
+    //make a call to database to update user's name
+  }
+
   //Signs existing user in with email and password
   //Param:
   //    credentials = {
