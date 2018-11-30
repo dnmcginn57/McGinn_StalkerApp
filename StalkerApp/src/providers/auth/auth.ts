@@ -159,12 +159,27 @@ export class AuthProvider {
         console.log(this.userProfile);
 
         this.uid = this.afAuth.auth.currentUser.uid;
+        
+        //displayName is in format "first last"
+        //.split() allows to seperate first from last
+        let names = userProfile.displayName.split(" ");
+
+        //If this is user's 1st time logging in, adds them to database
+        await this.trySetUserDoc(this.uid, names[0], names[1]);
 
         return this.userProfile;
       }
       else {
         await this.afAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
         this.uid = this.afAuth.auth.currentUser.uid;
+
+        //displayName is in format "first last"
+        //.split() allows to seperate first from last
+        let name = this.afAuth.auth.currentUser.displayName;
+        let names = name.split(" ");
+
+        //If this is user's 1st time logging in, adds them to database
+        await this.trySetUserDoc(this.uid, names[0], names[1]);
       }
     } catch (e) {
       throw (e);
