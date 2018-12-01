@@ -100,6 +100,28 @@ export class DatabaseProvider {
   *        Functions for a specific user        *
   **********************************************/
 
+  async userAcceptFriendRequest(id: string, other: string){
+    try{
+      let temp = {};
+      temp["dismissed"] = true;
+      await this.db.collection("Users").doc(id).collection("FriendRequests").doc(other).set(temp);
+      await this.userAddFriend(id, other);
+      await this.userAddFriend(other, id);
+    }catch(e){
+      throw e;
+    }
+  }
+
+  async userAddFriend(id: string, other: string){
+    try{
+      let temp = {};
+      temp["reference"] = this.db.collection("Users").doc(other).ref;
+      await this.db.collection("Users").doc(id).collection("Friends").doc(other).set(temp);
+    }catch(e){
+      throw e;
+    }
+  }
+
   async userAddTag(id: string, lat: number, lon: number) {
     try {
       let temp = {};
@@ -111,9 +133,29 @@ export class DatabaseProvider {
     }
   }
 
+  async userDeclineFriendRequest(id: string, other: string){
+    try{
+      let temp = {};
+      temp["dismissed"] = true;
+      await this.db.collection("Users").doc(id).collection("FriendRequests").doc(other).set(temp);
+    }catch(e){
+      throw e;
+    }
+  }
+
   async userGetPic(id: string) {
     let allUsers = await this.objectUsers();
     return this.image_urls[allUsers[id]['Picture']];
+  }
+
+  async userSendFriendRequest(id: string, other: string){   
+    try{
+      let temp = {};
+      temp["dismissed"] = false;
+      await this.db.collection("Users").doc(other).collection("FriendRequests").doc(id).set(temp);
+    }catch(e){
+      throw e;
+    }
   }
 
   async userSetLoc(id: string, lat: number, lon: number) {
