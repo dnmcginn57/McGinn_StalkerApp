@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the ProfilePage page.
@@ -34,14 +35,27 @@ export class ProfilePage {
   trackingState: string = "Start Tracking"
 
 
+  userInfo:any = {
+    email:null,
+    name:null,
+    photoUrl:null,
+    emailVerified:null,
+    uid:null
+  };
+
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public auth: AuthProvider,
     public camera: Camera,
-    public database: DatabaseProvider
+    public database: DatabaseProvider,
+    private alertCtrl: AlertController
   ) { 
+
     database.userGetPic(auth.uid).then((pic)=>{this.myPhoto = pic;});
+    this.getCurrentUserInfo();
+
   }
 
   ionViewDidLoad() {
@@ -69,6 +83,56 @@ export class ProfilePage {
     });
     */
 
+  }
+
+  async getCurrentUserInfo()
+  {
+    try{
+      let user = await this.auth.getUser();
+
+      this.userInfo.name = user.displayName;
+      this.userInfo.email = user.email;
+      this.userInfo.photoUrl = user.photoURL;
+      this.userInfo.emailVerified = user.emailVerified;
+      this.userInfo.uid = user.uid;
+
+    }
+     catch(e)
+     {
+       console.log(e);
+     }
+  }
+
+  presentPrompt() {
+    let alert = this.alertCtrl.create({
+      title: 'Edit name',
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'New Name'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data =>{
+            console.log(data.name);
+            this.userInfo.name = data.name;
+            this.auth.updateUser(this.userInfo.name);
+            
+          }
+
+        }
+      ]
+    });
+    alert.present();
   }
 
   Logout() {
