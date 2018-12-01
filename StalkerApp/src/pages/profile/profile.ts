@@ -31,7 +31,9 @@ export class ProfilePage {
     targetHeight: 300,
     saveToPhotoAlbum: false
   }
-  prof_pic: string = '../../assets/imgs/logo.png';
+
+  trackingState: string = "Start Tracking"
+
 
   userInfo:any = {
     email:null,
@@ -50,8 +52,10 @@ export class ProfilePage {
     public database: DatabaseProvider,
     private alertCtrl: AlertController
   ) { 
+
     database.profilePic(auth.uid).then((pic)=>{this.myPhoto = pic;});
     this.getCurrentUserInfo();
+
   }
 
   ionViewDidLoad() {
@@ -64,13 +68,14 @@ export class ProfilePage {
       let imageData: string = await this.camera.getPicture(this.options);
       this.myPhoto = 'data:image/jpeg;base64,' + imageData;
       await this.database.storeImg(this.myPhoto, this.auth.uid + '_profile.jpg');
-      await this.database.setUserImg(this.auth.uid, this.auth.uid + '_profile.jpg');
-      this.myPhoto = await this.database.profilePic(this.auth.uid);
+      await this.database.userSetPic(this.auth.uid, this.auth.uid + '_profile.jpg');
+      this.myPhoto = await this.database.userGetPic(this.auth.uid);
     } catch (e) {
       console.log(e);
     }
 
     /*!!!PLEASE USE ASYNC/AWAIT TO HELP PREVENT APP CRASHES!!!
+
     this.camera.getPicture(this.options).then((imageData) => {
       this.myPhoto = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
@@ -134,4 +139,19 @@ export class ProfilePage {
     this.auth.logout();
     this.navCtrl.setRoot(LoginPage);
   }
+
+  toggleTracking()
+  {
+    if(this.trackingState == "Start Tracking") this.trackingState = "Stop Tracking";
+    else this.trackingState = "Start Tracking";
+  }
+
+  async tagLoc(){
+    try{
+      await this.database.userAddTag(this.auth.uid, 100, 100);
+    }catch(e){
+      console.log(e);
+    }
+  }
+
 }

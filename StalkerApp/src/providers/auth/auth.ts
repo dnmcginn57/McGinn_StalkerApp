@@ -51,9 +51,7 @@ export class AuthProvider {
     try {
 
       let newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
-
       await this.trySetUserDoc(newUser.user.uid, firstname, lastname);
-
       console.log(`${newUser.user.email} 's UID: ${newUser.user.uid}`);
     }
     catch (e) {

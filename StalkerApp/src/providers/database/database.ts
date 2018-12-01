@@ -49,28 +49,9 @@ export class DatabaseProvider {
 
   }
 
-  /* setUserDoc
-   * Desc: Asynchronous. Uploads a user document to the firestore.
-   * Params:
-   *     id: the id of the document being set
-   *     firstname: the first name of the user
-   *     lastname: the last name of the user
-   * returns: nothing.
-   */
-  async setUserDoc(id: string, firstname: string, lastname: string) {
-    try {
-
-      var obj = {
-        first: firstname,
-        last: lastname
-      }
-
-      await this.db.collection('Users').doc(id).set(obj);
-
-    } catch (e) {
-      throw e;
-    }
-  }
+  /**********************************************
+  *  Functions for general database management  *
+  **********************************************/
 
   /* storeImg
    * Desc: Asynchronous. Stores an image to the firebase storage.
@@ -90,26 +71,16 @@ export class DatabaseProvider {
     }
   }
 
-  async setUserImg(id: string, filename: string){
-    try{
-      let temp = {};
-      temp["Picture"] = 'images/' + filename;
-      await this.db.collection("Users").doc(id).update(temp);
-    }catch(e){
-      throw e;
-    }
-  }
+  async objectUsers() {
 
-  async usersObj(){
-
-    try{
+    try {
       var query = await this.fire.collection("Users").get();
       var collection_obj = {};
       query.forEach(
         (doc: any) => {
           var doc_obj = {};
           var doc_data = doc.data();
-          for (var field in doc_data){
+          for (var field in doc_data) {
             doc_obj[field] = doc_data[field];
           }
           collection_obj[doc.id] = doc_obj;
@@ -119,14 +90,73 @@ export class DatabaseProvider {
       return collection_obj;
 
     }
-    catch(e){
+    catch (e) {
       throw e;
     }
   }
 
-  async profilePic(id: string){
-    let allUsers = await this.usersObj();
+
+  /**********************************************
+  *        Functions for a specific user        *
+  **********************************************/
+
+  async userAddTag(id: string, lat: number, lon: number) {
+    try {
+      let temp = {};
+      temp["Time"] = new Date();
+      temp["Location"] = [lat, lon];
+      await this.db.collection("Users").doc(id).collection("Tags").add(temp);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async userGetPic(id: string) {
+    let allUsers = await this.objectUsers();
     return this.image_urls[allUsers[id]['Picture']];
+  }
+
+  async userSetLoc(id: string, lat: number, lon: number) {
+    try {
+      let temp = {};
+      temp["LastLocation"] = [lat, lon];
+      await this.db.collection("Users").doc(id).update(temp);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async userSetPic(id: string, filename: string) {
+    try {
+      let temp = {};
+      temp["Picture"] = 'images/' + filename;
+      await this.db.collection("Users").doc(id).update(temp);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /* userSetDoc
+   * Desc: Asynchronous. Uploads a user document to the firestore.
+   * Params:
+   *     id: the id of the document being set
+   *     firstname: the first name of the user
+   *     lastname: the last name of the user
+   * returns: nothing.
+   */
+  async userSetDoc(id: string, firstname: string, lastname: string) {
+    try {
+
+      var obj = {
+        first: firstname,
+        last: lastname
+      }
+
+      await this.db.collection('Users').doc(id).set(obj);
+
+    } catch (e) {
+      throw e;
+    }
   }
 
 }
