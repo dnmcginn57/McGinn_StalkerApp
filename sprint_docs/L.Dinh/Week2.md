@@ -9,7 +9,7 @@ https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/map/
 
 | Description                             | Hrs  |
 | :---------------------------------------| ---: |
-| Implement map.ts file                   | 1    |
+| Work on map.ts file                   | 1    |
 
 
 ## Description of Sprint
