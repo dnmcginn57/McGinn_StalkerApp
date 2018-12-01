@@ -1,4 +1,3 @@
-4
 ### Name: Luong Dinh
 ### Date: 11/27
 
