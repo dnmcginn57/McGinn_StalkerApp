@@ -28,7 +28,7 @@ export class AuthProvider {
       let newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
 
       //Add the user to the collection
-      await this.database.setUserDoc(newUser.user.uid, firstname, lastname);
+      await this.database.userSetDoc(newUser.user.uid, firstname, lastname);
       
       console.log(`${newUser.user.email} 's UID: ${newUser.user.uid}`);
     }
