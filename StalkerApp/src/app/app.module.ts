@@ -15,6 +15,7 @@ import { FriendPage } from '../pages/friend/friend';
 import { LocationPage } from '../pages/location/location';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
+import { AllUsersPage } from '../pages/all-users/all-users';
 
 //Firebase team imports
 import { AngularFireModule } from 'angularfire2';
@@ -37,7 +38,8 @@ import { Facebook } from '@ionic-native/facebook';
     FriendPage,
     LocationPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    AllUsersPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { Facebook } from '@ionic-native/facebook';
     FriendPage,
     LocationPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    AllUsersPage
   ],
   providers: [
     StatusBar,

@@ -4,14 +4,8 @@
 <ion-content padding class = "profileContent">
     
 
-    <div id="profPicture">
+    <div id="profPicture" (click)="takePicture()">
         <img src="{{ myPhoto }}" />
-        <ion-fab bottom right edge>
-            <button ion-fab color="dark" (click)="takePicture()">
-                <ion-icon name="camera"></ion-icon>
-            </button>
-        </ion-fab>
-        -->
     </div>
 
 
@@ -24,8 +18,7 @@
     <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
 <br><br>
 
-    <button ion-button (click)="tagLoc()">Tag my current location</button>
-    <br>
+
     <div>
         <button ion-button (click)="Logout()">Log out</button>
     </div>
