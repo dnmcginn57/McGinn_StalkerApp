@@ -71,7 +71,7 @@ export class DatabaseProvider {
     }
   }
 
-  async objectUsers() {
+  async usersObject() {
 
     try {
       var query = await this.fire.collection("Users").get();
@@ -144,8 +144,37 @@ export class DatabaseProvider {
   }
 
   async userGetPic(id: string) {
-    let allUsers = await this.objectUsers();
+    let allUsers = await this.usersObject();
     return this.image_urls[allUsers[id]['Picture']];
+  }
+
+  async userFriendsObject(id: string){
+    try {
+      var query = await this.fire.collection("Users").doc(id).collection("Friends").get();
+      var collection_obj = {};
+      query.forEach(
+        (doc: any) => {
+          var doc_obj = {};
+          var doc_data = doc.data();
+          for (var field in doc_data) {
+            doc_obj[field] = doc_data[field];
+          }
+          collection_obj[doc.id] = doc_obj;
+        }
+      );
+
+      var all = await this.usersObject();
+      var friends_obj = {}
+      for(let keyID in collection_obj){
+        friends_obj[keyID] = all[keyID];
+      }
+
+      return friends_obj;
+    }
+    catch (e) {
+      throw e;
+    }
+
   }
 
   async userSendFriendRequest(id: string, other: string){   
