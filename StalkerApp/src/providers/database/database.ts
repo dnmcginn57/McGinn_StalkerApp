@@ -182,21 +182,6 @@ export class DatabaseProvider {
     
     try {
 
-      /*****************************************
-       * TESTING
-       ****************************************/
-      var all = await this.usersObject();
-      for (var keyID in all){
-        if (keyID != id){
-          await this.userSendFriendRequest(keyID, id);
-        }
-      }
-      await this.userAcceptFriendRequest(id, "IkGtwouG9FXudpOK7jYfVYsbDaZ2");
-
-
-
-
-
       var query = await this.fire.collection("Users").doc(id).collection("FriendRequests").get();
       var collection_obj = {};
       query.forEach(
