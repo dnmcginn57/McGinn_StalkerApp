@@ -31,7 +31,6 @@ export class LoginPage {
     });
   }
 
-
   async tryLogin(value) {
     try {
       await this.auth.loginWithEmail(value);
@@ -40,12 +39,38 @@ export class LoginPage {
       console.log(e);
       this.errorMessage=e.message;
     }
-
   }
 
+  async tryLoginWithGoogle() {
+    try {
+      await this.auth.loginWithGoogle();
+      this.navCtrl.setRoot(TabsPage);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async tryLoginWithTwitter() {
+    try {
+      await this.auth.loginWithTwitter();
+      this.navCtrl.setRoot(TabsPage);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async tryLoginWithFacebook() {
+    try {
+      await this.auth.loginWithFacebook();
+      this.navCtrl.setRoot(TabsPage);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   goRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
+
 
 }

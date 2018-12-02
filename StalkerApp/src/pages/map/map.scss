@@ -1,6 +1,5 @@
-    .ios, .md {
- 
-        page-map {
+.ios, .md {
+   page-map {
           background-color: black;
      
           .scroll {
@@ -14,6 +13,26 @@
      
         }
      
-    }
+}
+
+
+.unmoveableFAB{
+  position:absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.searchLabel{
+  width: 75%;
+  height: 10px;
+  background-color: color($colors, dark);
+}
+
+.searchButton{
+  position:absolute;
+  right: 0;
+  top: 0;
+}
+
 
 

@@ -15,6 +15,7 @@ import { FriendPage } from '../pages/friend/friend';
 import { LocationPage } from '../pages/location/location';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
+import { AllUsersPage } from '../pages/all-users/all-users';
 
 //Firebase team imports
 import { AngularFireModule } from 'angularfire2';
@@ -24,6 +25,9 @@ import { FIREBASE_CONFIG } from './credentials'
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AuthProvider } from '../providers/auth/auth';
 import { DatabaseProvider } from '../providers/database/database';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { TwitterConnect } from '@ionic-native/twitter-connect';
+import { Facebook } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,8 @@ import { DatabaseProvider } from '../providers/database/database';
     FriendPage,
     LocationPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    AllUsersPage
   ],
   imports: [
     BrowserModule,
@@ -52,18 +57,22 @@ import { DatabaseProvider } from '../providers/database/database';
     FriendPage,
     LocationPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    AllUsersPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
+    Facebook,
+    TwitterConnect,
     Camera,
-
+    AngularFireStorage,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
     GooglePlus,
-    AuthProvider
+    AuthProvider,
+    TwitterConnect
   ]
 })
 export class AppModule {}

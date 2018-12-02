@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AllUsersPage } from '../all-users/all-users';
 
 /**
  * Generated class for the FriendPage page.
@@ -20,6 +21,11 @@ export class FriendPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FriendPage');
+  }
+
+  goAllUsers()
+  {
+    this.navCtrl.push(AllUsersPage);
   }
 
 }
