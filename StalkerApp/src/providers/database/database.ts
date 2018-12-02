@@ -177,6 +177,55 @@ export class DatabaseProvider {
 
   }
 
+  //Returns the ids of all users that sent a request
+  async userPendingFriends(id: string){
+    
+    try {
+
+      /*****************************************
+       * TESTING
+       ****************************************/
+      var all = await this.usersObject();
+      for (var keyID in all){
+        if (keyID != id){
+          await this.userSendFriendRequest(keyID, id);
+        }
+      }
+      await this.userAcceptFriendRequest(id, "IkGtwouG9FXudpOK7jYfVYsbDaZ2");
+
+
+
+
+
+      var query = await this.fire.collection("Users").doc(id).collection("FriendRequests").get();
+      var collection_obj = {};
+      query.forEach(
+        (doc: any) => {
+          var doc_obj = {};
+          var doc_data = doc.data();
+          for (var field in doc_data) {
+            doc_obj[field] = doc_data[field];
+          }
+          collection_obj[doc.id] = doc_obj;
+        }
+      );
+
+      var list = [];
+      for(let keyID in collection_obj){
+        if (!collection_obj[keyID]["dismissed"]){
+          list.push(keyID);
+        }
+      }
+
+      console.log(list);
+      return list;
+    }
+    catch (e) {
+      throw e;
+    }
+
+  }
+
   async userSendFriendRequest(id: string, other: string){   
     try{
       let temp = {};
