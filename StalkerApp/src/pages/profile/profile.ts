@@ -53,7 +53,7 @@ export class ProfilePage {
     private alertCtrl: AlertController
   ) { 
 
-    database.profilePic(auth.uid).then((pic)=>{this.myPhoto = pic;});
+    database.userGetPic(auth.uid).then((pic)=>{this.myPhoto = pic;});
     this.getCurrentUserInfo();
 
   }
@@ -95,6 +95,11 @@ export class ProfilePage {
       this.userInfo.photoUrl = user.photoURL;
       this.userInfo.emailVerified = user.emailVerified;
       this.userInfo.uid = user.uid;
+
+      if(this.userInfo.name == null)
+      {
+
+      }
 
     }
      catch(e)

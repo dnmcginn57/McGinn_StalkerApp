@@ -39,7 +39,7 @@ export class AuthProvider {
         // The user is new
         //Add the user to the collection
         console.log("This user was just created...adding to database");
-        await this.database.setUserDoc(uid, firstname, lastname);
+        await this.database.userSetDoc(uid, firstname, lastname);
       }
     } catch (e) {
       throw (e);
