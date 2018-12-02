@@ -71,7 +71,7 @@ export class DatabaseProvider {
     }
   }
 
-  async objectUsers() {
+  async usersObject() {
 
     try {
       var query = await this.fire.collection("Users").get();
@@ -100,6 +100,28 @@ export class DatabaseProvider {
   *        Functions for a specific user        *
   **********************************************/
 
+  async userAcceptFriendRequest(id: string, other: string){
+    try{
+      let temp = {};
+      temp["dismissed"] = true;
+      await this.db.collection("Users").doc(id).collection("FriendRequests").doc(other).set(temp);
+      await this.userAddFriend(id, other);
+      await this.userAddFriend(other, id);
+    }catch(e){
+      throw e;
+    }
+  }
+
+  async userAddFriend(id: string, other: string){
+    try{
+      let temp = {};
+      temp["reference"] = this.db.collection("Users").doc(other).ref;
+      await this.db.collection("Users").doc(id).collection("Friends").doc(other).set(temp);
+    }catch(e){
+      throw e;
+    }
+  }
+
   async userAddTag(id: string, lat: number, lon: number) {
     try {
       let temp = {};
@@ -111,9 +133,102 @@ export class DatabaseProvider {
     }
   }
 
+  async userDeclineFriendRequest(id: string, other: string){
+    try{
+      let temp = {};
+      temp["dismissed"] = true;
+      await this.db.collection("Users").doc(id).collection("FriendRequests").doc(other).set(temp);
+    }catch(e){
+      throw e;
+    }
+  }
+
   async userGetPic(id: string) {
-    let allUsers = await this.objectUsers();
+    let allUsers = await this.usersObject();
     return this.image_urls[allUsers[id]['Picture']];
+  }
+
+  async userFriendsObject(id: string){
+    try {
+      var query = await this.fire.collection("Users").doc(id).collection("Friends").get();
+      var collection_obj = {};
+      query.forEach(
+        (doc: any) => {
+          var doc_obj = {};
+          var doc_data = doc.data();
+          for (var field in doc_data) {
+            doc_obj[field] = doc_data[field];
+          }
+          collection_obj[doc.id] = doc_obj;
+        }
+      );
+
+      var all = await this.usersObject();
+      var friends_obj = {}
+      for(let keyID in collection_obj){
+        friends_obj[keyID] = all[keyID];
+      }
+
+      return friends_obj;
+    }
+    catch (e) {
+      throw e;
+    }
+
+  }
+
+  async userNameString(id: string){
+    try{
+      var user = await this.usersObject();
+      user = user[id];
+      return user["first"] + " " + user["last"];
+    }catch(e){
+      throw e;
+    }
+  }
+
+  //Returns the ids of all users that sent a request
+  async userPendingFriends(id: string){
+    
+    try {
+
+      var query = await this.fire.collection("Users").doc(id).collection("FriendRequests").get();
+      var collection_obj = {};
+      query.forEach(
+        (doc: any) => {
+          var doc_obj = {};
+          var doc_data = doc.data();
+          for (var field in doc_data) {
+            doc_obj[field] = doc_data[field];
+          }
+          collection_obj[doc.id] = doc_obj;
+        }
+      );
+
+      var list = [];
+      for(let keyID in collection_obj){
+        if (!collection_obj[keyID]["dismissed"]){
+          list.push(keyID);
+        }
+      }
+
+      console.log(list);
+      return list;
+    }
+    catch (e) {
+      throw e;
+    }
+
+  }
+
+  async userSendFriendRequest(id: string, other: string){   
+    try{
+      let temp = {};
+      temp["dismissed"] = false;
+      await this.db.collection("Users").doc(other).collection("FriendRequests").doc(id).set(temp);
+    }catch(e){
+      throw e;
+    }
   }
 
   async userSetLoc(id: string, lat: number, lon: number) {
