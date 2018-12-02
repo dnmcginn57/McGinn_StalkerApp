@@ -177,6 +177,16 @@ export class DatabaseProvider {
 
   }
 
+  async userNameString(id: string){
+    try{
+      var user = await this.usersObject();
+      user = user[id];
+      return user["first"] + " " + user["last"];
+    }catch(e){
+      throw e;
+    }
+  }
+
   //Returns the ids of all users that sent a request
   async userPendingFriends(id: string){
     
