@@ -19,6 +19,14 @@
         </ion-fab>
    
     </div>
+    <div class="requests">
+        <ion-item *ngFor="let request of Request">
+            <ion-avatar item-start>
+                <img src="{{ request.Picture }}" />
+            </ion-avatar>
+            <h2>{{request.first + " "+ request.last}}</h2>
+        </ion-item>
+    </div>
 
 
 
