@@ -32,11 +32,11 @@ a satement that looks like:
 -->
 <ion-list>
     <ion-item-sliding>
-        <ion-item>
+        <ion-item *ngFor="let friend of Friends">
             <ion-avatar item-start>
-                <img src="../../assets/imgs/frens.png">
+                <img src="{{ friend.Picture }}" />
             </ion-avatar>
-            <h2>Fren</h2>
+            <h2>{{friend.first + " "+ friend.last}}</h2>
         </ion-item>
         <ion-item-options side="left">
             <button ion-button color="dark">
