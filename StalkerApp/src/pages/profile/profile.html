@@ -1,36 +1,46 @@
-<ion-content padding class = "profileContent">
-    
-
-    <div id="profPicture" (click)="takePicture()">
-        <img src="{{ myPhoto }}" />
-    </div>
+<ion-content padding class="profileContent">
 
 
-    <div class="edit">
-        <h3 style="color: white">Email: {{userInfo.email}}</h3>
-
-        <br>
-
-        <h3 style="color: white; display: inline-block;">Name: {{userInfo.name}} </h3>
-        <ion-fab right style="display: inline-block">
-            <button ion-fab (click)='presentPrompt()'>
-                <ion-icon name="create"></ion-icon>
-            </button>
-        </ion-fab>
-   
-    </div>
+  <div id="profPicture" (click)="takePicture()">
+    <img src="{{ myPhoto }}" />
+  </div>
 
 
 
-    <br>
-    <br>
-
-    <!-- Merge the following two buttons to one where label changes from start to stop -->
-    <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
-<br><br>
+  <h3 style="color: white">Email: {{userInfo.email}}</h3>
 
 
-    <div>
-        <button ion-button (click)="Logout()">Log out</button>
-    </div>
+  <br>
+  <div>
+    <h3 style="color: white; display: inline-block;">First: {{userInfo.first_name}} </h3>
+    <ion-fab right style="display: inline-block">
+      <button ion-fab (click)='presentPromptFirstName()'>
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
+  <br>
+  <div>
+    <h3 style="color: white; display: inline-block;">Last: {{userInfo.last_name}} </h3>
+    <ion-fab right style="display: inline-block">
+      <button ion-fab (click)='presentPromptLastName()'>
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
+
+
+
+
+  <br>
+  <br>
+
+  <!-- Merge the following two buttons to one where label changes from start to stop -->
+  <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
+  <br><br>
+
+
+  <div>
+    <button ion-button (click)="Logout()">Log out</button>
+  </div>
 </ion-content>
