@@ -6,10 +6,6 @@
   </div>
 
 
-
-  <h3 style="color: white">Email: {{userInfo.email}}</h3>
-
-
   <br>
   <div>
     <h3 style="color: white; display: inline-block;">First: {{userInfo.first_name}} </h3>
@@ -28,6 +24,15 @@
       </button>
     </ion-fab>
   </div>
+   <br>
+    <div class="requests">
+        <ion-item *ngFor="let request of Request">
+            <ion-avatar item-start>
+                <img src="{{ request.user.Picture }}" />
+            </ion-avatar>
+            <h2>{{request.user.first + " "+ request.user.last}}</h2>
+        </ion-item>
+    </div>
 
 
 

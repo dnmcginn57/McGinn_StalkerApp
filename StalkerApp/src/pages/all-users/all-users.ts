@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { DatabaseProvider } from '../../providers/database/database';
+import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the AllUsersPage page.
  *
@@ -15,7 +16,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AllUsersPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  testImage = "../../assets/imgs/frens.png";
+  allUsers:Array<{}>=[];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public db:DatabaseProvider, public auth:AuthProvider) {
+      db.usersObject().then((users)=>
+      {
+        for(var user in users)
+        {
+          console.log(user);
+          this.allUsers.push({key:user, user:users[user]});  
+          
+        }
+        console.log(this.allUsers);
+        console.log(this.allUsers[0]);
+      });
+      
   }
 
   //use this function to populate the list with all users
@@ -33,9 +50,12 @@ export class AllUsersPage {
 
   //this method is called when a user's list item is clicked
   // it should send them a friend request
-  sendFriendRequest()
+  sendFriendRequest(user)
   {
-    console.log('this will eventually send a friend request')
+    
+    //I don't think this is how this function call should work
+    //someone who knows what they're doing should modify this function call and uncomment it
+    this.db.userSendFriendRequest(this.auth.uid, user);
   }
 
 }

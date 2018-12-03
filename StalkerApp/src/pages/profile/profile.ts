@@ -45,6 +45,8 @@ export class ProfilePage {
     uid: null
   };
 
+  Request=[];
+
 
   constructor(
     public navCtrl: NavController,
@@ -57,6 +59,15 @@ export class ProfilePage {
 
     database.userGetPic(auth.uid).then((pic) => { this.myPhoto = pic; });
     this.getCurrentUserInfo();
+    console.log(this.myPhoto);
+    database.userPendingFriends(auth.uid).then((requests) =>
+    {
+      for(var request in requests)
+      {
+        this.Request.push({key:request,user:requests[request]});
+      console.log(request);
+      }
+    });
 
   }
 
