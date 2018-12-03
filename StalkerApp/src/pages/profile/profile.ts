@@ -106,6 +106,8 @@ export class ProfilePage {
         let names = fullname.split(" ");
         this.userInfo.first_name = names[0];
         this.userInfo.last_name = names[1];
+
+        this.userInfo.full_name = names[0] + " " + names[1];
       }
       else {
         //Splits full name into first and last
