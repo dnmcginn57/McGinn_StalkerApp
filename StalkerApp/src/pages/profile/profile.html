@@ -22,9 +22,9 @@
     <div class="requests">
         <ion-item *ngFor="let request of Request">
             <ion-avatar item-start>
-                <img src="{{ request.Picture }}" />
+                <img src="{{ request.user.Picture }}" />
             </ion-avatar>
-            <h2>{{request.first + " "+ request.last}}</h2>
+            <h2>{{request.user.first + " "+ request.user.last}}</h2>
         </ion-item>
     </div>
 
