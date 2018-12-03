@@ -220,10 +220,12 @@ export class ProfilePage {
 
   addFriend(key)
   {
+    console.log(key);
     this.database.userAcceptFriendRequest(this.auth.uid,key);
   }
   declineFriend(key)
   {
+    console.log(key);
     this.database.userDeclineFriendRequest(this.auth.uid,key);
   }
 

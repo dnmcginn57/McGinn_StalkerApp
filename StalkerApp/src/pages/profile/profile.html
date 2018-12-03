@@ -31,8 +31,8 @@
                 <img src="{{ request.user.Picture }}" />
             </ion-avatar>
             <h2>{{request.user.first + " "+ request.user.last}}</h2>
-            <button (click)='addFriend(request.key)'>Add</button>
-            <button (click)='declineFriend(request.key)'>Declind</button> 
+            <button (click)='addFriend(request.user)'>Add</button>
+            <button (click)='declineFriend(request.user)'>Declind</button> 
         </ion-item>
     </div>
 
