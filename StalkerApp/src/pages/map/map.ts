@@ -18,22 +18,215 @@ declare var google;
   selector: 'page-map',
   templateUrl: 'map.html',
 })
+
+
+
 export class MapPage {
 
 
   @ViewChild('map') mapElement: ElementRef;
-  map: any;
-  Destination: any = '';
+  Destination: any;
   MyLocation: any;
+  map: any;
+  stylesArray = [
+    {
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#212121"
+        }
+      ]
+    },
+    {
+      "elementType": "labels.icon",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#757575"
+        }
+      ]
+    },
+    {
+      "elementType": "labels.text.stroke",
+      "stylers": [
+        {
+          "color": "#212121"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#757575"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative.country",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#9e9e9e"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative.land_parcel",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative.locality",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#bdbdbd"
+        }
+      ]
+    },
+    {
+      "featureType": "poi",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#757575"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.park",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#181818"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.park",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#616161"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.park",
+      "elementType": "labels.text.stroke",
+      "stylers": [
+        {
+          "color": "#1b1b1b"
+        }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#2c2c2c"
+        }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#8a8a8a"
+        }
+      ]
+    },
+    {
+      "featureType": "road.arterial",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#373737"
+        }
+      ]
+    },
+    {
+      "featureType": "road.highway",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#3c3c3c"
+        }
+      ]
+    },
+    {
+      "featureType": "road.highway.controlled_access",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#4e4e4e"
+        }
+      ]
+    },
+    {
+      "featureType": "road.local",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#616161"
+        }
+      ]
+    },
+    {
+      "featureType": "transit",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#757575"
+        }
+      ]
+    },
+    {
+      "featureType": "water",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "featureType": "water",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#3d3d3d"
+        }
+      ]
+    }
+  ];
+  
+  
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
   }
 
   ionViewDidLoad() {
-   this.loadMap();
+    this.loadMap();
     console.log('ionViewDidLoad MapPage');
   }
- 
 
+  
+ 
 
   loadMap(){
  
@@ -43,7 +236,7 @@ export class MapPage {
 
       
       //Array contains all styling options for google's default dark theme.
-      //  it fits well with our current black and white color pallet
+      /*/  it fits well with our current black and white color pallet
       var stylesArray = [
           {
             "elementType": "geometry",
@@ -229,13 +422,13 @@ export class MapPage {
               }
             ]
           }
-        ]
+        ]*/
        
       let mapOptions = {
         center: latLng,
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        styles: stylesArray 
+        styles: this.stylesArray 
 
       }
  
@@ -278,7 +471,8 @@ export class MapPage {
     let directionsDisplay = new google.maps.DirectionsRenderer;
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 7,
-      center: {lat: 41.85, lng: -87.65}
+      center: {lat: 41.85, lng: -87.65},
+      styles: this.stylesArray
     });
     directionsDisplay.setMap(map);
 
@@ -310,5 +504,4 @@ export class MapPage {
     }
   });
 }
-
 }
