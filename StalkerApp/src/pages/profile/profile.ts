@@ -43,7 +43,7 @@ export class ProfilePage {
     uid:null
   };
 
-  Request=[];
+  Request;
 
 
   constructor(
@@ -58,13 +58,13 @@ export class ProfilePage {
     database.userGetPic(auth.uid).then((pic)=>{this.myPhoto = pic;});
     this.getCurrentUserInfo();
     console.log(this.myPhoto);
-    database.userPendingFriends(auth.uid).then((request) => 
-      { for(var key in request)
-        {
-          console.log(request[key]);
-          this.Request.push(request[key]);
-        }
-      });
+    database.userPendingFriends(auth.uid).then((request) =>
+    {
+      this.Request=request;
+      console.log(request);
+    } 
+    );
+      console.log(database.userPendingFriends(auth.uid));
 
   }
 
