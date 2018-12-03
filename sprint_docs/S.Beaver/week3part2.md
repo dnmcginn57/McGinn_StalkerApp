@@ -1,5 +1,5 @@
 ### Name: Sarah Beaver
-### Date: 11/19
+### Date: 11/28
 
 ## Files Worked On
 https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/login/login.html
@@ -10,14 +10,11 @@ https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/logi
 
 | Description                        | Hrs  |
 | :--------------------------------- | ---: |
-| Class meeting                      | .5   |
-| Merging and fixing photo upload    | 5    |
+| worked on the map some             | 1    |
+| fixed some tracking issues         | 2    |
+| fixed some tracking issues         | 2    |
 | Total                              | 5.5  |
 
 ## Description of Sprint
 
-Everyone showed up for team 1 except Keona. Discussed what each team is doing/should be doing.
-worked of getting photos to replace and upload/download a existing profile picture.
-
-
-
+Worked on map some and did some styling. Helped fixed some foreground tracking issues. Helped with the friends and showing friend requests.
