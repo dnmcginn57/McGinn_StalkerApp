@@ -64,6 +64,7 @@ this.watch = this.geolocation.watchPosition(options).pipe(filter((p: any) => p.c
   this.zone.run(() => {
     this.lat = position.coords.latitude;
     this.lng = position.coords.longitude;
+   
   });
  
 });

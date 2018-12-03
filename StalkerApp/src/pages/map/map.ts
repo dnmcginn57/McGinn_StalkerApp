@@ -252,12 +252,41 @@ export class MapPage {
       animation: google.maps.Animation.DROP,
       position: this.map.getCenter()
     });
+
+
+    var Markerlocations = [
+      [33.8689,98.5329],
+      [33.8669,98.5364],
+      [33.8669,98.5390],
+      [33.8669,98.5400],
+      [33.8669,98.5333],
+      [33.8669,98.5382],
+    ];
+
+    var j;
+    
+    for (j=0; j< Markerlocations.length; j++)
+    {
+      var friendmarker = new google.maps.Marker({
+        //map: this.map,
+        position: new google.maps.LatLng(Markerlocations[j][0],Markerlocations[j][1]),
+        animation: google.maps.Animation.Bounce,
+      })
+    }
    
+    
+
     let content = "<h4>Information!</h4>";         
    
     this.addInfoWindow(marker, content);
-   
+       
   }
+
+
+   
+
+
+
 
   addInfoWindow(marker, content){
  
