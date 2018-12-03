@@ -12,8 +12,8 @@ https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/logi
 | :--------------------------------- | ---: |
 | worked on the map some             | 1    |
 | fixed some tracking issues         | 2    |
-| fixed some tracking issues         | 2    |
-| Total                              | 5.5  |
+| helped with showing friends        | 2    |
+| Total                              | 5    |
 
 ## Description of Sprint
 
