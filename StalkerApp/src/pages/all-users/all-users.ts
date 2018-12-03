@@ -17,19 +17,21 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class AllUsersPage {
 
   testImage = "../../assets/imgs/frens.png";
-  allUsers = [];
+  allUsers:Array<{}>=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public db:DatabaseProvider, public auth:AuthProvider) {
-      db.usersObject().then((user)=>
+      db.usersObject().then((users)=>
       {
-        for(var key in user)
+        for(var user in users)
         {
-          console.log(user[key]);
-          this.allUsers.push(user[key]);       
+          console.log(user);
+          this.allUsers.push({key:user, user:users[user]});  
+          
         }
+        console.log(this.allUsers);
+        console.log(this.allUsers[0]);
       });
-      console.log(this.allUsers);
       
   }
 
@@ -53,7 +55,7 @@ export class AllUsersPage {
     
     //I don't think this is how this function call should work
     //someone who knows what they're doing should modify this function call and uncomment it
-    //this.db.userSendFriendRequest(this.auth.uid, this.allUsers.indexOf(user).toString());
+    this.db.userSendFriendRequest(this.auth.uid, user);
   }
 
 }
