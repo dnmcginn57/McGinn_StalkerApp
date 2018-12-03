@@ -62,11 +62,12 @@ export class ProfilePage {
     console.log(this.myPhoto);
     database.userPendingFriends(auth.uid).then((requests) =>
     {
+      //this only returns ids
       for(var request in requests)
-      {
+      { 
         this.Request.push({key:request,user:requests[request]});
-      console.log(request);
       }
+      console.log(this.Request);
     });
 
   }
@@ -215,6 +216,15 @@ export class ProfilePage {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  addFriend(key)
+  {
+    this.database.userAcceptFriendRequest(this.auth.uid,key);
+  }
+  declineFriend(key)
+  {
+    this.database.userDeclineFriendRequest(this.auth.uid,key);
   }
 
 }
