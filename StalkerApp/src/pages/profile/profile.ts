@@ -57,6 +57,7 @@ export class ProfilePage {
 
     database.userGetPic(auth.uid).then((pic)=>{this.myPhoto = pic;});
     this.getCurrentUserInfo();
+    console.log(this.myPhoto);
     database.userPendingFriends(auth.uid).then((request) => 
       { for(var key in request)
         {

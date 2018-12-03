@@ -30,14 +30,14 @@
     a satement that looks like:
       this.items.push
   -->
+
   <ion-list>
-    <ion-item (click)="sendFriendRequest">
+    <ion-item *ngFor="let user of allUsers" (click)="sendFriendRequest(user)">
       <ion-avatar item-start>
-        <img src="../../assets/imgs/frens.png">
+        <img src="{{testImage}}">
       </ion-avatar>
-      <h2>Name</h2>
+      <h2>{{user.first + " " + user.last}}</h2>
     </ion-item>
   </ion-list>
 
 
-</ion-content>
