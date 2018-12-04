@@ -29,7 +29,7 @@ export class LocationPage {
 
   Destination: any = '';
   MyLocation: any;
-
+  trackingState: string = "Stop Tracking"
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation, public locationTracker: LocationTracker, private firebase: DatabaseProvider) {
   }
@@ -75,6 +75,18 @@ export class LocationPage {
       window.alert('Directions request failed due to ' + status);
     }
   });
+}
+toggleTracking() {
+  if (this.trackingState == "Start Tracking") 
+  {
+    this.trackingState = "Stop Tracking";
+    this.start();
+  }
+  else 
+  {
+    this.trackingState = "Start Tracking";
+    this.stop();
+  }
 }
 
 // posttodb(){
