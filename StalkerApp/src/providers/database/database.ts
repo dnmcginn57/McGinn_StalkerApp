@@ -188,7 +188,7 @@ export class DatabaseProvider {
   }
 
   //Returns the ids of all users that sent a request
-  async userPendingFriends(id: string){
+  async userPendingFriendIDs(id: string){
     
     try {
 
@@ -209,6 +209,53 @@ export class DatabaseProvider {
       for(let keyID in collection_obj){
         if (!collection_obj[keyID]["dismissed"]){
           list.push(keyID);
+        }
+      }
+
+      console.log(list);
+      return list;
+    }
+    catch (e) {
+      throw e;
+    }
+
+  }
+
+  //Returns the ids of all users that sent a request
+  async userPendingFriends(id: string){
+    
+    try {
+
+      var users_query = await this.fire.collection("Users").get();
+      var users_obj = {};
+      users_query.forEach(
+        (doc: any) => {
+          var doc_obj = {};
+          var doc_data = doc.data();
+          for (var field in doc_data) {
+            doc_obj[field] = doc_data[field];
+          }
+          users_obj[doc.id] = doc_obj;
+        }
+      );
+
+      var requests_query = await this.fire.collection("Users").doc(id).collection("FriendRequests").get();
+      var requests_obj = {};
+      requests_query.forEach(
+        (doc: any) => {
+          var doc_obj = {};
+          var doc_data = doc.data();
+          for (var field in doc_data) {
+            doc_obj[field] = doc_data[field];
+          }
+          requests_obj[doc.id] = doc_obj;
+        }
+      );
+
+      var list = {};
+      for(let keyID in requests_obj){
+        if (!requests_obj[keyID]["dismissed"]){
+          list[keyID] = users_obj[keyID];
         }
       }
 
