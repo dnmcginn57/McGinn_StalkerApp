@@ -2,7 +2,8 @@
 
 
   <div id="profPicture" (click)="takePicture()">
-    <img src="{{ myPhoto }}" />
+    <img *ngIf="myPhoto" src="{{ myPhoto }}" />
+    <img *ngIf="!myPhoto" src="{{testImage}}">
   </div>
 
 
@@ -30,11 +31,12 @@
     <div class="requests">
         <ion-item *ngFor="let request of Request">
             <ion-avatar item-start>
-                <img src="{{ request.user.Picture }}" />
+              <img *ngIf="request.Picture" src={{request.Picture}} >
+              <img *ngIf="!request.Picture" src={{testImage}} >
             </ion-avatar>
             <h2>{{request.user.first + " "+ request.user.last}}</h2>
-            <button (click)='addFriend(request.user)'>Add</button>
-            <button (click)='declineFriend(request.user)'>Declind</button> 
+            <button (click)='addFriend(request.key)'>Add</button>
+            <button (click)='declineFriend(request.key)'>Declind</button> 
         </ion-item>
     </div>
 
@@ -44,8 +46,7 @@
   <br>
   <br>
 
-   <!-- <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
-  <br><br> -->
+  
 
 
   <div>

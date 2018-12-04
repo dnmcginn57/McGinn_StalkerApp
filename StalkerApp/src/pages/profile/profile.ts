@@ -5,6 +5,8 @@ import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AlertController } from 'ionic-angular';
+import {App} from 'ionic-angular';
+
 
 /**
  * Generated class for the ProfilePage page.
@@ -13,13 +15,16 @@ import { AlertController } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
+
+
 @IonicPage()
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  myPhoto: any = '../../assets/imgs/logo.png';
+  myPhoto: any ;
+  testImage = "../../assets/imgs/frens.png";
   options: CameraOptions = {
     quality: 75,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -32,7 +37,7 @@ export class ProfilePage {
     saveToPhotoAlbum: false
   }
 
-  trackingState: string = "Start Tracking"
+  
 
 
   userInfo: any = {
@@ -54,10 +59,10 @@ export class ProfilePage {
     public auth: AuthProvider,
     public camera: Camera,
     public database: DatabaseProvider,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private app:App,
   ) {
     database.userGetPic(auth.uid).then((pic) => { this.myPhoto = pic; });
-    this.getCurrentUserInfo();
     console.log(this.myPhoto);
     database.userPendingFriends(auth.uid).then((requests) =>
     {
@@ -68,12 +73,26 @@ export class ProfilePage {
       }
       console.log(this.Request);
     });
+    
+      this.getCurrentUserInfo();
   }
-
+  ionViewWillLoad()
+  {
+    this.getPendingFriends();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
 
+  async getPendingFriends()
+  {
+    let requests=await this.database.userPendingFriends(this.auth.uid);
+    for(var request in requests)
+    {
+      let picture= await this.database.userGetPic(request);
+      this.Request.push({key:request,user:requests[request],Picture:picture});
+    }
+  }
   async takePicture() {
 
     try {
@@ -200,13 +219,10 @@ export class ProfilePage {
 
   Logout() {
     this.auth.logout();
-    this.navCtrl.setRoot(LoginPage);
+    this.app.getRootNav().setRoot(LoginPage);
   }
 
-  toggleTracking() {
-    if (this.trackingState == "Start Tracking") this.trackingState = "Stop Tracking";
-    else this.trackingState = "Start Tracking";
-  }
+  
 
   async tagLoc() {
     try {
@@ -220,11 +236,13 @@ export class ProfilePage {
   {
     console.log(key);
     this.database.userAcceptFriendRequest(this.auth.uid,key);
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
   declineFriend(key)
   {
     console.log(key);
     this.database.userDeclineFriendRequest(this.auth.uid,key);
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
 }

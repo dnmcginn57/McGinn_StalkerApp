@@ -5,7 +5,8 @@ import { MapPage } from '../map/map';
 import { ProfilePage } from '../profile/profile';
 import { FriendPage } from '../friend/friend';
 import { LocationPage } from '../location/location';
-
+import {LoginPage} from '../login/login';
+import {LocationTracker} from '../../providers/location-tracker/location-tracker';
 
 //Tabs page; you shouldn't have to do much here
 //unless you want more tabs
@@ -18,8 +19,9 @@ import { LocationPage } from '../location/location';
 export class TabsPage { 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public lt:LocationTracker) {
+    lt.startTracking();
   }
 
   ionViewDidLoad() {

@@ -8,11 +8,11 @@
 
   
   <ion-navbar color = "dark">
-    <ion-buttons start>
+    <!-- <ion-buttons start>
       <button ion-button icon-only (click)="goBack()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
@@ -32,11 +32,12 @@
   -->
 
   <ion-list>
-    <ion-item *ngFor="let person of allUsers" (click)="sendFriendRequest(person.key)">
+    <ion-item *ngFor="let person of allUsers" (click)="sendFriendRequest(person.Key)">
       <ion-avatar item-start>
-        <img src="{{testImage}}">
+        <img *ngIf="person.Picture" src={{person.Picture}} >
+        <img *ngIf="!person.Picture" src={{testImage}} >
       </ion-avatar>
-      <h2>{{person.user.first + " " + person.user.last}}</h2>
+      <h2>{{person.User.first + " " + person.User.last}}</h2>
     </ion-item>
   </ion-list>
 

@@ -17,6 +17,7 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
 import { AllUsersPage } from '../pages/all-users/all-users';
 
+
 //Firebase team imports
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth'
@@ -28,6 +29,7 @@ import { DatabaseProvider } from '../providers/database/database';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Facebook } from '@ionic-native/facebook';
+import {LocationTracker} from '../providers/location-tracker/location-tracker';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import { Facebook } from '@ionic-native/facebook';
     DatabaseProvider,
     GooglePlus,
     AuthProvider,
-    TwitterConnect
+    TwitterConnect,
+    LocationTracker
+    
   ]
 })
 export class AppModule {}
