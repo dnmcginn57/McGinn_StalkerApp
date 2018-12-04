@@ -1,6 +1,17 @@
-import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
+import { ErrorHandler,NgModule } from '@angular/core';
+import { IonicPageModule, IonicErrorHandler } from 'ionic-angular';
 import { LocationPage } from './location';
+import { BrowserModule } from '@angular/platform-browser';
+
+import {LocationTracker} from '../../providers/location-tracker/location-tracker';
+//import {BackgroundGeolocation} from '@ionic-native/background-geolocation';
+import {Geolocation} from '@ionic-native/geolocation';
+
+import { LocationTracker } from '../../providers/location-tracker/location-tracker';
+
+import { Geolocation } from '@ionic-native/geolocation';
+import { BrowserModule } from '@angular/platform-browser';
+import {BackgroundGeolocation} from '@ionic-native/background-geolocation';
 
 
 @NgModule({
@@ -9,6 +20,14 @@ import { LocationPage } from './location';
   ],
   imports: [
     IonicPageModule.forChild(LocationPage),
+    BrowserModule,
+   
   ],
+  providers: [
+    LocationTracker,
+  //  BackgroundGeolocation,
+    Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
 })
 export class LocationPageModule {}
