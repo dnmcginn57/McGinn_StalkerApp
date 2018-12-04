@@ -3,6 +3,8 @@ import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 // import 'rxjs/add/operator/filter';
 import {filter} from 'rxjs/operators';
+import {DatabaseProvider} from '../database/database';
+import {AuthProvider} from '../auth/auth';
  
 @Injectable()
 export class LocationTracker {
@@ -13,8 +15,9 @@ export class LocationTracker {
   backgroundGeolocation: any;
  
  
-  constructor(public zone: NgZone, public geolocation:Geolocation) {
- 
+  constructor(public zone: NgZone, public geolocation:Geolocation, 
+    private db:DatabaseProvider,private auth:AuthProvider) {
+      
   }
  
   startTracking() {
@@ -66,6 +69,7 @@ this.watch = this.geolocation.watchPosition(options).pipe(filter((p: any) => p.c
     this.lng = position.coords.longitude;
    
   });
+  this.db.userSetLoc(this.auth.uid, this.lat, this.lng);
  
 });
  

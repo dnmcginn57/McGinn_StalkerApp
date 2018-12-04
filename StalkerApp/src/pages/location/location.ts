@@ -3,7 +3,7 @@ import { Component, } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //import { ViewChild, ElementRef } from '@angular/core';
 import { LocationTracker } from '../../providers/location-tracker/location-tracker';
-import {FirebaseProvider} from '../../providers/firebase/old_firebase'
+import {DatabaseProvider} from '../../providers/database/database'
 
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -31,7 +31,7 @@ export class LocationPage {
   MyLocation: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation, public locationTracker: LocationTracker, private firebase: FirebaseProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation, public locationTracker: LocationTracker, private firebase: DatabaseProvider) {
   }
 
   ionViewDidLoad() {
