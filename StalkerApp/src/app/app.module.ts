@@ -29,6 +29,7 @@ import { DatabaseProvider } from '../providers/database/database';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Facebook } from '@ionic-native/facebook';
+import {LocationTracker} from '../providers/location-tracker/location-tracker';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { Facebook } from '@ionic-native/facebook';
     GooglePlus,
     AuthProvider,
     TwitterConnect,
+    LocationTracker
     
   ]
 })
