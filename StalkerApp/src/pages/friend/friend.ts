@@ -17,28 +17,37 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'friend.html',
 })
 export class FriendPage {
+  testImage = "../../assets/imgs/frens.png";
   Friends=[];
  // theirPhoto:any='../../assets/imgs/logo.png';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public db:DatabaseProvider,
     public auth:AuthProvider) {
-      
-      db.userFriendsObject(auth.uid).then((friend) => 
-      {  var theirPhoto:any;
-         for(var key in friend)
-        {
-          console.log(friend[key]);
-          db.userGetPic(key).then((pic) => { 
-            theirPhoto = pic;});
-            
-           this.Friends.push({key:key,user:friend[key],Picture:theirPhoto});
-            }
-      
-      });
-  }
 
+  }
+  ionViewWillLoad()
+  {
+    this.getFriends();
+  
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad FriendPage');
+  }
+  async getFriends()
+  {
+    let friend =await this.db.userFriendsObject(this.auth.uid);
+      var theirPhoto:string;
+       for(var key in friend)
+      {
+         theirPhoto=await (this.picture(key));
+         this.Friends.push({key:key,user:friend[key],Picture:theirPhoto});
+        }
+    
+  }
+  async picture(key): Promise<string>
+  {
+    var temp= await this.db.userGetPic(key);
+      return temp;
   }
 
   goAllUsers()
