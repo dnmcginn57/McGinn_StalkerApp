@@ -7,10 +7,6 @@ import {LocationTracker} from '../../providers/location-tracker/location-tracker
 //import {BackgroundGeolocation} from '@ionic-native/background-geolocation';
 import {Geolocation} from '@ionic-native/geolocation';
 
-import { LocationTracker } from '../../providers/location-tracker/location-tracker';
-
-import { Geolocation } from '@ionic-native/geolocation';
-import { BrowserModule } from '@angular/platform-browser';
 import {BackgroundGeolocation} from '@ionic-native/background-geolocation';
 
 
@@ -24,6 +20,7 @@ import {BackgroundGeolocation} from '@ionic-native/background-geolocation';
    
   ],
   providers: [
+    LocationTracker,
     LocationTracker,
   //  BackgroundGeolocation,
     Geolocation,
