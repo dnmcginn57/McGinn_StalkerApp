@@ -1,0 +1,40 @@
+### Name: Jakob Lopez
+### Date: November 29, 2018
+
+ ## Files Worked On
+ - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/GoogleService-Info.plist
+ 
+ - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/package.json
+
+ - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/providers/auth/auth.ts
+ 
+ - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/pages/login/login.html
+ - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/pages/login/login.ts
+ 
+ - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/pages/profile/profile.html
+ - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/pages/profile/profile.ts
+ 
+ - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/config.xml
+ 
+ - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/src/app/app.module.ts
+ 
+ - https://github.com/bluefire8421/StalkerApp/blob/firebase/StalkerApp/platforms(These aren't uploaded to Github)
+
+ 
+ 
+ ## Approximate Time Worked
+ | Description                          | Hrs   |
+ | :------------------------------------| ----: |
+ | Facebook login                       | 2     |
+ | Debugging on Physical Android Device | 7     |
+ | Profile Page                         | 2     |
+ | :------------------------------------| ----: |
+ | Total                                | 11    |
+
+
+ ## Description of Sprint
+Spent more countless hours attempting to get Google login to work on an android device, but finally got it to work; lots of time spent 
+messing with version conflicts in platforms/android and Android Studio. Created a developer accout for Facebook and implemented Facebook
+authentication. Now, there are logins available for all 3 social media authetication choices. Added user information to Profile page
+that allows a user to edit their name. Lastly, added code that when logging into StalkerApp via Google login and the user has not
+yet registered an account, their information is added into firebase authentication as well as the database.

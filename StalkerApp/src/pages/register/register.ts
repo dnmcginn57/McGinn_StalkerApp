@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 
 
@@ -28,12 +28,30 @@ export class RegisterPage {
 
   ionViewWillLoad(){
     this.registerForm = this.formBuilder.group({
-      email: new FormControl(),
-      password: new FormControl(),
-      first: new FormControl(),
-      last: new FormControl()
-    });
+      email: new FormControl("", Validators.required),
+      password: new FormControl("", Validators.required),
+      confirmPassword: new FormControl("", Validators.required),
+      first: new FormControl("", Validators.required),
+      last: new FormControl("", Validators.required)
+    },
+    {validator: this.matchingPasswords('password', 'confirmPassword')}); 
   }
+
+  //custom validator for matching passwords
+  matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
+    return(group: FormGroup): {[key: string]: any} => {
+      let password = group.controls[passwordKey];
+      let confirmPassword = group.controls[confirmPasswordKey];
+
+      if (password.value !== confirmPassword.value) {
+        return {
+          mismatchedPasswords: true
+        };
+      }
+    }
+  }
+
+
 
   //Attempts to register user
   //Params:

@@ -7,6 +7,7 @@ import { FriendPage } from '../friend/friend';
 import { LocationPage } from '../location/location';
 import {LoginPage} from '../login/login';
 
+
 //Tabs page; you shouldn't have to do much here
 //unless you want more tabs
 

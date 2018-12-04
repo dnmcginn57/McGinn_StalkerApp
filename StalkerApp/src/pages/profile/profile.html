@@ -1,27 +1,53 @@
+<ion-content padding class="profileContent">
 
 
+  <div id="profPicture" (click)="takePicture()">
+    <img src="{{ myPhoto }}" />
+  </div>
 
-<ion-content padding class = "profileContent">
-    
-    <div id="profPicture">
-            <img src="{{ myPhoto }}" />
-        <ion-fab bottom right edge>
-            <button ion-fab color="dark" (click)="takePicture()"><ion-icon name = "camera"></ion-icon></button>
-        </ion-fab>
+
+  <br>
+  <div>
+    <h3 style="color: white;">Email: {{userInfo.email}} </h3>
+    <h3 style="color: white; display: inline-block;">First: {{userInfo.first_name}} </h3>
+    <ion-fab right style="display: inline-block">
+      <button ion-fab (click)='presentPromptFirstName()'>
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
+  <br>
+  <div>
+    <h3 style="color: white; display: inline-block;">Last: {{userInfo.last_name}} </h3>
+    <ion-fab right style="display: inline-block">
+      <button ion-fab (click)='presentPromptLastName()'>
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
+   <br>
+    <div class="requests">
+        <ion-item *ngFor="let request of Request">
+            <ion-avatar item-start>
+                <img src="{{ request.user.Picture }}" />
+            </ion-avatar>
+            <h2>{{request.user.first + " "+ request.user.last}}</h2>
+            <button (click)='addFriend(request.user)'>Add</button>
+            <button (click)='declineFriend(request.user)'>Declind</button> 
+        </ion-item>
     </div>
 
 
-        <h3 style="color: white">Name</h3>
 
-    <br>
-    <br>
-    <!–- Merge the following two buttons to one where label changes from start to stop -->
-    <button ion-button>Start Tracking</button>
-    <button ion-button>Stop tracking</button>
-<br><br>
-    <button ion-button>Tag my current location</button>
-    <br>
-    <div>
-        <button ion-button (click)="Logout()">Log out</button>
-    </div>
+
+  <br>
+  <br>
+
+   <!-- <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
+  <br><br> -->
+
+
+  <div>
+    <button ion-button (click)="Logout()">Log out</button>
+  </div>
 </ion-content>

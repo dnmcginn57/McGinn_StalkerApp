@@ -3,17 +3,10 @@
 }
 
 #profPicture{
-    background-image: url('../../assets/imgs/logo.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
 
     height: 20vh;
     width:20vh;
     display: inline-block;
-    
-
-
 }
 
 ion-fab{
@@ -22,7 +15,7 @@ ion-fab{
 
 ion-fab[bottom][edge]{
 
-    bottom: -15vh;
+    bottom: 5vh;
 }
 
 .fab {
