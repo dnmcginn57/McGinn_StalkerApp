@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color = "dark">
+    <ion-buttons start>
+      <button ion-button icon-only (click) = "goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class ="fProfileContent">
+
+  <div id="fProfPicture">
+    <!--
+    <img *ngIf="theirPhoto" src="{{ theirPhoto }}" />
+    <img *ngIf="!theirPhoto" src="{{testImage}}">
+    -->
+  </div>
+
+  <br>
+  <div>
+    <h3 style="color: white;">Email: </h3>
+    <br>
+    <h3 style="color: white; display: inline-block;">First: </h3>
+    <br>
+    <h3 style="color: white; display: inline-block;">Last: </h3>
+  </div>
+
+</ion-content>

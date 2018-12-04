@@ -16,6 +16,7 @@ import { LocationPage } from '../pages/location/location';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
 import { AllUsersPage } from '../pages/all-users/all-users';
+import { FriendProfilePage } from '../pages/friend-profile/friend-profile';
 
 
 //Firebase team imports
@@ -40,7 +41,8 @@ import { Facebook } from '@ionic-native/facebook';
     LocationPage,
     LoginPage,
     RegisterPage,
-    AllUsersPage
+    AllUsersPage,
+    FriendProfilePage,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ import { Facebook } from '@ionic-native/facebook';
     LocationPage,
     LoginPage,
     RegisterPage,
-    AllUsersPage
+    AllUsersPage,
+    FriendProfilePage
   ],
   providers: [
     StatusBar,

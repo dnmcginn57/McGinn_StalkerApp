@@ -1,23 +1,18 @@
 
 <ion-header>
-    <ion-navbar color="danger">
+    <ion-navbar color="dark">
       <ion-title>
-       Direction
+       Marked Locations
       </ion-title>
     </ion-navbar>
   </ion-header>
   
+  <!-- *ngFor="let location of Locations"-->
   <ion-content>
       <ion-list>
-  
           <ion-item>
-              <ion-label floating>Destination</ion-label>
-              <ion-input type="text" [(ngModel)]="Destination"></ion-input>
+              locations eventually
           </ion-item>
       </ion-list>
-      <button ion-button full (click)="calculateAndDisplayRoute()">Get Direction</button>
-  
-      <div id="map"></div>
-  
   </ion-content>
 
