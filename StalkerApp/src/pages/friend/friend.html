@@ -31,8 +31,8 @@ a satement that looks like:
     this.items.push
 -->
 <ion-list>
-    <ion-item-sliding>
-        <ion-item *ngFor="let friend of Friends">
+    <ion-item-sliding *ngFor="let friend of Friends">
+        <ion-item >
             <ion-avatar item-start>
                 <img [src]=" theirPhoto " />
             </ion-avatar>
