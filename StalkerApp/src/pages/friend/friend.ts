@@ -18,20 +18,23 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class FriendPage {
   Friends=[];
-  theirPhoto:any='../../assets/imgs/logo.png';
+ // theirPhoto:any='../../assets/imgs/logo.png';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public db:DatabaseProvider,
     public auth:AuthProvider) {
       
       db.userFriendsObject(auth.uid).then((friend) => 
-      { for(var key in friend)
+      {  var theirPhoto:any;
+         for(var key in friend)
         {
           console.log(friend[key]);
-          this.theirPhoto = friend[key].Picture;
-          this.Friends.push(friend[key]);
-        }
+          db.userGetPic(key).then((pic) => { 
+            theirPhoto = pic;});
+            
+           this.Friends.push({key:key,user:friend[key],Picture:theirPhoto});
+            }
+      
       });
-      console.log(this.Friends);
   }
 
   ionViewDidLoad() {

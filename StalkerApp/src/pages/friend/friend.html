@@ -34,9 +34,9 @@ a satement that looks like:
     <ion-item-sliding *ngFor="let friend of Friends">
         <ion-item >
             <ion-avatar item-start>
-                <img [src]=" theirPhoto " />
+                <img src=" {{friend.Picture}}" />
             </ion-avatar>
-            <h2>{{friend.first + " "+ friend.last}}</h2>
+            <h2>{{friend.user.first + " "+ friend.user.last}}</h2>
         </ion-item>
         <ion-item-options side="left">
             <button ion-button color="dark">
