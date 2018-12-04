@@ -23,16 +23,16 @@ export class FriendPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public db:DatabaseProvider,
     public auth:AuthProvider) {
-
+      this.getFriends();
   }
   ionViewWillLoad()
   {
-    this.getFriends();
-  
+   
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad FriendPage');
   }
+
   async getFriends()
   {
     let friend =await this.db.userFriendsObject(this.auth.uid);
