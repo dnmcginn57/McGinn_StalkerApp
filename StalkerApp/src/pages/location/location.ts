@@ -3,6 +3,10 @@ import { Component, } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //import { ViewChild, ElementRef } from '@angular/core';
 import { LocationTracker } from '../../providers/location-tracker/location-tracker';
+import {FirebaseProvider} from '../../providers/firebase/old_firebase'
+
+import { Geolocation } from '@ionic-native/geolocation';
+
 declare var google;
 
 /**
@@ -27,7 +31,7 @@ export class LocationPage {
   MyLocation: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public locationTracker: LocationTracker) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation, public locationTracker: LocationTracker, private firebase: FirebaseProvider) {
   }
 
   ionViewDidLoad() {
@@ -73,10 +77,69 @@ export class LocationPage {
   });
 }
 
+// posttodb(){
+// this.geolocation.getCurrentPosition().then((resp) => {
+//   var coord
+//   {
+//   lat1 : resp.coords.latitude
+//   lon1:  resp.coords.longitude
+//   }
+//   this.firebase.postLocation(coord);
+//  }).catch((error) => {
+//    console.log('Error getting location', error);
+//  });
+ 
+//  let watch = this.geolocation.watchPosition();
+//  watch.subscribe((data) => {
+//   // data can be a set of coordinates, or an error (if an error occurred).
+//   lat2: data.coords.latitude
+//   lon2: data.coords.longitude
+//  });
+
+// }
+
 
 start(){
   console.log("before");
   this.locationTracker.startTracking();
+  //this.posttodb();
+
+
+  // var coord = {
+  //          lat: position.coords.latitude,
+  //          lng: position.coords.longitude
+  //        };
+
+  // this.MyLocation = new google.maps.LatLng(coord);
+  //      var myloc = this.MyLocation = new google.maps.LatLng(coord);
+  //  this.firebase.postLocation(myloc);
+
+ 
+  
+  // const map = new google.maps.Map(document.getElementById('map'), {
+  //   zoom: 7,
+  //   center: {lat: 41.85, lng: -87.65}
+  // });
+
+  // if (navigator.geolocation) {
+  //   navigator.geolocation.getCurrentPosition(function(position) {
+  //     var coord = {
+  //       lat: position.coords.latitude,
+  //       lng: position.coords.longitude
+  //     };
+  //     //map.setCenter(coord);
+  //     this.MyLocation = new google.maps.LatLng(coord);
+  //     var myloc = this.MyLocation = new google.maps.LatLng(coord);
+  // this.firebase.postLocation(myloc);
+
+  //   }, function() {
+
+  //   });
+  // } else {
+  //   // Browser doesn't support Geolocation
+  // }  
+
+  
   console.log("after");
 }
 
