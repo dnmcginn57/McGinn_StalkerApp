@@ -5,6 +5,8 @@ import { LoginPage } from '../login/login';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AlertController } from 'ionic-angular';
+import {App} from 'ionic-angular';
+
 
 /**
  * Generated class for the ProfilePage page.
@@ -19,7 +21,8 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  myPhoto:any='../../assets/imgs/logo.png';
+  myPhoto: any ;
+  testImage = "../../assets/imgs/frens.png";
   options: CameraOptions = {
     quality: 75,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -35,12 +38,14 @@ export class ProfilePage {
   trackingState: string = "Start Tracking"
 
 
-  userInfo:any = {
-    email:null,
-    name:null,
-    photoUrl:null,
-    emailVerified:null,
-    uid:null
+  userInfo: any = {
+    email: null,
+    full_name: null,
+    first_name: null,
+    last_name: null,
+    photoUrl: null,
+    emailVerified: null,
+    uid: null
   };
 
   Request=[];
@@ -52,26 +57,28 @@ export class ProfilePage {
     public auth: AuthProvider,
     public camera: Camera,
     public database: DatabaseProvider,
-    private alertCtrl: AlertController
-  ) { 
-
-    database.userGetPic(auth.uid).then((pic)=>{this.myPhoto = pic;});
-    this.getCurrentUserInfo();
-    console.log(this.myPhoto);
-    database.userPendingFriends(auth.uid).then((request) => 
-      { for(var key in request)
-        {
-          console.log(request[key]);
-          this.Request.push(request[key]);
-        }
-      });
-
+    private alertCtrl: AlertController,
+    private app:App,
+  ) {
+      this.getCurrentUserInfo();
   }
-
+  ionViewWillLoad()
+  {
+    this.getPendingFriends();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
 
+  async getPendingFriends()
+  {
+    let requests=await this.database.userPendingFriends(this.auth.uid);
+    for(var request in requests)
+    {
+      let picture= await this.database.userGetPic(request);
+      this.Request.push({key:request,user:requests[request],Picture:picture});
+    }
+  }
   async takePicture() {
 
     try {
@@ -95,31 +102,49 @@ export class ProfilePage {
 
   }
 
-  async getCurrentUserInfo()
-  {
-    try{
+  //Gets currently logged in user's information
+  async getCurrentUserInfo() {
+    try {
       let user = await this.auth.getUser();
 
-      this.userInfo.name = user.displayName;
+      this.userInfo.full_name = user.displayName;
       this.userInfo.email = user.email;
       this.userInfo.photoUrl = user.photoURL;
       this.userInfo.emailVerified = user.emailVerified;
       this.userInfo.uid = user.uid;
 
+      //If user was authenticated with email and password
+      if (this.userInfo.full_name == null) {
+        let fullname = await this.database.userNameString(this.userInfo.uid);
+
+        //Splits full name into first and last
+        let names = fullname.split(" ");
+        this.userInfo.first_name = names[0];
+        this.userInfo.last_name = names[1];
+
+        this.userInfo.full_name = names[0] + " " + names[1];
+      }
+      else {
+        //Splits full name into first and last
+        let names = this.userInfo.full_name.split(" ");
+        this.userInfo.first_name = names[0];
+        this.userInfo.last_name = names[1];
+      }
     }
-     catch(e)
-     {
-       console.log(e);
-     }
+    catch (e) {
+      console.log(e);
+    }
   }
 
-  presentPrompt() {
+  //Presents a prompt to user
+  //Allows user to edit and save their first name
+  presentPromptFirstName() {
     let alert = this.alertCtrl.create({
       title: 'Edit name',
       inputs: [
         {
           name: 'name',
-          placeholder: 'New Name'
+          placeholder: this.userInfo.first_name
         }
       ],
       buttons: [
@@ -132,11 +157,44 @@ export class ProfilePage {
         },
         {
           text: 'Save',
-          handler: data =>{
-            console.log(data.name);
-            this.userInfo.name = data.name;
-            this.auth.updateUser(this.userInfo.name);
-            
+          handler: data => {
+            this.userInfo.first_name = data.name;
+            this.auth.updateUser(this.userInfo.first_name + " " + this.userInfo.last_name);
+            //should also change in database
+
+          }
+
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  //Presents a prompt to user
+  //Allows user to edit and save their last name
+  presentPromptLastName() {
+    let alert = this.alertCtrl.create({
+      title: 'Edit name',
+      inputs: [
+        {
+          name: 'name',
+          placeholder: this.userInfo.last_name
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.userInfo.last_name = data.name;
+            this.auth.updateUser(this.userInfo.first_name + " " + this.userInfo.last_name);
+
           }
 
         }
@@ -147,21 +205,33 @@ export class ProfilePage {
 
   Logout() {
     this.auth.logout();
-    this.navCtrl.setRoot(LoginPage);
+    this.app.getRootNav().setRoot(LoginPage);
   }
 
-  toggleTracking()
-  {
-    if(this.trackingState == "Start Tracking") this.trackingState = "Stop Tracking";
+  toggleTracking() {
+    if (this.trackingState == "Start Tracking") this.trackingState = "Stop Tracking";
     else this.trackingState = "Start Tracking";
   }
 
-  async tagLoc(){
-    try{
+  async tagLoc() {
+    try {
       await this.database.userAddTag(this.auth.uid, 100, 100);
-    }catch(e){
+    } catch (e) {
       console.log(e);
     }
+  }
+
+  addFriend(key)
+  {
+    console.log(key);
+    this.database.userAcceptFriendRequest(this.auth.uid,key);
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+  }
+  declineFriend(key)
+  {
+    console.log(key);
+    this.database.userDeclineFriendRequest(this.auth.uid,key);
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
 }

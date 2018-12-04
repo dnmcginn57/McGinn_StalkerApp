@@ -12,7 +12,7 @@ https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/logi
 | :--------------------------------- | ---: |
 | Class meeting                      | .5   |
 | Merging and fixing photo upload    | 5    |
-| Total                              | 2    |
+| Total                              | 5.5  |
 
 ## Description of Sprint
 
