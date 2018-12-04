@@ -56,7 +56,6 @@ export class ProfilePage {
     public database: DatabaseProvider,
     private alertCtrl: AlertController
   ) {
-
     database.userGetPic(auth.uid).then((pic) => { this.myPhoto = pic; });
     this.getCurrentUserInfo();
     console.log(this.myPhoto);
@@ -69,7 +68,6 @@ export class ProfilePage {
       }
       console.log(this.Request);
     });
-
   }
 
   ionViewDidLoad() {

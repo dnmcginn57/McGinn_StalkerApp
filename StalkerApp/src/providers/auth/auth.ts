@@ -59,6 +59,7 @@ export class AuthProvider {
     }
   }
 
+  //Updates a user's displayName in firebase auth
   async updateUser(name) {
     try {
       let user = firebase.auth().currentUser;
@@ -165,7 +166,6 @@ export class AuthProvider {
         //If this is user's 1st time logging in, adds them to database
         await this.trySetUserDoc(this.uid, names[0], names[1]);
 
-        return this.userProfile;
       }
       else {
         await this.afAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
@@ -194,6 +194,14 @@ export class AuthProvider {
         // Login with permissions
         let res: FacebookLoginResponse = await this.facebook.login(['public_profile', 'user_photos',
           'email', 'user_birthday']);
+
+        const facebookCredential = await firebase.auth.FacebookAuthProvider
+          .credential(res.authResponse.accessToken);
+
+        // Log user into firebase
+        let success = await firebase.auth().signInWithCredential(facebookCredential)
+
+        console.log("Firebase success: " + JSON.stringify(success));
 
         // The connection was successful
         if (res.status == "connected") {
@@ -225,6 +233,8 @@ export class AuthProvider {
           await this.trySetUserDoc(this.uid, names[0], names[1]);
 
         }
+
+
       }
       else {
         await this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
