@@ -17,6 +17,7 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
 import { AllUsersPage } from '../pages/all-users/all-users';
 
+
 //Firebase team imports
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth'
@@ -72,7 +73,8 @@ import { Facebook } from '@ionic-native/facebook';
     DatabaseProvider,
     GooglePlus,
     AuthProvider,
-    TwitterConnect
+    TwitterConnect,
+    
   ]
 })
 export class AppModule {}

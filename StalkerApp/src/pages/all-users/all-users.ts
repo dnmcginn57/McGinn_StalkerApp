@@ -17,30 +17,48 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class AllUsersPage {
 
   testImage = "../../assets/imgs/frens.png";
-  allUsers:Array<{}>=[];
+  allUsers=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public db:DatabaseProvider, public auth:AuthProvider) {
-      db.usersObject().then((users)=>
-      {
-        for(var user in users)
-        {
-          console.log(user);
-          this.allUsers.push({key:user, user:users[user]});  
+      // db.usersObject().then((users)=>
+      // {
+      //   for(var user in users)
+      //   {
+      //     console.log(user);
+      //     this.allUsers.push({key:user, user:users[user]});  
           
-        }
-        console.log(this.allUsers);
-        console.log(this.allUsers[0]);
-      });
+      //   }
+      //   console.log(this.allUsers);
+      //   console.log(this.allUsers[0]);
+      // });
       
   }
 
+  ionViewWillLoad(){
+    this.getAllUsers();
+  }
   //use this function to populate the list with all users
   //each time the page loads
   ionViewDidLoad() {
     console.log('ionViewDidLoad AllUsersPage');
   }
 
+  async getAllUsers(){
+    let users= await this.db.usersObject();
+    var photo:string;
+    for(var user in users)
+    {
+      photo = await (this.getPhoto(user));
+      this.allUsers.push({Key:user,User:users[user],Picture:photo});
+    }
+  }
+
+  async getPhoto(key):Promise<string>
+  {
+    var temp= await this.db.userGetPic(key);
+    return temp;
+  }
   //this function is complete. it just takes you
   //right back to the friend page
   goBack()

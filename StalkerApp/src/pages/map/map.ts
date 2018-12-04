@@ -233,7 +233,7 @@ export class MapPage {
  
     this.geolocation.getCurrentPosition().then((position) => {
  
-      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      let latLng =  google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
       
       //Array contains all styling options for google's default dark theme.
