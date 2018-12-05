@@ -29,7 +29,13 @@ export class LoginPage {
       email: new FormControl(),
       password: new FormControl(),
     });
+    let tabs = document.querySelectorAll('.show-tabbar');
+  	if (tabs !== null) {
+	  	Object.keys(tabs).map((key) => {
+		  	tabs[key].style.display = 'none';
+    });
   }
+}
 
   async tryLogin(value) {
     try {
@@ -71,5 +77,6 @@ export class LoginPage {
   goRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
+
 
 }
