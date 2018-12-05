@@ -31,7 +31,7 @@ export class LocationPage {
   MyLocation: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation, public locationTracker: LocationTracker, private firebase: DatabaseProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation, public locationTracker: LocationTracker, private database: DatabaseProvider) {
   }
 
   ionViewDidLoad() {
@@ -77,31 +77,34 @@ export class LocationPage {
   });
 }
 
-// posttodb(){
-// this.geolocation.getCurrentPosition().then((resp) => {
-//   var coord
-//   {
-//   lat1 : resp.coords.latitude
-//   lon1:  resp.coords.longitude
-//   }
-//   this.firebase.postLocation(coord);
-//  }).catch((error) => {
-//    console.log('Error getting location', error);
-//  });
+posttodb(){
+this.geolocation.getCurrentPosition().then((resp) => {
+  var name = " user";
+  var coord
+  {
+  lat1 : resp.coords.latitude
+  lon1:  resp.coords.longitude
+  }
+  //this.database. userSetLoc(name, lat1,lon1 );
+ }).catch((error) => {
+   console.log('Error getting location', error);
+ });
  
-//  let watch = this.geolocation.watchPosition();
-//  watch.subscribe((data) => {
-//   // data can be a set of coordinates, or an error (if an error occurred).
-//   lat2: data.coords.latitude
-//   lon2: data.coords.longitude
-//  });
+ let watch = this.geolocation.watchPosition();
+ watch.subscribe((data) => {
+  // data can be a set of coordinates, or an error (if an error occurred).
+  lat2: data.coords.latitude
+  lon2: data.coords.longitude
+ });
 
-// }
+}
 
 
 start(){
   console.log("before");
   this.locationTracker.startTracking();
+
+
   //this.posttodb();
 
 
