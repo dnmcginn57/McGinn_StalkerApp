@@ -9,7 +9,7 @@ https://github.com/bluefire8421/StalkerApp/blob/Camera/Social-Media/Messaging/St
 | :------------------------------ | -----| ----:  |
 | Met with group to disscuss project| 12/3/18| 0.5  |
 | Fixed where when user logs out the tabs are no longer ascessable| 12/4/18| 2.5  |
-| Continue working on email verification| 12/05/18| 1.0  |
+| Working on email verification| 12/04/18| 1.0  |
 | TOTAL:                           || 4.0  |
 
 ## Description of Sprint
