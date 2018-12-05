@@ -73,13 +73,15 @@ export class ProfilePage {
       }
       console.log(this.Request);
     });
-    
+
       this.getCurrentUserInfo();
   }
+
   ionViewWillLoad()
   {
     this.getPendingFriends();
   }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
@@ -220,6 +222,14 @@ export class ProfilePage {
   Logout() {
     this.auth.logout();
     this.app.getRootNav().setRoot(LoginPage);
+  }
+
+  async tryLinkWithGoogle(){
+    try{
+      await this.auth.linkWithGoogle();
+    }catch(e){
+      console.log(e);
+    }
   }
 
   

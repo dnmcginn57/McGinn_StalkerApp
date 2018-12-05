@@ -52,6 +52,8 @@ export class AuthProvider {
 
       let newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
       await this.trySetUserDoc(newUser.user.uid, firstname, lastname);
+
+      await this.updateUser(firstname + " " + lastname);
       console.log(`${newUser.user.email} 's UID: ${newUser.user.uid}`);
     }
     catch (e) {
@@ -127,6 +129,7 @@ export class AuthProvider {
         //displayName is in format "first last"
         //.split() allows to seperate first from last
         let name = this.afAuth.auth.currentUser.displayName;
+        console.log(name);
         let names = name.split(" ");
 
 
@@ -275,6 +278,27 @@ export class AuthProvider {
       throw (e);
     }
 
+  }
+
+  //Links current user account with a Google account
+  //User has to sign into Google account the wish to link with
+  async linkWithGoogle()
+  {
+    try{
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+      if ((<any>window).cordova) {
+        await this.afAuth.auth.currentUser.linkWithRedirect(provider);
+
+        let result = await firebase.auth().getRedirectResult();
+      }else{
+        await this.afAuth.auth.currentUser.linkWithPopup(provider);
+      }
+      console.log("Link with Google successful")
+    }catch(e)
+    {
+      throw(e);
+    }
   }
 
   //Logs user out
