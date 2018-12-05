@@ -37,7 +37,7 @@ export class ProfilePage {
     saveToPhotoAlbum: false
   }
 
-  trackingState: string = "Start Tracking"
+  
 
 
   userInfo: any = {
@@ -210,10 +210,7 @@ export class ProfilePage {
     this.app.getRootNav().setRoot(LoginPage);
   }
 
-  toggleTracking() {
-    if (this.trackingState == "Start Tracking") this.trackingState = "Stop Tracking";
-    else this.trackingState = "Start Tracking";
-  }
+  
 
   async tagLoc() {
     try {

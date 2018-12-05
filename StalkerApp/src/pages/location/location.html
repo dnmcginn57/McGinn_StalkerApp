@@ -15,8 +15,9 @@
               <ion-input type="text" [(ngModel)]="Destination"></ion-input>
           </ion-item>
       </ion-list>
-      <button ion-button full (click)="calculateAndDisplayRoute()">Get Direction</button>
-  
+      <button ion-button full (click)="start()">Get Direction</button>
+       <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
+  <br><br>
       <div id="map"></div>
   
   </ion-content>
