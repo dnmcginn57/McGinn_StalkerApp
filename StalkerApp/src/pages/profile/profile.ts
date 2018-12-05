@@ -62,12 +62,26 @@ export class ProfilePage {
     private alertCtrl: AlertController,
     private app:App,
   ) {
+    database.userGetPic(auth.uid).then((pic) => { this.myPhoto = pic; });
+    console.log(this.myPhoto);
+    database.userPendingFriends(auth.uid).then((requests) =>
+    {
+      //this only returns ids
+      for(var request in requests)
+      { 
+        this.Request.push({key:request,user:requests[request]});
+      }
+      console.log(this.Request);
+    });
+
       this.getCurrentUserInfo();
   }
+
   ionViewWillLoad()
   {
     this.getPendingFriends();
   }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
@@ -208,6 +222,14 @@ export class ProfilePage {
   Logout() {
     this.auth.logout();
     this.app.getRootNav().setRoot(LoginPage);
+  }
+
+  async tryLinkWithGoogle(){
+    try{
+      await this.auth.linkWithGoogle();
+    }catch(e){
+      console.log(e);
+    }
   }
 
   

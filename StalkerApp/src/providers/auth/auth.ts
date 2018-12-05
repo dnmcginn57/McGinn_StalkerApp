@@ -52,6 +52,8 @@ export class AuthProvider {
 
       let newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
       await this.trySetUserDoc(newUser.user.uid, firstname, lastname);
+
+      await this.updateUser(firstname + " " + lastname);
       console.log(`${newUser.user.email} 's UID: ${newUser.user.uid}`);
     }
     catch (e) {
@@ -59,6 +61,7 @@ export class AuthProvider {
     }
   }
 
+  //Updates a user's displayName in firebase auth
   async updateUser(name) {
     try {
       let user = firebase.auth().currentUser;
@@ -126,6 +129,7 @@ export class AuthProvider {
         //displayName is in format "first last"
         //.split() allows to seperate first from last
         let name = this.afAuth.auth.currentUser.displayName;
+        console.log(name);
         let names = name.split(" ");
 
 
@@ -157,7 +161,7 @@ export class AuthProvider {
         console.log(this.userProfile);
 
         this.uid = this.afAuth.auth.currentUser.uid;
-        
+
         //displayName is in format "first last"
         //.split() allows to seperate first from last
         let names = userProfile.displayName.split(" ");
@@ -165,7 +169,6 @@ export class AuthProvider {
         //If this is user's 1st time logging in, adds them to database
         await this.trySetUserDoc(this.uid, names[0], names[1]);
 
-        return this.userProfile;
       }
       else {
         await this.afAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
@@ -195,6 +198,14 @@ export class AuthProvider {
         let res: FacebookLoginResponse = await this.facebook.login(['public_profile', 'user_photos',
           'email', 'user_birthday']);
 
+        const facebookCredential = await firebase.auth.FacebookAuthProvider
+          .credential(res.authResponse.accessToken);
+
+        // Log user into firebase
+        let success = await firebase.auth().signInWithCredential(facebookCredential)
+
+        console.log("Firebase success: " + JSON.stringify(success));
+
         // The connection was successful
         if (res.status == "connected") {
 
@@ -220,11 +231,25 @@ export class AuthProvider {
 
           this.uid = this.afAuth.auth.currentUser.uid;
 
+          //If this is user's 1st time logging in, adds them to database
+          let names = name.split(" ");
+          await this.trySetUserDoc(this.uid, names[0], names[1]);
+
         }
+
+
       }
       else {
         await this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
         this.uid = this.afAuth.auth.currentUser.uid;
+
+        //displayName is in format "first last"
+        //.split() allows to seperate first from last
+        let name = this.afAuth.auth.currentUser.displayName;
+        let names = name.split(" ");
+
+        //If this is user's 1st time logging in, adds them to database
+        await this.trySetUserDoc(this.uid, names[0], names[1]);
 
       }
 
@@ -253,6 +278,27 @@ export class AuthProvider {
       throw (e);
     }
 
+  }
+
+  //Links current user account with a Google account
+  //User has to sign into Google account the wish to link with
+  async linkWithGoogle()
+  {
+    try{
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+      if ((<any>window).cordova) {
+        await this.afAuth.auth.currentUser.linkWithRedirect(provider);
+
+        let result = await firebase.auth().getRedirectResult();
+      }else{
+        await this.afAuth.auth.currentUser.linkWithPopup(provider);
+      }
+      console.log("Link with Google successful")
+    }catch(e)
+    {
+      throw(e);
+    }
   }
 
   //Logs user out
