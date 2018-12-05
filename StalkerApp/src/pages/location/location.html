@@ -1,0 +1,24 @@
+
+<ion-header>
+    <ion-navbar color="danger">
+      <ion-title>
+       Direction
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+      <ion-list>
+  
+          <ion-item>
+              <ion-label floating>Destination</ion-label>
+              <ion-input type="text" [(ngModel)]="Destination"></ion-input>
+          </ion-item>
+      </ion-list>
+      <button ion-button full (click)="start()">Get Direction</button>
+       <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
+  <br><br>
+      <div id="map"></div>
+  
+  </ion-content>
+

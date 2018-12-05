@@ -1,0 +1,28 @@
+.profileContent {
+    background-color: black;
+}
+
+#profPicture{
+
+    height: 20vh;
+    width:20vh;
+    display: inline-block;
+}
+
+ion-fab{
+    position: relative;
+}
+
+ion-fab[bottom][edge]{
+
+    bottom: 5vh;
+}
+
+.fab {
+    margin-right: 3vw;
+
+}
+h3{
+    display: inline-block;
+
+}

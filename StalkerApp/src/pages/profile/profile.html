@@ -1,0 +1,60 @@
+<ion-content padding class="profileContent">
+
+
+  <div id="profPicture" (click)="takePicture()">
+    <img *ngIf="myPhoto" src="{{ myPhoto }}" />
+    <img *ngIf="!myPhoto" src="{{testImage}}">
+  </div>
+
+
+  <br>
+  <div>
+    <h3 style="color: white;">Email: {{userInfo.email}} </h3>
+    <br>
+    <h3 style="color: white; display: inline-block;">First: {{userInfo.first_name}} </h3>
+    <ion-fab right style="display: inline-block">
+      <button ion-fab (click)='presentPromptFirstName()'>
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-fab>
+
+    <button ion-fab (click)='tryLinkWithGoogle()'>
+      Link with Google
+    </button>
+
+  </div>
+  <br>
+  <div>
+    <h3 style="color: white; display: inline-block;">Last: {{userInfo.last_name}} </h3>
+    <ion-fab right style="display: inline-block">
+      <button ion-fab (click)='presentPromptLastName()'>
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
+  <br>
+  <div class="requests">
+    <ion-item *ngFor="let request of Request">
+      <ion-avatar item-start>
+        <img *ngIf="request.Picture" src={{request.Picture}}>
+        <img *ngIf="!request.Picture" src={{testImage}}>
+      </ion-avatar>
+      <h2>{{request.user.first + " "+ request.user.last}}</h2>
+      <button (click)='addFriend(request.key)'>Add</button>
+      <button (click)='declineFriend(request.key)'>Declind</button>
+    </ion-item>
+  </div>
+
+
+
+
+  <br>
+  <br>
+
+
+
+
+  <div>
+    <button ion-button (click)="Logout()">Log out</button>
+  </div>
+</ion-content>
