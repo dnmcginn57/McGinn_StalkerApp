@@ -124,7 +124,7 @@ export class ProfilePage {
       let user = await this.auth.getUser();
 
       this.userInfo.full_name = user.displayName;
-      this.userInfo.email = user.email;
+      this.userInfo.email = user.providerData['0'].email;
       this.userInfo.photoUrl = user.photoURL;
       this.userInfo.emailVerified = user.emailVerified;
       this.userInfo.uid = user.uid;

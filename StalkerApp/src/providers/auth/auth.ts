@@ -26,7 +26,7 @@ export class AuthProvider {
 
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-        console.log(user.email + " is signed in")
+        console.log(user.providerData['0'].email + " is signed in")
       } else {
         console.log("Nobody is signed in")
       }
@@ -74,14 +74,14 @@ export class AuthProvider {
       }
       else {
         //If on web browser, use popup window
-        await this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        let res = await this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
 
         this.uid = this.afAuth.auth.currentUser.uid;
-
+        console.log(this.afAuth.auth.currentUser.providerData['0'].email)
+        
         //displayName is in format "first last"
         //.split() allows to seperate first from last
         let name = this.afAuth.auth.currentUser.displayName;
-        console.log(name);
         let names = name.split(" ");
 
         //If this is user's 1st time logging in, adds them to database
