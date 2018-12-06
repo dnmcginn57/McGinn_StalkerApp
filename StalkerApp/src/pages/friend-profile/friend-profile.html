@@ -13,9 +13,20 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding style="background-color: black">
+  
+
   <div id="profPicture">
-    <!-- <img *ngIf="myPhoto" src="{{ myPhoto }}" />
-    <img *ngIf="!myPhoto" src="{{testImage}}"> -->
+   <img *ngIf="activeFriend.Picture" src={{activeFriend.Picture}} />
+    <img *ngIf="!activeFriend.Picture" src={{testImage}}>
   </div>
+  <br>
+  <h3 style="color: white; ">First: {{activeFriend.user.first}} </h3>
+  <br>
+  <h3 style="color: white; ">Last: {{activeFriend.user.last}} </h3>
+  <br>
+  <h3 style="color: white; ">Last Location: {{activeFriend.user.LastLocation[0]}}, <br>
+     {{activeFriend.user.LastLocation[1]}}</h3>
+ 
+  
 </ion-content>

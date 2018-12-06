@@ -14,9 +14,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'friend-profile.html',
 })
 export class FriendProfilePage {
-
+  activeFriend;
+  testImage = "../../assets/imgs/frens.png";
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    //this.navCtrl.
+    this.activeFriend = navParams.data;
+    console.log(this.activeFriend);
+    console.log(this.activeFriend.user.first);
   }
 
   ionViewDidLoad() {
