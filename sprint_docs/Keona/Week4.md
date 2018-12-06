@@ -2,7 +2,7 @@
 
 ## Files Worked On
 https://github.com/bluefire8421/StalkerApp/blob/Camera/Social-Media/Messaging/StalkerApp/src/pages/login/login.ts <br>
-
+https://github.com/bluefire8421/StalkerApp/blob/Camera/Social-Media/Messaging/StalkerApp/src/providers/auth/auth.ts <br>
 ## Approximated Time Worked:
 
 | Description                     | Date | Hrs.  |
