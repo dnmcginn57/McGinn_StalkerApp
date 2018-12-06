@@ -4,7 +4,6 @@ import { AllUsersPage } from '../all-users/all-users';
 import { FriendProfilePage } from '../friend-profile/friend-profile';
 import { DatabaseProvider } from '../../providers/database/database';
 import { AuthProvider } from '../../providers/auth/auth';
-import { FriendProfilePage } from '../friend-profile/friend-profile';
 
 /**
  * Generated class for the FriendPage page.
