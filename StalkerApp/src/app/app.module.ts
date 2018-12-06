@@ -20,6 +20,7 @@ import { PersonalchatPage } from '../pages/personalchat/personalchat';
 import {FriendProfilePage} from '../pages/friend-profile/friend-profile';
 
 
+
 //Firebase team imports
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth'

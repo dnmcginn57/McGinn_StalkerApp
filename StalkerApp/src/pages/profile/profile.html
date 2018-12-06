@@ -10,10 +10,14 @@
   <br>
   <div>
     <h3 style="color: white;">Email: {{userInfo.email}} </h3>
-    <br>
+
+  </div>
+  <br>
+  <div>
+
     <h3 style="color: white; display: inline-block;">First: {{userInfo.first_name}} </h3>
-    <ion-fab right style="display: inline-block">
-      <button ion-fab (click)='presentPromptFirstName()'>
+    <ion-fab style="display: inline-block">
+      <button ion-fab mini (click)='presentPromptFirstName()'>
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-fab>
@@ -25,7 +29,7 @@
   <div>
     <h3 style="color: white; display: inline-block;">Last: {{userInfo.last_name}} </h3>
     <ion-fab right style="display: inline-block">
-      <button ion-fab (click)='presentPromptLastName()'>
+      <button ion-fab mini (click)='presentPromptLastName()'>
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-fab>
@@ -56,6 +60,10 @@
 
   <br>
   <br>
+
+
+  <!-- <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
+  <br><br> -->
 
   <div>
     <button ion-button (click)="Logout()">Log out</button>

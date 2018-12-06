@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AllUsersPage } from '../all-users/all-users';
+import { FriendProfilePage } from '../friend-profile/friend-profile';
 import { DatabaseProvider } from '../../providers/database/database';
 import { AuthProvider } from '../../providers/auth/auth';
 import { FriendProfilePage } from '../friend-profile/friend-profile';
@@ -56,10 +57,12 @@ export class FriendPage {
     this.navCtrl.push(AllUsersPage);
   }
 
-  goToFriendProfile(friend)
+
+  goFriendProfile(friend)
   {
     console.log(friend);
-    this.navCtrl.push(FriendProfilePage,friend);
+    this.navCtrl.push(FriendProfilePage,friend)
+
   }
 
 }
