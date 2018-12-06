@@ -5,7 +5,7 @@ import * as firebase from 'firebase/app';
 import { DatabaseProvider } from '../database/database';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-
+//@Jakob line 110 is start of email verification
 
 
 @Injectable()
@@ -87,6 +87,30 @@ export class AuthProvider {
     try {
       this.userProfile = await this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
       this.uid = this.afAuth.auth.currentUser.uid;
+      /*var actionCodeSettings = {
+        url:'https://www.example.com/?email=' + firebase.auth().currentUser.email,
+        iOS: {
+          bundleId: 'com.example.ios'
+        },
+        android: {
+          packageName: 'com.example.android',
+          installApp: true,
+          minimumVersion: '12'
+        },
+        handleCodeInApp: true
+      };
+        firebase.auth().currentUser.sendEmailVerification(actionCodeSettings)
+  .then(function() {
+    // Verification email sent.
+  })
+  .catch(function(error) {
+    // Error occurred. Inspect error.code.
+    console.log("Email not verified. Please check email to verify email");
+  });   */
+  var user = firebase.auth().currentUser;
+      user.sendEmailVerification().then(function(){
+      }).catch(function(error){
+      });
     }
     catch (e) {
       throw (e);
