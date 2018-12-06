@@ -26,7 +26,7 @@ export class AuthProvider {
 
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-        console.log(user.providerData['0'].email + " is signed in")
+        console.log(user.email + " is signed in")
       } else {
         console.log("Nobody is signed in")
       }
@@ -74,11 +74,10 @@ export class AuthProvider {
       }
       else {
         //If on web browser, use popup window
-        let res = await this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        await this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
 
         this.uid = this.afAuth.auth.currentUser.uid;
-        console.log(this.afAuth.auth.currentUser.providerData['0'].email)
-        
+
         //displayName is in format "first last"
         //.split() allows to seperate first from last
         let name = this.afAuth.auth.currentUser.displayName;
@@ -352,7 +351,7 @@ export class AuthProvider {
 
       let data = await this.facebook.getLoginStatus();
       if (data.status = 'connected') {
-          this.facebook.logout();
+        this.facebook.logout();
       }
 
     }
