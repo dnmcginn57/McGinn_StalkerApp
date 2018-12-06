@@ -17,6 +17,7 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
 import { AllUsersPage } from '../pages/all-users/all-users';
 import { PersonalchatPage } from '../pages/personalchat/personalchat';
+import {FriendProfilePage} from '../pages/friend-profile/friend-profile';
 
 
 //Firebase team imports
@@ -43,7 +44,8 @@ import {LocationTracker} from '../providers/location-tracker/location-tracker';
     LoginPage,
     RegisterPage,
     AllUsersPage,
-    PersonalchatPage
+    PersonalchatPage,
+    FriendProfilePage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import {LocationTracker} from '../providers/location-tracker/location-tracker';
     LoginPage,
     RegisterPage,
     AllUsersPage,
-    PersonalchatPage
+    PersonalchatPage,
+    FriendProfilePage
   ],
   providers: [
     StatusBar,

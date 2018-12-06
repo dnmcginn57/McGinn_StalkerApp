@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AllUsersPage } from '../all-users/all-users';
 import { DatabaseProvider } from '../../providers/database/database';
 import { AuthProvider } from '../../providers/auth/auth';
+import { FriendProfilePage } from '../friend-profile/friend-profile';
 
 /**
  * Generated class for the FriendPage page.
@@ -53,6 +54,12 @@ export class FriendPage {
   goAllUsers()
   {
     this.navCtrl.push(AllUsersPage);
+  }
+
+  goToFriendProfile(friend)
+  {
+    console.log(friend);
+    this.navCtrl.push(FriendProfilePage,friend);
   }
 
 }
