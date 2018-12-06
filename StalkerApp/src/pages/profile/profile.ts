@@ -232,7 +232,24 @@ export class ProfilePage {
     }
   }
 
-  
+
+    async tryLinkWithTwitter(){
+    try{
+      await this.auth.linkWithTwitter();
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+  async tryLinkWithFacebook(){
+    try{
+      await this.auth.linkWithFacebook();
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+
 
   async tagLoc() {
     try {
