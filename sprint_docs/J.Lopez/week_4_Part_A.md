@@ -25,6 +25,8 @@
 
  ## Description of Sprint
  Finished ability to link account with multiple authentications. I was trying to make the Firebase capable of having multiple accounts per
- email, but this causes the top-level email (the email that Firebase uses as an identifier) to become null. I wantedan email to be 
+ email, but this causes the top-level email (the email that Firebase uses as an identifier) to become null. I wanted an email to be 
  associated with a user, so i restricted the firebase to 1 email, 1 account only. A merge from master corrupted the Android platform
  so I had to mess with version conflicts in Android Studio(fixed by just updating google-services and firebase to most recent versions).
+ When a user signs in with Faebook for the first time they are added to Firebase. Also, i didn't notice that Facebook login did not
+ include a Firebase login, so user would login to their Facebook but account was never added to Firebase; this issue was fixed.
