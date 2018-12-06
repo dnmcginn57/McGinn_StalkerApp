@@ -16,6 +16,7 @@ import { LocationPage } from '../pages/location/location';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
 import { AllUsersPage } from '../pages/all-users/all-users';
+import { PersonalchatPage } from '../pages/personalchat/personalchat';
 
 
 //Firebase team imports
@@ -41,12 +42,13 @@ import {LocationTracker} from '../providers/location-tracker/location-tracker';
     LocationPage,
     LoginPage,
     RegisterPage,
-    AllUsersPage
+    AllUsersPage,
+    PersonalchatPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG.config),
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
@@ -60,7 +62,8 @@ import {LocationTracker} from '../providers/location-tracker/location-tracker';
     LocationPage,
     LoginPage,
     RegisterPage,
-    AllUsersPage
+    AllUsersPage,
+    PersonalchatPage
   ],
   providers: [
     StatusBar,
