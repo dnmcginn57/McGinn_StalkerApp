@@ -20,6 +20,7 @@
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
+    "@ionic-native/background-geolocation": "^4.18.0",
     "@ionic-native/base64": "^4.17.0",
     "@ionic-native/camera": "^4.17.0",
     "@ionic-native/core": "~4.15.0",
@@ -82,7 +83,8 @@
         "APP_ID": "1086394971523153",
         "APP_NAME": "StalkerApp",
         "FACEBOOK_ANDROID_SDK_VERSION": "4.38.1"
-      }
+      },
+      "cordova-plugin-mauron85-background-geolocation": {}
     },
     "platforms": [
       "android",

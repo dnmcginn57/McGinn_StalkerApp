@@ -10,15 +10,20 @@
   <br>
   <div>
     <h3 style="color: white;">Email: {{userInfo.email}} </h3>
+
   </div>
   <br>
   <div>
+
     <h3 style="color: white; display: inline-block;">First: {{userInfo.first_name}} </h3>
     <ion-fab style="display: inline-block">
       <button ion-fab mini (click)='presentPromptFirstName()'>
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-fab>
+
+
+
   </div>
   <br>
   <div>
@@ -38,19 +43,27 @@
       </ion-avatar>
       <h2>{{request.user.first + " "+ request.user.last}}</h2>
       <button (click)='addFriend(request.key)'>Add</button>
-      <button (click)='declineFriend(request.key)'>Declind</button>
+      <button (click)='declineFriend(request.key)'>Decline</button>
     </ion-item>
   </div>
 
 
-
+  <button ion-button (click)='tryLinkWithGoogle()'>
+    Link with Google
+  </button> 
+  <button ion-button (click)='tryLinkWithTwitter()'>
+    Link with Twitter
+  </button> 
+  <button ion-button (click)='tryLinkWithFacebook()'>
+    Link with Facebook
+  </button> 
 
   <br>
   <br>
+
 
   <!-- <button ion-button (click)="toggleTracking()">{{trackingState}}</button>
   <br><br> -->
-
 
   <div>
     <button ion-button (click)="Logout()">Log out</button>

@@ -4,6 +4,7 @@ import { AllUsersPage } from '../all-users/all-users';
 import { FriendProfilePage } from '../friend-profile/friend-profile';
 import { DatabaseProvider } from '../../providers/database/database';
 import { AuthProvider } from '../../providers/auth/auth';
+import { FriendProfilePage } from '../friend-profile/friend-profile';
 
 /**
  * Generated class for the FriendPage page.
@@ -24,16 +25,16 @@ export class FriendPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public db:DatabaseProvider,
     public auth:AuthProvider) {
-
+      this.getFriends();
   }
   ionViewWillLoad()
   {
-    this.getFriends();
-  
+   
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad FriendPage');
   }
+
   async getFriends()
   {
     let friend =await this.db.userFriendsObject(this.auth.uid);
@@ -55,6 +56,7 @@ export class FriendPage {
   {
     this.navCtrl.push(AllUsersPage);
   }
+
 
   goFriendProfile(friend)
   {

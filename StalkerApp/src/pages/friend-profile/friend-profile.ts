@@ -15,10 +15,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FriendProfilePage {
 
-  activeFriend
-
+  activeFriend;
+  testImage = "../../assets/imgs/frens.png";
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.activeFriend = navParams.get('friend');
+    this.activeFriend = navParams.data;
+    console.log(this.activeFriend);
+    console.log(this.activeFriend.user.first);
+
   }
 
   ionViewDidLoad() {
@@ -29,5 +32,6 @@ export class FriendProfilePage {
   {
     this.navCtrl.pop();
   }
+
 
 }

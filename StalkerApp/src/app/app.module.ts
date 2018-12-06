@@ -16,7 +16,9 @@ import { LocationPage } from '../pages/location/location';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
 import { AllUsersPage } from '../pages/all-users/all-users';
-import { FriendProfilePage } from '../pages/friend-profile/friend-profile';
+import { PersonalchatPage } from '../pages/personalchat/personalchat';
+import {FriendProfilePage} from '../pages/friend-profile/friend-profile';
+
 
 
 //Firebase team imports
@@ -30,6 +32,7 @@ import { DatabaseProvider } from '../providers/database/database';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Facebook } from '@ionic-native/facebook';
+import {LocationTracker} from '../providers/location-tracker/location-tracker';
 
 @NgModule({
   declarations: [
@@ -42,12 +45,13 @@ import { Facebook } from '@ionic-native/facebook';
     LoginPage,
     RegisterPage,
     AllUsersPage,
-    FriendProfilePage,
+    PersonalchatPage,
+    FriendProfilePage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG.config),
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
@@ -62,6 +66,7 @@ import { Facebook } from '@ionic-native/facebook';
     LoginPage,
     RegisterPage,
     AllUsersPage,
+    PersonalchatPage,
     FriendProfilePage
   ],
   providers: [
@@ -77,6 +82,7 @@ import { Facebook } from '@ionic-native/facebook';
     GooglePlus,
     AuthProvider,
     TwitterConnect,
+    LocationTracker
     
   ]
 })
