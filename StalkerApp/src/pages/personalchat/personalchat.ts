@@ -4,7 +4,7 @@ import { AngularFirestore } from "angularfire2/firestore";
 //import { Chat } from "../../app/app.models";
 //import { firebase } from "../../app/app.config";
 //import { ChatService } from "../../app/app.services";
-import { Storage } from "@ionic/Storage";
+import { Storage } from "@ionic/storage";
 
 
 @IonicPage()
