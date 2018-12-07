@@ -43,7 +43,7 @@ a satement that looks like:
         <h2>{{friend.user.first + " "+ friend.user.last}}</h2>
       </ion-item>
       <ion-item-options side="left">
-        <button ion-button color="dark">
+        <button ion-button color="dark"(click)="goPersonalChat(friend)">
           <ion-icon name="mail"></ion-icon>
           Message
         </button>
