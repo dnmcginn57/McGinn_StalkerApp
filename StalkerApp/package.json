@@ -52,7 +52,8 @@
     "rxjs-compat": "^6.3.3",
     "sw-toolbox": "3.6.0",
     "twitter-connect-plugin": "^0.6.0",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "cordova-plugin-mauron85-background-geolocation": "~2.3.6"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.0",
@@ -86,8 +87,8 @@
       "cordova-plugin-mauron85-background-geolocation": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

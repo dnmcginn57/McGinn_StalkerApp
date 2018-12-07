@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
 import { AuthProvider } from '../../providers/auth/auth';
+import { AlertController } from 'ionic-angular';
 
 
 @Component({
@@ -20,8 +21,9 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public formBuilder: FormBuilder,
-    public auth: AuthProvider
-  ) {}
+    public auth: AuthProvider,
+    private alertCtrl: AlertController
+  ) { }
 
 
   ionViewWillLoad() {
@@ -31,20 +33,41 @@ export class LoginPage {
     });
   }
 
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Email is not verified',
+      subTitle: 'Please check your email',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
+
   async tryLogin(value) {
     try {
       await this.auth.loginWithEmail(value);
-      this.navCtrl.setRoot(TabsPage);
+
+      if (await this.auth.isVerified()) {
+        this.navCtrl.setRoot(TabsPage);
+      }
+      else{
+        this.presentAlert();
+      }
     } catch (e) {
       console.log(e);
-      this.errorMessage=e.message;
+      this.errorMessage = e.message;
     }
   }
 
   async tryLoginWithGoogle() {
     try {
       await this.auth.loginWithGoogle();
-      this.navCtrl.setRoot(TabsPage);
+      
+      if (await this.auth.isVerified()) {
+        this.navCtrl.setRoot(TabsPage);
+      }
+      else{
+        this.presentAlert();
+      }
     } catch (e) {
       console.log(e);
     }
@@ -53,7 +76,13 @@ export class LoginPage {
   async tryLoginWithTwitter() {
     try {
       await this.auth.loginWithTwitter();
-      this.navCtrl.setRoot(TabsPage);
+      
+      if (await this.auth.isVerified()) {
+        this.navCtrl.setRoot(TabsPage);
+      }
+      else{
+        this.presentAlert();
+      }
     } catch (e) {
       console.log(e);
     }
@@ -62,7 +91,13 @@ export class LoginPage {
   async tryLoginWithFacebook() {
     try {
       await this.auth.loginWithFacebook();
-      this.navCtrl.setRoot(TabsPage);
+      
+      if (await this.auth.isVerified()) {
+        this.navCtrl.setRoot(TabsPage);
+      }
+      else{
+        this.presentAlert();
+      }
     } catch (e) {
       console.log(e);
     }
