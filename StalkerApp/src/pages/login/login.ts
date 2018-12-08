@@ -7,6 +7,7 @@ import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
 import { AuthProvider } from '../../providers/auth/auth';
 import { AlertController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginPage {
     public navCtrl: NavController,
     public formBuilder: FormBuilder,
     public auth: AuthProvider,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private storage: Storage
   ) { }
 
 
@@ -48,6 +50,7 @@ export class LoginPage {
 
       if (await this.auth.isVerified()) {
         this.navCtrl.setRoot(TabsPage);
+        this.storage.set('user', JSON.stringify(this.auth.uid));
       }
       else{
         this.presentAlert();
@@ -64,6 +67,7 @@ export class LoginPage {
       
       if (await this.auth.isVerified()) {
         this.navCtrl.setRoot(TabsPage);
+        this.storage.set('user', JSON.stringify(this.auth.uid));
       }
       else{
         this.presentAlert();
@@ -79,6 +83,7 @@ export class LoginPage {
       
       if (await this.auth.isVerified()) {
         this.navCtrl.setRoot(TabsPage);
+        this.storage.set('user', JSON.stringify(this.auth.uid));
       }
       else{
         this.presentAlert();
@@ -94,6 +99,7 @@ export class LoginPage {
       
       if (await this.auth.isVerified()) {
         this.navCtrl.setRoot(TabsPage);
+        this.storage.set('user', JSON.stringify(this.auth.uid));
       }
       else{
         this.presentAlert();

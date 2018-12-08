@@ -30,6 +30,8 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Facebook } from '@ionic-native/facebook';
 import {LocationTracker} from '../providers/location-tracker/location-tracker';
+import { IonicStorageModule } from '@ionic/storage';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import {LocationTracker} from '../providers/location-tracker/location-tracker';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
