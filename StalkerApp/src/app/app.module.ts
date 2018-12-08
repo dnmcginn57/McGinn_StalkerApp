@@ -56,7 +56,6 @@ import { ChatService } from './app.service';
     AngularFireModule.initializeApp(FIREBASE_CONFIG.config),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [

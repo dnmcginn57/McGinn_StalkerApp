@@ -219,9 +219,15 @@ export class ProfilePage {
     alert.present();
   }
 
-  Logout() {
-    this.auth.logout();
-    this.app.getRootNav().setRoot(LoginPage);
+  async Logout() {
+    try{
+      await this.auth.logout();
+      this.app.getRootNav().setRoot(LoginPage);
+    }catch(e)
+    {
+      console.log(e);
+    }
+
   }
 
   async tryLinkWithGoogle(){
