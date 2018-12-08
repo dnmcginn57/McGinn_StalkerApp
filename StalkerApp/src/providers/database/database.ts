@@ -283,7 +283,7 @@ export class DatabaseProvider {
       let temp = {};
       temp["LastLocation"] = [lat, lon];
       //Edited this line from update to set
-      await this.db.collection("Users").doc(id).set(temp);
+      await this.db.collection("Users").doc(id).update(temp);
     } catch (e) {
       throw e;
     }
