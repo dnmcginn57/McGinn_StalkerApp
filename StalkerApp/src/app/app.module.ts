@@ -19,6 +19,7 @@ import { AllUsersPage } from '../pages/all-users/all-users';
 import { PersonalchatPage } from '../pages/personalchat/personalchat';
 import {FriendProfilePage} from '../pages/friend-profile/friend-profile';
 
+import { IonicStorageModule } from "@ionic/storage";
 
 
 //Firebase team imports
@@ -56,6 +57,7 @@ import { ChatService } from './app.service';
     AngularFireModule.initializeApp(FIREBASE_CONFIG.config),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -86,7 +88,7 @@ import { ChatService } from './app.service';
     TwitterConnect,
     LocationTracker,
     ChatService
-    
+
   ]
 })
 export class AppModule {}

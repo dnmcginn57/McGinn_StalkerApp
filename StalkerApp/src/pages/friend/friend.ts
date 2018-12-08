@@ -5,6 +5,7 @@ import { FriendProfilePage } from '../friend-profile/friend-profile';
 import { PersonalchatPage } from '../personalchat/personalchat';
 import { DatabaseProvider } from '../../providers/database/database';
 import { AuthProvider } from '../../providers/auth/auth';
+import { PersonalchatPage } from '../personalchat/personalchat';
 
 /**
  * Generated class for the FriendPage page.
@@ -67,6 +68,7 @@ export class FriendPage {
   goPersonalChat(friend){
     console.log(friend);
     this.navCtrl.push(PersonalchatPage,friend)
+
 
   }
 

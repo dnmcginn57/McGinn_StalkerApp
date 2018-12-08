@@ -10,6 +10,9 @@ we could also just use the space for the most recent chat text to display
 the user's most recent location-->
 <ion-header>
   <ion-navbar color="dark">
+      <ion-list-header style="color:white">
+          Friends You Are Stalking
+        </ion-list-header>
     <ion-buttons end>
       <button ion-button icon-only (click)="goAllUsers()">
         <ion-icon name="arrow-forward"></ion-icon>
@@ -30,9 +33,6 @@ a satement that looks like:
     this.items.push
 -->
   <ion-list>
-    <ion-list-header>
-      Friends Being Stalked
-    </ion-list-header>
     <ion-item-sliding *ngFor="let friend of Friends">
 
       <ion-item>
@@ -44,6 +44,7 @@ a satement that looks like:
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="dark"(click)="goPersonalChat(friend)">
+
           <ion-icon name="mail"></ion-icon>
           Message
         </button>
