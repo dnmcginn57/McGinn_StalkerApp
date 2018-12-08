@@ -19,7 +19,6 @@ import { AllUsersPage } from '../pages/all-users/all-users';
 import { PersonalchatPage } from '../pages/personalchat/personalchat';
 import {FriendProfilePage} from '../pages/friend-profile/friend-profile';
 
-import { IonicStorageModule } from "@ionic/storage";
 
 
 //Firebase team imports
