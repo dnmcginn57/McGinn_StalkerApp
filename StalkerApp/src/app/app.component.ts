@@ -33,7 +33,7 @@ export class MyApp {
           //If there is a user in storage set uid in auth
           //auth has not yet loaded so value would be null
           //TabsPage calls tracker which needs a valid uid
-          auth.uid = user;
+          auth.uid = JSON.parse(user);
 
           this.rootPage = TabsPage;
         }
