@@ -124,14 +124,14 @@ export class DatabaseProvider {
    *     other: the id of the user that sent the request
    * Returns: None
    */
-  async userAcceptFriendRequest(id: string, other: string){
-    try{
+  async userAcceptFriendRequest(id: string, other: string) {
+    try {
       let temp = {};
       temp["dismissed"] = true;
       await this.db.collection("Users").doc(id).collection("FriendRequests").doc(other).set(temp);
       await this.userAddFriend(id, other);
       await this.userAddFriend(other, id);
-    }catch(e){
+    } catch (e) {
       throw e;
     }
   }
@@ -143,12 +143,12 @@ export class DatabaseProvider {
    *     other: the id of the user whose being added to the friends list
    * Returns: None
    */
-  async userAddFriend(id: string, other: string){
-    try{
+  async userAddFriend(id: string, other: string) {
+    try {
       let temp = {};
       temp["reference"] = this.db.collection("Users").doc(other).ref;
       await this.db.collection("Users").doc(id).collection("Friends").doc(other).set(temp);
-    }catch(e){
+    } catch (e) {
       throw e;
     }
   }
@@ -157,15 +157,19 @@ export class DatabaseProvider {
    * Desc: ASYNC. Adds a location to a user's tagged locations.
    * Params:
    *     id: the id of the user who is adding the location
+   *     tag_name: the name/message for the tag
    *     lat: the latitude of the location
    *     lon: the longitude of the location
+   *     img: optional, the base 64 encoded image associated with the tag
    * Returns: None
    */
-  async userAddTag(id: string, lat: number, lon: number) {
+  async userAddTag(id: string, tag_name: string, lat: number, lon: number, img?: string) {
     try {
       let temp = {};
+      temp["Name"] = tag_name;
       temp["Time"] = new Date();
       temp["Location"] = [lat, lon];
+      temp["Image"] = img || "";
       await this.db.collection("Users").doc(id).collection("Tags").add(temp);
     } catch (e) {
       throw e;
@@ -184,15 +188,15 @@ export class DatabaseProvider {
    *         "Picture": "./John_Doe.jpg"
    *     }
    */
-  async userByID(id: string){
-    try{
+  async userByID(id: string) {
+    try {
       var all_users = await this.usersObject();
-      if(all_users[id]){
+      if (all_users[id]) {
         return all_users[id];
-      }else{
+      } else {
         throw "Error in DatabaseProvider function userByID(): No user with id " + id;
       }
-    }catch(e){
+    } catch (e) {
       throw e;
     }
   }
@@ -206,12 +210,12 @@ export class DatabaseProvider {
    *     other: the id of the user whose request is being declined
    * Returns: None
    */
-  async userDeclineFriendRequest(id: string, other: string){
-    try{
+  async userDeclineFriendRequest(id: string, other: string) {
+    try {
       let temp = {};
       temp["dismissed"] = true;
       await this.db.collection("Users").doc(id).collection("FriendRequests").doc(other).set(temp);
-    }catch(e){
+    } catch (e) {
       throw e;
     }
   }
@@ -247,7 +251,7 @@ export class DatabaseProvider {
    *         }
    *     }
    */
-  async userFriendsObject(id: string){
+  async userFriendsObject(id: string) {
     try {
       var query = await this.fire.collection("Users").doc(id).collection("Friends").get();
       var collection_obj = {};
@@ -264,7 +268,7 @@ export class DatabaseProvider {
 
       var all = await this.usersObject();
       var friends_obj = {}
-      for(let keyID in collection_obj){
+      for (let keyID in collection_obj) {
         friends_obj[keyID] = all[keyID];
       }
 
@@ -284,12 +288,12 @@ export class DatabaseProvider {
    * Returns: (string) full name of the user
    * Example returned string: "John Doe"
    */
-  async userNameString(id: string){
-    try{
+  async userNameString(id: string) {
+    try {
       var user = await this.usersObject();
       user = user[id];
       return user["first"] + " " + user["last"];
-    }catch(e){
+    } catch (e) {
       throw e;
     }
   }
@@ -303,8 +307,8 @@ export class DatabaseProvider {
    * Example returned list:
    *     ["SGUSBONAOINUE", "XCASIUGDAUIGT"]
    */
-  async userPendingFriendIDs(id: string){
-    
+  async userPendingFriendIDs(id: string) {
+
     try {
 
       var query = await this.fire.collection("Users").doc(id).collection("FriendRequests").get();
@@ -321,8 +325,8 @@ export class DatabaseProvider {
       );
 
       var list = [];
-      for(let keyID in collection_obj){
-        if (!collection_obj[keyID]["dismissed"]){
+      for (let keyID in collection_obj) {
+        if (!collection_obj[keyID]["dismissed"]) {
           list.push(keyID);
         }
       }
@@ -357,8 +361,8 @@ export class DatabaseProvider {
    *         }
    *     }
    */
-  async userPendingFriends(id: string){
-    
+  async userPendingFriends(id: string) {
+
     try {
 
       var users_query = await this.fire.collection("Users").get();
@@ -388,8 +392,8 @@ export class DatabaseProvider {
       );
 
       var list = {};
-      for(let keyID in requests_obj){
-        if (!requests_obj[keyID]["dismissed"]){
+      for (let keyID in requests_obj) {
+        if (!requests_obj[keyID]["dismissed"]) {
           list[keyID] = users_obj[keyID];
         }
       }
@@ -410,12 +414,12 @@ export class DatabaseProvider {
    *     other: the id of the user receiving the friend request
    * Returns: None
    */
-  async userSendFriendRequest(id: string, other: string){   
-    try{
+  async userSendFriendRequest(id: string, other: string) {
+    try {
       let temp = {};
       temp["dismissed"] = false;
       await this.db.collection("Users").doc(other).collection("FriendRequests").doc(id).set(temp);
-    }catch(e){
+    } catch (e) {
       throw e;
     }
   }
@@ -447,7 +451,7 @@ export class DatabaseProvider {
    *     last: last name of the user
    * Returns: None
    */
-  async userSetName(id: string, first: string, last: string){
+  async userSetName(id: string, first: string, last: string) {
     try {
       let temp = {};
       temp["first"] = first;
