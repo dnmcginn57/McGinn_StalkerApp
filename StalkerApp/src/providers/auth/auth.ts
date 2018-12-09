@@ -287,7 +287,7 @@ export class AuthProvider {
   async trySetUserDoc(uid, firstname, lastname) {
     try {
       let metadata = await firebase.auth().currentUser.metadata;
-      if (metadata.creationTime == metadata.lastSignInTime) {
+      if(metadata.creationTime == metadata.lastSignInTime) {
         // The user is new
         //Add the user to the collection
         console.log("This user was just created...adding to database");
@@ -295,6 +295,22 @@ export class AuthProvider {
         await this.verifyUserEmail();
 
         await this.database.userSetDoc(uid, firstname, lastname);
+      }
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  async wasJustCreated()
+  {
+    try {
+      let metadata = await firebase.auth().currentUser.metadata;
+      if(metadata.creationTime == metadata.lastSignInTime) {
+        return true;
+        
+      }
+      else{
+        return false;
       }
     } catch (e) {
       throw (e);
