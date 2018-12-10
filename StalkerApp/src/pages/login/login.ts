@@ -48,11 +48,13 @@ export class LoginPage {
     try {
       await this.auth.loginWithEmail(value);
 
-      if (await this.auth.isVerified()) {
+      let createStatus = await this.auth.wasJustCreated()
+      if(await this.auth.isVerified() || !createStatus) {
         this.navCtrl.setRoot(TabsPage);
         this.storage.set('user', JSON.stringify(this.auth.uid));
       }
       else{
+        
         this.presentAlert();
       }
     } catch (e) {
@@ -65,7 +67,8 @@ export class LoginPage {
     try {
       await this.auth.loginWithGoogle();
       
-      if (await this.auth.isVerified()) {
+      let createStatus = await this.auth.wasJustCreated()
+      if(await this.auth.isVerified() || !createStatus) {
         this.navCtrl.setRoot(TabsPage);
         this.storage.set('user', JSON.stringify(this.auth.uid));
       }
@@ -81,7 +84,8 @@ export class LoginPage {
     try {
       await this.auth.loginWithTwitter();
       
-      if (await this.auth.isVerified()) {
+      let createStatus = await this.auth.wasJustCreated()
+      if(await this.auth.isVerified() || !createStatus) {
         this.navCtrl.setRoot(TabsPage);
         this.storage.set('user', JSON.stringify(this.auth.uid));
       }
@@ -97,7 +101,8 @@ export class LoginPage {
     try {
       await this.auth.loginWithFacebook();
       
-      if (await this.auth.isVerified()) {
+      let createStatus = await this.auth.wasJustCreated()
+      if(await this.auth.isVerified() || !createStatus) {
         this.navCtrl.setRoot(TabsPage);
         this.storage.set('user', JSON.stringify(this.auth.uid));
       }
