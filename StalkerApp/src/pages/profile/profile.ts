@@ -259,7 +259,7 @@ export class ProfilePage {
 
   async tagLoc() {
     try {
-      await this.database.userAddTag(this.auth.uid, 100, 100);
+      await this.database.userAddTag(this.auth.uid, "name",100, 100);
     } catch (e) {
       console.log(e);
     }
