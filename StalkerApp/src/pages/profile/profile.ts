@@ -6,6 +6,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AlertController } from 'ionic-angular';
 import {App} from 'ionic-angular';
+import { LocationTracker } from '../../providers/location-tracker/location-tracker';
 
 
 /**
@@ -61,6 +62,7 @@ export class ProfilePage {
     public database: DatabaseProvider,
     private alertCtrl: AlertController,
     private app:App,
+    private lt: LocationTracker
   ) {
     database.userGetPic(auth.uid).then((pic) => { this.myPhoto = pic; });
     console.log(this.myPhoto);
@@ -237,7 +239,6 @@ export class ProfilePage {
           text: 'Yes, I am sure',
           handler: data => {
             this.deleteUser();
-            this.app.getRootNav().setRoot(LoginPage);
             console.log("Account deleted");
           }
         }
@@ -248,6 +249,7 @@ export class ProfilePage {
   async Logout() {
     try{
       await this.auth.logout();
+      this.lt.stopTracking();
       this.app.getRootNav().setRoot(LoginPage);
     }catch(e)
     {
@@ -308,6 +310,8 @@ export class ProfilePage {
   {
     try{
       await this.auth.deleteUser();
+      this.lt.stopTracking()
+      this.app.getRootNav().setRoot(LoginPage);
     }catch(e)
     {
 
