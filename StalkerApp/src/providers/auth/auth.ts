@@ -287,7 +287,7 @@ export class AuthProvider {
   async trySetUserDoc(uid, firstname, lastname) {
     try {
       let metadata = await firebase.auth().currentUser.metadata;
-      if(metadata.creationTime == metadata.lastSignInTime) {
+      if (metadata.creationTime == metadata.lastSignInTime) {
         // The user is new
         //Add the user to the collection
         console.log("This user was just created...adding to database");
@@ -301,15 +301,14 @@ export class AuthProvider {
     }
   }
 
-  async wasJustCreated()
-  {
+  async wasJustCreated() {
     try {
       let metadata = await firebase.auth().currentUser.metadata;
-      if(metadata.creationTime == metadata.lastSignInTime) {
+      if (metadata.creationTime == metadata.lastSignInTime) {
         return true;
-        
+
       }
-      else{
+      else {
         return false;
       }
     } catch (e) {
@@ -330,14 +329,13 @@ export class AuthProvider {
   }
 
   async isVerified() {
-    try{
+    try {
       let flag = await this.afAuth.auth.currentUser.emailVerified;
 
       return flag;
     }
-    catch(e)
-    {
-      throw(e);
+    catch (e) {
+      throw (e);
     }
 
   }
@@ -371,13 +369,11 @@ export class AuthProvider {
     //make a call to database to update user's name
   }
 
-  async getStorage()
-  {
-    try{
+  async getStorage() {
+    try {
       return await this.storage.get('user');
-    }catch(e)
-    {
-      throw(e);
+    } catch (e) {
+      throw (e);
     }
   }
 
@@ -415,7 +411,21 @@ export class AuthProvider {
       await this.storage.remove('user');
     }
     catch (e) {
-      throw(e);
+      throw (e);
+    }
+  }
+
+
+  async deleteUser() {
+    try {
+      let user = await this.afAuth.auth.currentUser;
+
+      await user.delete();
+      await this.storage.remove('user');
+
+      //this.database.deleteUser(this.uid);
+    } catch (e) {
+      throw (e);
     }
   }
 }

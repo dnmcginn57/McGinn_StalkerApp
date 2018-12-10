@@ -219,6 +219,32 @@ export class ProfilePage {
     alert.present();
   }
 
+  //Presents a prompt to user
+  //Allows user to edit and save their last name
+  presentPromptDelete() {
+    let alert = this.alertCtrl.create({
+      title: 'Are you sure you want to delete your account?',
+      subTitle: 'This action is irreversible and all data will be lost',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Yes, I am sure',
+          handler: data => {
+            this.deleteUser();
+            this.app.getRootNav().setRoot(LoginPage);
+            console.log("Account deleted");
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
   async Logout() {
     try{
       await this.auth.logout();
@@ -276,6 +302,16 @@ export class ProfilePage {
     console.log(key);
     this.database.userDeclineFriendRequest(this.auth.uid,key);
     this.navCtrl.setRoot(this.navCtrl.getActive().component);
+  }
+
+  async deleteUser()
+  {
+    try{
+      await this.auth.deleteUser();
+    }catch(e)
+    {
+
+    }
   }
 
 }
