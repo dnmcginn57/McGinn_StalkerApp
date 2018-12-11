@@ -113,7 +113,8 @@
         <variable name="APP_NAME" value="StalkerApp" />
         <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.38.1" />
     </plugin>
-    <engine name="android" spec="7.0.0" />
-    <engine name="ios" spec="^4.5.5" />  
     <plugin name="cordova-plugin-mauron85-background-geolocation" spec="~2.3.6" />
-    <widget>
+    <engine name="ios" spec="^4.5.5" />
+    <engine name="android" spec="7.0.0" />
+    <plugin name="cordova-sqlite-storage" spec="2.5.2" />
+</widget>

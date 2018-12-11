@@ -219,9 +219,15 @@ export class ProfilePage {
     alert.present();
   }
 
-  Logout() {
-    this.auth.logout();
-    this.app.getRootNav().setRoot(LoginPage);
+  async Logout() {
+    try{
+      await this.auth.logout();
+      this.app.getRootNav().setRoot(LoginPage);
+    }catch(e)
+    {
+      console.log(e);
+    }
+
   }
 
   async tryLinkWithGoogle(){
@@ -232,11 +238,28 @@ export class ProfilePage {
     }
   }
 
-  
+
+    async tryLinkWithTwitter(){
+    try{
+      await this.auth.linkWithTwitter();
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+  async tryLinkWithFacebook(){
+    try{
+      await this.auth.linkWithFacebook();
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+
 
   async tagLoc() {
     try {
-      await this.database.userAddTag(this.auth.uid, 100, 100);
+      await this.database.userAddTag(this.auth.uid, "name",100, 100);
     } catch (e) {
       console.log(e);
     }

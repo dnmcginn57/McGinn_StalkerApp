@@ -1,0 +1,32 @@
+
+<ion-header>
+  <ion-navbar color = "dark">
+    <ion-buttons start>
+      <button ion-button icon-only (click) = "goBack()">
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class ="fProfileContent">
+
+  <div id="fProfPicture">
+   <img *ngIf="activeFriend.Picture" src={{activeFriend.Picture}} />
+    <img *ngIf="!activeFriend.Picture" src={{testImage}}> 
+  </div>
+
+  <br>
+  <div>
+    <h3 style="color: white;">Email: </h3>
+    <br>
+  <h3 style="color: white; ">First: {{activeFriend.user.first}} </h3>
+  <br>
+  <h3 style="color: white; ">Last: {{activeFriend.user.last}} </h3>
+  <br>
+  <h3 style="color: white; ">Last Location: {{activeFriend.user.LastLocation[0]}}, <br>
+     {{activeFriend.user.LastLocation[1]}}</h3>
+  </div>
+
+
+</ion-content>
