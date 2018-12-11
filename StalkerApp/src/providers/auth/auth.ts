@@ -5,7 +5,11 @@ import * as firebase from 'firebase/app';
 import { DatabaseProvider } from '../database/database';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-//@Jakob line 110 is start of email verification
+import { Storage } from '@ionic/storage';
+import { Typography } from 'ionic-angular';
+
+
+
 
 
 @Injectable()
@@ -20,7 +24,8 @@ export class AuthProvider {
     public googlePlus: GooglePlus,
     public database: DatabaseProvider,
     public twitterConnect: TwitterConnect,
-    public facebook: Facebook) {
+    public facebook: Facebook,
+    public storage: Storage) {
     console.log('Hello AuthProvider Provider');
 
     firebase.auth().onAuthStateChanged(function (user) {
@@ -32,95 +37,23 @@ export class AuthProvider {
     });
   }
 
-  async trySetUserDoc(uid, firstname, lastname) {
-    try {
-      let metadata = await firebase.auth().currentUser.metadata;
-      if (metadata.creationTime == metadata.lastSignInTime) {
-        // The user is new
-        //Add the user to the collection
-        console.log("This user was just created...adding to database");
-        await this.database.userSetDoc(uid, firstname, lastname);
-      }
-    } catch (e) {
-      throw (e);
-    }
-  }
-
-  //Creates a new Firebase user with email and password
-  async postUser2Firebase(email, password, firstname, lastname) {
-    try {
-
-      let newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      await this.trySetUserDoc(newUser.user.uid, firstname, lastname);
-
-      await this.updateUser(firstname + " " + lastname);
-      console.log(`${newUser.user.email} 's UID: ${newUser.user.uid}`);
-    }
-    catch (e) {
-      throw (e);
-    }
-  }
-
-  //Updates a user's displayName in firebase auth
-  async updateUser(name) {
-    try {
-      let user = firebase.auth().currentUser;
-
-      await user.updateProfile({
-        displayName: name,
-        photoURL: ""
-      });
-    } catch (e) {
-      throw (e);
-    }
-
-    //make a call to database to update user's name
-  }
-
-  //Signs existing user in with email and password
-  //Param:
-  //    credentials = {
-  //        email:String,
-  //        password:String
-  //      };
+  //********************************************************************//
+  //                        Login User
+  // 
+  // Signs user in with their account. If user is signing in with
+  // Google,Facebook or Twitter and it is their 1st time logging into the 
+  // app, account gets created for them in Firebase auth and the database
+  //********************************************************************//
   async loginWithEmail(credentials) {
     try {
       this.userProfile = await this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
       this.uid = this.afAuth.auth.currentUser.uid;
-      /*var actionCodeSettings = {
-        url:'https://www.example.com/?email=' + firebase.auth().currentUser.email,
-        iOS: {
-          bundleId: 'com.example.ios'
-        },
-        android: {
-          packageName: 'com.example.android',
-          installApp: true,
-          minimumVersion: '12'
-        },
-        handleCodeInApp: true
-      };
-        firebase.auth().currentUser.sendEmailVerification(actionCodeSettings)
-  .then(function() {
-    // Verification email sent.
-  })
-  .catch(function(error) {
-    // Error occurred. Inspect error.code.
-    console.log("Email not verified. Please check email to verify email");
-  });   */
-  var user = firebase.auth().currentUser;
-      user.sendEmailVerification().then(function(){
-      }).catch(function(error){
-      });
     }
     catch (e) {
       throw (e);
     }
   }
 
-  //Signs user in with google account
-  //User does not need to sign up for Stalker App
-  //If user doesn't exist when signing in with Google,
-  //function automatically creates account in Firebase
   async loginWithGoogle() {
     try {
       if ((<any>window).cordova) {
@@ -142,7 +75,6 @@ export class AuthProvider {
 
         //If this is user's 1st time logging in, adds them to database
         await this.trySetUserDoc(this.uid, names[0], names[1]);
-
       }
       else {
         //If on web browser, use popup window
@@ -153,9 +85,7 @@ export class AuthProvider {
         //displayName is in format "first last"
         //.split() allows to seperate first from last
         let name = this.afAuth.auth.currentUser.displayName;
-        console.log(name);
         let names = name.split(" ");
-
 
         //If this is user's 1st time logging in, adds them to database
         await this.trySetUserDoc(this.uid, names[0], names[1]);
@@ -166,10 +96,6 @@ export class AuthProvider {
     }
   }
 
-  //Signs user in with Twitter account
-  //User does not need to sign up for Stalker App.
-  //If user doesn't exist when signing in with Twitter,
-  //function automatically authenticates account in Firebase
   async loginWithTwitter() {
     try {
       if ((<any>window).cordova) {
@@ -211,10 +137,6 @@ export class AuthProvider {
     }
   }
 
-  //Signs user in with Facebook account
-  //User does not need to sign up for Stalker App.
-  //If user doesn't exist when signing in with Facebook,
-  //function automatically authenticates account in Firebase
   async loginWithFacebook() {
     try {
       if ((<any>window).cordova) {
@@ -258,10 +180,7 @@ export class AuthProvider {
           //If this is user's 1st time logging in, adds them to database
           let names = name.split(" ");
           await this.trySetUserDoc(this.uid, names[0], names[1]);
-
         }
-
-
       }
       else {
         await this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
@@ -274,15 +193,194 @@ export class AuthProvider {
 
         //If this is user's 1st time logging in, adds them to database
         await this.trySetUserDoc(this.uid, names[0], names[1]);
-
       }
-
     } catch (e) {
       throw (e);
     }
   }
 
-  //Returns currently signed in user
+
+  //********************************************************************//
+  //       Linking current user to another form of authentication
+  // 
+  // If user is on mobile device, they will be redirected to another 
+  // window to link they're current account with their preferred media.
+  // If on a browser, user links account through a popup window.
+  //********************************************************************//
+
+  async linkWithGoogle() {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+      if ((<any>window).cordova) {
+        await this.afAuth.auth.currentUser.linkWithRedirect(provider);
+
+        let result = await firebase.auth().getRedirectResult();
+      } else {
+        await this.afAuth.auth.currentUser.linkWithPopup(provider);
+      }
+      console.log("Link with Google successful")
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  async linkWithTwitter() {
+    try {
+      const provider = new firebase.auth.TwitterAuthProvider();
+      if ((<any>window).cordova) {
+        await this.afAuth.auth.currentUser.linkWithRedirect(provider);
+
+        let result = await firebase.auth().getRedirectResult();
+      } else {
+        await this.afAuth.auth.currentUser.linkWithPopup(provider);
+      }
+      console.log("Link with Twitter successful")
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  async linkWithFacebook() {
+    try {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      if ((<any>window).cordova) {
+        await this.afAuth.auth.currentUser.linkWithRedirect(provider);
+
+        let result = await firebase.auth().getRedirectResult();
+      } else {
+        await this.afAuth.auth.currentUser.linkWithPopup(provider);
+      }
+      console.log("Link with Facebook successful")
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+
+
+  //********************************************************************//
+  //                        Miscellaneous
+  // 
+  // trySetUserDoc - 
+  //     If account was just created, add account to database.
+  //     This function is called in the Google, Facebook and Twitter
+  //     logins because social media accounts only get added to Firebase
+  //     authentication, so they need to manually get added upon creation.
+  // 
+  // postUser2Firebase - 
+  //     Creates a new Firebase user with email and password. This will
+  //     only be called when registering an account, so it calls 
+  //     trySetUserDoc(). The Firebase user does not initially have a 
+  //     displayName, so an update function is called to set it.      
+  //
+  // updateUser - 
+  //     Updates current user's displayName in Firebase auth        
+  //
+  // getUser - 
+  //     Returns currently signed in user
+  //
+  // logout - 
+  //     Logs the current user out of their account       
+  //********************************************************************//
+
+  async trySetUserDoc(uid, firstname, lastname) {
+    try {
+      let metadata = await firebase.auth().currentUser.metadata;
+      if(metadata.creationTime == metadata.lastSignInTime) {
+        // The user is new
+        //Add the user to the collection
+        console.log("This user was just created...adding to database");
+
+        await this.verifyUserEmail();
+
+        await this.database.userSetDoc(uid, firstname, lastname);
+      }
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  async wasJustCreated()
+  {
+    try {
+      let metadata = await firebase.auth().currentUser.metadata;
+      if(metadata.creationTime == metadata.lastSignInTime) {
+        return true;
+        
+      }
+      else{
+        return false;
+      }
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  async verifyUserEmail() {
+    try {
+      let user = firebase.auth().currentUser;;
+      await user.sendEmailVerification();
+
+      console.log("Email verification message sent")
+    }
+    catch (e) {
+      throw (e);
+    }
+  }
+
+  async isVerified() {
+    try{
+      let flag = await this.afAuth.auth.currentUser.emailVerified;
+
+      return flag;
+    }
+    catch(e)
+    {
+      throw(e);
+    }
+
+  }
+
+
+  async postUser2Firebase(email, password, firstname, lastname) {
+    try {
+      let newUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      await this.trySetUserDoc(newUser.user.uid, firstname, lastname);
+
+      await this.updateUser(firstname + " " + lastname);
+      console.log(`${newUser.user.email} 's UID: ${newUser.user.uid}`);
+    }
+    catch (e) {
+      throw (e);
+    }
+  }
+
+
+  async updateUser(name) {
+    try {
+      let user = firebase.auth().currentUser;
+
+      await user.updateProfile({
+        displayName: name,
+        photoURL: ""
+      });
+    } catch (e) {
+      throw (e);
+    }
+    //make a call to database to update user's name
+  }
+
+  async getStorage()
+  {
+    try{
+      return await this.storage.get('user');
+    }catch(e)
+    {
+      throw(e);
+    }
+  }
+
   async getUser() {
     try {
       let user = await this.afAuth.auth.currentUser;
@@ -301,38 +399,23 @@ export class AuthProvider {
     catch (e) {
       throw (e);
     }
-
-  }
-
-  //Links current user account with a Google account
-  //User has to sign into Google account the wish to link with
-  async linkWithGoogle()
-  {
-    try{
-      const provider = new firebase.auth.GoogleAuthProvider();
-
-      if ((<any>window).cordova) {
-        await this.afAuth.auth.currentUser.linkWithRedirect(provider);
-
-        let result = await firebase.auth().getRedirectResult();
-      }else{
-        await this.afAuth.auth.currentUser.linkWithPopup(provider);
-      }
-      console.log("Link with Google successful")
-    }catch(e)
-    {
-      throw(e);
-    }
   }
 
   //Logs user out
   async logout() {
     try {
       await this.afAuth.auth.signOut();
+
+      //NEEDS CORDOVA LOGOUT WONT WORK IN BROWSER
+      /*let data = await this.facebook.getLoginStatus();
+      if (data.status = 'connected') {
+        this.facebook.logout();
+      }*/
+
+      await this.storage.remove('user');
     }
     catch (e) {
-      console.log(e);
+      throw(e);
     }
   }
-
 }
