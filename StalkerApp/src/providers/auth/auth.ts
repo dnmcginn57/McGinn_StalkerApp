@@ -397,6 +397,19 @@ export class AuthProvider {
     }
   }
 
+  async resetPassword(email:string)
+  {
+    try{
+      let user = await this.afAuth.auth;
+
+      await user.sendPasswordResetEmail(email);
+
+    }catch(e)
+    {
+      throw(e);
+    }
+  }
+
   //Logs user out
   async logout() {
     try {
