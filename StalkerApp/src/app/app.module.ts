@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
+import {IonicStorageModule} from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
 
@@ -33,6 +33,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Facebook } from '@ionic-native/facebook';
 import {LocationTracker} from '../providers/location-tracker/location-tracker';
+import { ChatService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import {LocationTracker} from '../providers/location-tracker/location-tracker';
     AngularFireModule.initializeApp(FIREBASE_CONFIG.config),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -82,8 +84,11 @@ import {LocationTracker} from '../providers/location-tracker/location-tracker';
     GooglePlus,
     AuthProvider,
     TwitterConnect,
-    LocationTracker
-    
+    LocationTracker,
+    ChatService,
+   // Storage
+ 
+
   ]
 })
 export class AppModule {}

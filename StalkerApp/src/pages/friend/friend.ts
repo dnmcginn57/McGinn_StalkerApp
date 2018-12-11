@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AllUsersPage } from '../all-users/all-users';
 import { FriendProfilePage } from '../friend-profile/friend-profile';
+import { PersonalchatPage } from '../personalchat/personalchat';
 import { DatabaseProvider } from '../../providers/database/database';
 import { AuthProvider } from '../../providers/auth/auth';
-import { FriendProfilePage } from '../friend-profile/friend-profile';
+
 
 /**
  * Generated class for the FriendPage page.
@@ -62,6 +63,12 @@ export class FriendPage {
   {
     console.log(friend);
     this.navCtrl.push(FriendProfilePage,friend)
+
+  }
+  goPersonalChat(friend){
+    console.log(friend);
+    this.navCtrl.push(PersonalchatPage,friend)
+
 
   }
 

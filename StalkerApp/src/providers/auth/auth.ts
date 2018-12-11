@@ -5,7 +5,10 @@ import * as firebase from 'firebase/app';
 import { DatabaseProvider } from '../database/database';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-import { IfStmt } from '@angular/compiler';
+import { Storage } from '@ionic/storage';
+import { Typography } from 'ionic-angular';
+
+
 
 
 
@@ -21,7 +24,8 @@ export class AuthProvider {
     public googlePlus: GooglePlus,
     public database: DatabaseProvider,
     public twitterConnect: TwitterConnect,
-    public facebook: Facebook) {
+    public facebook: Facebook,
+    public storage: Storage) {
     console.log('Hello AuthProvider Provider');
 
     firebase.auth().onAuthStateChanged(function (user) {
@@ -283,15 +287,59 @@ export class AuthProvider {
   async trySetUserDoc(uid, firstname, lastname) {
     try {
       let metadata = await firebase.auth().currentUser.metadata;
-      if (metadata.creationTime == metadata.lastSignInTime) {
+      if(metadata.creationTime == metadata.lastSignInTime) {
         // The user is new
         //Add the user to the collection
         console.log("This user was just created...adding to database");
+
+        await this.verifyUserEmail();
+
         await this.database.userSetDoc(uid, firstname, lastname);
       }
     } catch (e) {
       throw (e);
     }
+  }
+
+  async wasJustCreated()
+  {
+    try {
+      let metadata = await firebase.auth().currentUser.metadata;
+      if(metadata.creationTime == metadata.lastSignInTime) {
+        return true;
+        
+      }
+      else{
+        return false;
+      }
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  async verifyUserEmail() {
+    try {
+      let user = firebase.auth().currentUser;;
+      await user.sendEmailVerification();
+
+      console.log("Email verification message sent")
+    }
+    catch (e) {
+      throw (e);
+    }
+  }
+
+  async isVerified() {
+    try{
+      let flag = await this.afAuth.auth.currentUser.emailVerified;
+
+      return flag;
+    }
+    catch(e)
+    {
+      throw(e);
+    }
+
   }
 
 
@@ -323,6 +371,15 @@ export class AuthProvider {
     //make a call to database to update user's name
   }
 
+  async getStorage()
+  {
+    try{
+      return await this.storage.get('user');
+    }catch(e)
+    {
+      throw(e);
+    }
+  }
 
   async getUser() {
     try {
@@ -349,14 +406,16 @@ export class AuthProvider {
     try {
       await this.afAuth.auth.signOut();
 
-      let data = await this.facebook.getLoginStatus();
+      //NEEDS CORDOVA LOGOUT WONT WORK IN BROWSER
+      /*let data = await this.facebook.getLoginStatus();
       if (data.status = 'connected') {
         this.facebook.logout();
-      }
+      }*/
 
+      await this.storage.remove('user');
     }
     catch (e) {
-      console.log(e);
+      throw(e);
     }
   }
 }

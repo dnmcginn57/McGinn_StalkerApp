@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
-import { AngularFirestore } from "angularfire2/firestore";
-//import { Chat } from "../../app/app.models";
-//import { firebase } from "../../app/app.config";
-//import { ChatService } from "../../app/app.services";
-import { Storage } from "@ionic/Storage";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Chat } from '../../app/app.models';
+import { FIREBASE_CONFIG } from '../../app/credentials';
+import { ChatService } from '../../app/app.service';
+import { Storage } from '@ionic/storage';
+
 
 
 @IonicPage()
@@ -25,7 +26,7 @@ export class PersonalchatPage implements OnInit {
     public navCtrl: NavController,
     public navParams: NavParams,
     private db: AngularFirestore,
-    //private chatService: ChatService,
+    private chatService: ChatService,
     private storage: Storage
   ) {
    // this.chatpartner = chatService.currentChatPartner;
@@ -39,11 +40,11 @@ export class PersonalchatPage implements OnInit {
 
   ngOnInit() {
 
-    this.storage.get("chatuser").then(chatuser => {
+    /* this.storage.get("chatuser").then(chatuser => {
       this.chatuser = chatuser;
     });
 
-   /* this.db
+   this.db
       .collection<Chat>(firebase.chats_endpoint, res => {
         return res.where("pair", "==", this.chatService.currentChatPairId);
       })
@@ -56,9 +57,9 @@ export class PersonalchatPage implements OnInit {
   } //ngOnInit
 
   addChat() {
-    if (this.message && this.message !== "") {
+   /* if (this.message && this.message !== "") {
       console.log(this.message);
-     /* this.chatPayload = {
+      this.chatPayload = {
         message: this.message,
         sender: this.chatuser.email,
         pair: this.chatService.currentChatPairId,
@@ -76,11 +77,11 @@ export class PersonalchatPage implements OnInit {
         })
         .catch(err => {
           console.log(err);
-        });*/
+        });
     }
   } //addChat
 
   isChatPartner(senderEmail) {
-    return senderEmail == this.chatpartner.email;
+    return senderEmail == this.chatpartner.email;*/
   } //isChatPartner
 }
