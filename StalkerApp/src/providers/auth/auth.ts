@@ -268,6 +268,15 @@ export class AuthProvider {
   //     logins because social media accounts only get added to Firebase
   //     authentication, so they need to manually get added upon creation.
   // 
+  // wasJustCreated - 
+  //     Returns true if the current user was just created
+  // 
+  // verifyUserEmail - 
+  //     Sends user a link to verify their email
+  // 
+  // isVerified - 
+  //     Returns true if the user has verified their account
+  // 
   // postUser2Firebase - 
   //     Creates a new Firebase user with email and password. This will
   //     only be called when registering an account, so it calls 
@@ -277,17 +286,26 @@ export class AuthProvider {
   // updateUser - 
   //     Updates current user's displayName in Firebase auth        
   //
+  // getStorage - 
+  //     Returns the uid that is in storage
+  //
   // getUser - 
   //     Returns currently signed in user
   //
+  // resetPassword
+  //     Sends a link to a given email to reset password 
   // logout - 
-  //     Logs the current user out of their account       
+  //     Logs the current user out of their account      
+  //
+  // deleteUser
+  //     delete user from Firebase. Calls database function to delete
+  //     user from database 
   //********************************************************************//
 
   async trySetUserDoc(uid, firstname, lastname) {
     try {
-      let metadata = await firebase.auth().currentUser.metadata;
-      if (metadata.creationTime == metadata.lastSignInTime) {
+      let flag = await this.wasJustCreated();
+      if (flag) {
         // The user is new
         //Add the user to the collection
         console.log("This user was just created...adding to database");
@@ -306,7 +324,6 @@ export class AuthProvider {
       let metadata = await firebase.auth().currentUser.metadata;
       if (metadata.creationTime == metadata.lastSignInTime) {
         return true;
-
       }
       else {
         return false;
@@ -397,16 +414,14 @@ export class AuthProvider {
     }
   }
 
-  async resetPassword(email:string)
-  {
-    try{
+  async resetPassword(email: string) {
+    try {
       let user = await this.afAuth.auth;
 
       await user.sendPasswordResetEmail(email);
 
-    }catch(e)
-    {
-      throw(e);
+    } catch (e) {
+      throw (e);
     }
   }
 
