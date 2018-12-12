@@ -415,7 +415,7 @@ export class AuthProvider {
   }
 
   //Won't be used; let Keona work on this
-  /*async resetPassword(email: string) {
+  async resetPassword(email: string) {
     try {
       let user = await this.afAuth.auth;
 
@@ -424,7 +424,7 @@ export class AuthProvider {
     } catch (e) {
       throw (e);
     }
-  }*/
+  }
 
   //Logs user out
   async logout() {

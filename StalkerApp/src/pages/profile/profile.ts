@@ -66,15 +66,15 @@ export class ProfilePage {
   ) {
     database.userGetPic(auth.uid).then((pic) => { this.myPhoto = pic; });
     console.log(this.myPhoto);
-    database.userPendingFriends(auth.uid).then((requests) =>
-    {
-      //this only returns ids
-      for(var request in requests)
-      { 
-        this.Request.push({key:request,user:requests[request]});
-      }
-      console.log(this.Request);
-    });
+    // database.userPendingFriends(auth.uid).then((requests) =>
+    // {
+    //   //this only returns ids
+    //   for(var request in requests)
+    //   { 
+    //     this.Request.push({key:request,user:requests[request]});
+    //   }
+    //   console.log(this.Request);
+    // });
 
       this.getCurrentUserInfo();
   }
@@ -179,7 +179,8 @@ export class ProfilePage {
             this.userInfo.first_name = data.name;
             this.auth.updateUser(this.userInfo.first_name + " " + this.userInfo.last_name);
             //should also change in database
-
+            this.database.userSetName(this.auth.uid, this.userInfo.first_name, this.userInfo.last_name);
+        
           }
 
         }
@@ -212,7 +213,7 @@ export class ProfilePage {
           handler: data => {
             this.userInfo.last_name = data.name;
             this.auth.updateUser(this.userInfo.first_name + " " + this.userInfo.last_name);
-
+            this.database.userSetName(this.auth.uid, this.userInfo.first_name, this.userInfo.last_name);
           }
 
         }
@@ -285,13 +286,13 @@ export class ProfilePage {
 
 
 
-  async tagLoc() {
+ /* async tagLoc() {
     try {
       await this.database.userAddTag(this.auth.uid, "name",100, 100);
     } catch (e) {
       console.log(e);
     }
-  }
+  }*/
 
   addFriend(key)
   {
