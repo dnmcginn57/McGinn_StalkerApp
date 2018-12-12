@@ -7,6 +7,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AlertController } from 'ionic-angular';
 import { App } from 'ionic-angular';
 import { LocationTracker } from '../../providers/location-tracker/location-tracker';
+import { TabsPage } from '../tabs/tabs';
 
 
 /**
@@ -38,9 +39,6 @@ export class ProfilePage {
     saveToPhotoAlbum: false
   }
 
-
-
-
   userInfo: any = {
     email: null,
     full_name: null,
@@ -52,7 +50,6 @@ export class ProfilePage {
   };
 
   Request = [];
-
 
   constructor(
     public navCtrl: NavController,
@@ -66,15 +63,6 @@ export class ProfilePage {
   ) {
     database.userGetPic(auth.uid).then((pic) => { this.myPhoto = pic; });
     console.log(this.myPhoto);
-    // database.userPendingFriends(auth.uid).then((requests) =>
-    // {
-    //   //this only returns ids
-    //   for(var request in requests)
-    //   { 
-    //     this.Request.push({key:request,user:requests[request]});
-    //   }
-    //   console.log(this.Request);
-    // });
 
     this.getCurrentUserInfo();
   }
@@ -98,22 +86,13 @@ export class ProfilePage {
 
     try {
       let imageData: string = await this.camera.getPicture(this.options);
-      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
-      await this.database.storeImg(this.myPhoto, this.auth.uid + '_profile.jpg');
+      var image64 = 'data:image/jpeg;base64,' + imageData;
+      await this.database.storeImg(image64, this.auth.uid + '_profile.jpg');
       await this.database.userSetPic(this.auth.uid, this.auth.uid + '_profile.jpg');
       this.myPhoto = await this.database.userGetPic(this.auth.uid);
     } catch (e) {
       console.log(e);
     }
-
-    /*!!!PLEASE USE ASYNC/AWAIT TO HELP PREVENT APP CRASHES!!!
-
-    this.camera.getPicture(this.options).then((imageData) => {
-      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      console.log(err)
-    });
-    */
 
   }
 
