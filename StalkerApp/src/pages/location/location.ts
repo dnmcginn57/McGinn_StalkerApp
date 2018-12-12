@@ -28,12 +28,12 @@ import { AlertController } from 'ionic-angular';
 })
 export class LocationPage {
 
-  public auth: AuthProvider;
+  
   picName: string = 'something';
   tempName: string;
   myPhoto: any;
-  public database: DatabaseProvider;
-  position: any;
+  
+  position: any = {};
   latlng: any;
 
   options: CameraOptions = {
@@ -47,25 +47,33 @@ export class LocationPage {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public geolocation: Geolocation, private alertCtrl: AlertController,public camera:Camera) {}
+    public geolocation: Geolocation, private alertCtrl: AlertController,
+    public camera:Camera, public database: DatabaseProvider,public auth: AuthProvider) {}
 
   async takePicture() {
     try {
       //takes the picture and saves it to a string v
-      let imageData: string = await this.camera.getPicture();
-      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+      // let imageData: string = await this.camera.getPicture();
+      // this.myPhoto = 'data:image/jpeg;base64,' + imageData;
       // Prompts the user to name the picture v
       await this.presentPrompt();
       // gets the current location of user
+      let that=this;
       await navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
+       
+        that.position = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
+        console.log("THAT POSITION", that.position);
       });
+      //console.log(this.myPhoto);
+     // console.log(this.position);
+      // console.log(this.picName);
+      
       // adds the picture, name and location to the database v
       await this.database.userAddTag(this.auth.uid, this.picName,
-       this.position.coords.latitude , this.position.coords.longitude,this.myPhoto);
+       this.position.lat, this.position.lng);
     } catch (e) {
       console.log(e);
     }
