@@ -44,7 +44,9 @@ export class LoginPage {
     alert.present();
   }
 
-  async onForgotPassword() {
+  //Keona wanted to work on this
+  //I made this seperately; won't be used
+  /*async onForgotPassword() {
     try {
       let alert = this.alertCtrl.create({
         title: 'Please enter your email',
@@ -80,8 +82,8 @@ export class LoginPage {
     } catch (e) {
       console.log(e);
     }
-
   }
+  */
 
   async tryLogin(value) {
     try {
@@ -135,16 +137,6 @@ export class LoginPage {
       console.log(e);
     }
   }
-
-  /*async onForgotPassword() {
-    try {
-
-
-      await this.auth.resetPassword();
-    } catch (e) {
-      console.log(e);
-    }
-  }*/
 
   async tryLoginWithFacebook() {
     try {
