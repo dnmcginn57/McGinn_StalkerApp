@@ -17,7 +17,7 @@
 
     <h3 style="color: white; display: inline-block;">First: {{userInfo.first_name}} </h3>
     <ion-fab style="display: inline-block">
-      <button ion-fab mini (click)='presentPromptFirstName()'>
+      <button ion-fab mini (click)='presentPromptFirstName()' color = "light">
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-fab>
@@ -29,7 +29,7 @@
   <div>
     <h3 style="color: white; display: inline-block;">Last: {{userInfo.last_name}} </h3>
     <ion-fab right style="display: inline-block">
-      <button ion-fab mini (click)='presentPromptLastName()'>
+      <button ion-fab mini (click)='presentPromptLastName()' color = "light">
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-fab>
@@ -48,13 +48,13 @@
   </div>
 
 
-  <button ion-button (click)='tryLinkWithGoogle()'>
+  <button ion-button (click)='tryLinkWithGoogle()' color ="light">
     Link with Google
   </button> 
-  <button ion-button (click)='tryLinkWithTwitter()'>
+  <button ion-button (click)='tryLinkWithTwitter()' color ="light">
     Link with Twitter
   </button> 
-  <button ion-button (click)='tryLinkWithFacebook()'>
+  <button ion-button (click)='tryLinkWithFacebook()' color ="light">
     Link with Facebook
   </button> 
 

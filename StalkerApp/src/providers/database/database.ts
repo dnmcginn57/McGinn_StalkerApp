@@ -432,6 +432,31 @@ export class DatabaseProvider {
     }
   }
 
+  /* userSetDoc
+   * Desc: Asynchronous. Uploads a user document to the firestore.
+   * Params:
+   *     id: the id of the document being set
+   *     firstname: the first name of the user
+   *     lastname: the last name of the user
+   * returns: nothing.
+   */
+  async userSetDoc(id: string, firstname: string, lastname: string) {
+    try {
+
+      var obj = {
+        uid: id,
+        first: firstname,
+        last: lastname,
+        creation_time: new Date()
+      }
+
+      await this.db.collection('Users').doc(id).set(obj);
+
+    } catch (e) {
+      throw e;
+    }
+  }
+
   /* userSetLoc
    * Desc: ASYNC. Sets the current location of the user
    * Params:
@@ -487,26 +512,4 @@ export class DatabaseProvider {
     }
   }
 
-  /* userSetDoc
-   * Desc: Asynchronous. Uploads a user document to the firestore.
-   * Params:
-   *     id: the id of the document being set
-   *     firstname: the first name of the user
-   *     lastname: the last name of the user
-   * returns: nothing.
-   */
-  async userSetDoc(id: string, firstname: string, lastname: string) {
-    try {
-
-      var obj = {
-        first: firstname,
-        last: lastname
-      }
-
-      await this.db.collection('Users').doc(id).set(obj);
-
-    } catch (e) {
-      throw e;
-    }
-  }
 }
