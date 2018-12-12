@@ -85,8 +85,8 @@ import { ChatService } from './app.service';
     AuthProvider,
     TwitterConnect,
     LocationTracker,
-    ChatService
-   
+    ChatService,
+   // Storage
  
 
   ]
