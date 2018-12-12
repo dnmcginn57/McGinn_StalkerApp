@@ -501,5 +501,14 @@ export class DatabaseProvider {
       throw e;
     }
   }
-
+  passwordreset(email) {
+    var promise = new Promise((resolve, reject) => {
+      firebase.auth().sendPasswordResetEmail(email).then(() => {
+        resolve({ success: true });
+      }).catch((err) => {
+        reject(err);
+      })
+    })
+    return promise;
+  }
 }
