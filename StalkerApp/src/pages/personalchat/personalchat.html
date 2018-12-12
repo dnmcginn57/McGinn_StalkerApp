@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color = "dark">
     <ion-title>Chat Partner</ion-title>
   </ion-navbar>
 
@@ -26,8 +26,8 @@
         <ion-input type="text" [(ngModel)]="message" placeholder="Enter Message...."></ion-input>
       </ion-col>
       <ion-col col-2>
-        <button ion-button block (click)="addChat()">
-          Send
+        <button ion-button block (click)="addChat()" color = "dark">
+          <ion-icon name = "paper-plane"></ion-icon>
         </button>
       </ion-col>
     </ion-row>
