@@ -120,6 +120,10 @@ export class LoginPage {
     }
   }
 
+  goToResetPassPage(){
+    this.navCtrl.push(ResetpassPage);
+    }
+  
   goRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
