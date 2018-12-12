@@ -401,6 +401,17 @@ export class AuthProvider {
     }
   }
 
+   passwordreset(email) {
+    var promise = new Promise((resolve, reject) => {
+      firebase.auth().sendPasswordResetEmail(email).then(() => {
+        resolve({ success: true });
+      }).catch((err) => {
+        reject(err);
+      })
+    })
+    return promise;
+  }
+  
   //Logs user out
   async logout() {
     try {
