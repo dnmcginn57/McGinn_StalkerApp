@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
-import { AngularFirestore } from "angularfire2/firestore";
-import { Chat } from "../../app/app.models";
-import { FIREBASE_CONFIG } from "../../app/credentials";
-import { ChatService } from "../../app/app.service";
-import { Storage } from "@ionic/Storage";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Chat } from '../../app/app.models';
+import { FIREBASE_CONFIG } from '../../app/credentials';
+import { ChatService } from '../../app/app.service';
+import { Storage } from '@ionic/storage';
+
+
+
 @IonicPage()
 @Component({
   selector: "page-chatroom",
@@ -15,7 +18,7 @@ export class PersonalchatPage implements OnInit {
   chatpartner; 
   chatuser;
   message: string;
-  chatPayload: Chat;
+  //chatPayload: Chat;
   intervalScroll;
   @ViewChild("content") content: any;
 
@@ -24,11 +27,9 @@ export class PersonalchatPage implements OnInit {
     public navParams: NavParams,
     private db: AngularFirestore,
     private chatService: ChatService,
-    //private storage: Storage
+    private storage: Storage
   ) {
-    this.chatpartner = this.chatService.currentChatPartner;
-    this .chatuser = this.chatService.currentUser;
-    console.log ("Username: "+this.chatpartner.first);
+   // this.chatpartner = chatService.currentChatPartner;
   }
 
 
@@ -39,10 +40,12 @@ export class PersonalchatPage implements OnInit {
 
   ngOnInit() {
 
-  
+    /* this.storage.get("chatuser").then(chatuser => {
+      this.chatuser = chatuser;
+    });
 
    this.db
-      .collection<Chat>(FIREBASE_CONFIG.chats_endpoint, res => {
+      .collection<Chat>(firebase.chats_endpoint, res => {
         return res.where("pair", "==", this.chatService.currentChatPairId);
       })
       .valueChanges()
@@ -50,21 +53,26 @@ export class PersonalchatPage implements OnInit {
         
         this.chats = chats;
        
-      });
+      });*/
   } //ngOnInit
 
   addChat() {
+<<<<<<< HEAD
     if (this.message && this.message !== "") {
       console.log(this.chatuser);
       
+=======
+   /* if (this.message && this.message !== "") {
+      console.log(this.message);
+>>>>>>> 1de92e64df0495c824662a59012abe518bb948c5
       this.chatPayload = {
         message: this.message,
         sender: this.chatuser.email,
         pair: this.chatService.currentChatPairId,
         time: new Date().getTime()
-      };
+      };*/
 
-      this.chatService
+      /*this.chatService
         .addChat(this.chatPayload)
         .then(() => {
           //Clear message box
@@ -80,6 +88,6 @@ export class PersonalchatPage implements OnInit {
   } //addChat
 
   isChatPartner(senderEmail) {
-    return senderEmail == this.chatpartner.email;
+    return senderEmail == this.chatpartner.email;*/
   } //isChatPartner
 }

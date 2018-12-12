@@ -16,7 +16,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class AllUsersPage {
 
-  testImage = "../../assets/imgs/frens.png";
+  testImage = "assets/imgs/frens.png";
   allUsers=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
