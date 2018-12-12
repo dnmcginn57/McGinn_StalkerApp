@@ -268,6 +268,15 @@ export class AuthProvider {
   //     logins because social media accounts only get added to Firebase
   //     authentication, so they need to manually get added upon creation.
   // 
+  // wasJustCreated - 
+  //     Returns true if the current user was just created
+  // 
+  // verifyUserEmail - 
+  //     Sends user a link to verify their email
+  // 
+  // isVerified - 
+  //     Returns true if the user has verified their account
+  // 
   // postUser2Firebase - 
   //     Creates a new Firebase user with email and password. This will
   //     only be called when registering an account, so it calls 
@@ -277,17 +286,26 @@ export class AuthProvider {
   // updateUser - 
   //     Updates current user's displayName in Firebase auth        
   //
+  // getStorage - 
+  //     Returns the uid that is in storage
+  //
   // getUser - 
   //     Returns currently signed in user
   //
+  // resetPassword
+  //     Sends a link to a given email to reset password 
   // logout - 
-  //     Logs the current user out of their account       
+  //     Logs the current user out of their account      
+  //
+  // deleteUser
+  //     delete user from Firebase. Calls database function to delete
+  //     user from database 
   //********************************************************************//
 
   async trySetUserDoc(uid, firstname, lastname) {
     try {
-      let metadata = await firebase.auth().currentUser.metadata;
-      if(metadata.creationTime == metadata.lastSignInTime) {
+      let flag = await this.wasJustCreated();
+      if (flag) {
         // The user is new
         //Add the user to the collection
         console.log("This user was just created...adding to database");
@@ -301,15 +319,13 @@ export class AuthProvider {
     }
   }
 
-  async wasJustCreated()
-  {
+  async wasJustCreated() {
     try {
       let metadata = await firebase.auth().currentUser.metadata;
-      if(metadata.creationTime == metadata.lastSignInTime) {
+      if (metadata.creationTime == metadata.lastSignInTime) {
         return true;
-        
       }
-      else{
+      else {
         return false;
       }
     } catch (e) {
@@ -330,14 +346,13 @@ export class AuthProvider {
   }
 
   async isVerified() {
-    try{
+    try {
       let flag = await this.afAuth.auth.currentUser.emailVerified;
 
       return flag;
     }
-    catch(e)
-    {
-      throw(e);
+    catch (e) {
+      throw (e);
     }
 
   }
@@ -371,13 +386,11 @@ export class AuthProvider {
     //make a call to database to update user's name
   }
 
-  async getStorage()
-  {
-    try{
+  async getStorage() {
+    try {
       return await this.storage.get('user');
-    }catch(e)
-    {
-      throw(e);
+    } catch (e) {
+      throw (e);
     }
   }
 
@@ -401,6 +414,18 @@ export class AuthProvider {
     }
   }
 
+  //Won't be used; let Keona work on this
+  /*async resetPassword(email: string) {
+    try {
+      let user = await this.afAuth.auth;
+
+      await user.sendPasswordResetEmail(email);
+
+    } catch (e) {
+      throw (e);
+    }
+  }*/
+
   //Logs user out
   async logout() {
     try {
@@ -415,7 +440,21 @@ export class AuthProvider {
       await this.storage.remove('user');
     }
     catch (e) {
-      throw(e);
+      throw (e);
+    }
+  }
+
+
+  async deleteUser() {
+    try {
+      let user = await this.afAuth.auth.currentUser;
+
+      await user.delete();
+      await this.storage.remove('user');
+
+      //this.database.deleteUser(this.uid);
+    } catch (e) {
+      throw (e);
     }
   }
 }

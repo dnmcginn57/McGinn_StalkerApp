@@ -3,6 +3,7 @@ import { NavController, ToastController, UrlSerializer } from 'ionic-angular';
 
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
+import { AlertController } from 'ionic-angular';
 
 
 //import { HomePage } from '../home/home';
@@ -23,10 +24,11 @@ export class RegisterPage {
     public navCtrl: NavController,
     public formBuilder: FormBuilder,
     public toastCtrl: ToastController,
-    public auth: AuthProvider
-  ) {}
+    public auth: AuthProvider,
+    private alertCtrl: AlertController,
+  ) { }
 
-  ionViewWillLoad(){
+  ionViewWillLoad() {
     this.registerForm = this.formBuilder.group({
       email: new FormControl("", Validators.required),
       password: new FormControl("", Validators.required),
@@ -34,12 +36,12 @@ export class RegisterPage {
       first: new FormControl("", Validators.required),
       last: new FormControl("", Validators.required)
     },
-    {validator: this.matchingPasswords('password', 'confirmPassword')}); 
+      { validator: this.matchingPasswords('password', 'confirmPassword') });
   }
 
   //custom validator for matching passwords
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-    return(group: FormGroup): {[key: string]: any} => {
+    return (group: FormGroup): { [key: string]: any } => {
       let password = group.controls[passwordKey];
       let confirmPassword = group.controls[confirmPasswordKey];
 
@@ -56,30 +58,37 @@ export class RegisterPage {
   //Attempts to register user
   //Params:
   //      value - a form with an email, password, first and last (names)
-  async tryRegister(value){
-    try{
+  async tryRegister(value) {
+    try {
       await this.auth.postUser2Firebase(value.email, value.password, value.first, value.last);
 
-      this.successMessage="Your account has been created.";
+      this.successMessage = "Your account has been created.";
       console.log(this.successMessage);
 
+      let alert = this.alertCtrl.create({
+        title: 'Account needs to be verified',
+        subTitle: 'check your email',
+        buttons: ['Dismiss']
+      });
+      alert.present();
 
-        this.goLoginPage();
+
+      this.goLoginPage();
 
     }
-    catch(e){
+    catch (e) {
       console.log(e);
-       this.errorMessage = e.message;
-       this.successMessage = "";
-    } 
+      this.errorMessage = e.message;
+      this.successMessage = "";
+    }
   }
 
-/*
-  registerTest(){
-    this.auth.postUser2Firebase("me@website.com", "password1234", "Me", "Not you");
-  }*/
+  /*
+    registerTest(){
+      this.auth.postUser2Firebase("me@website.com", "password1234", "Me", "Not you");
+    }*/
 
-  goLoginPage(){
+  goLoginPage() {
     this.navCtrl.pop();
   }
 
