@@ -35,13 +35,13 @@ export class LoginPage {
       email: new FormControl(),
       password: new FormControl(),
     });
-    let tabs = document.querySelectorAll('.show-tabbar');
-  	if (tabs !== null) {
-	  	Object.keys(tabs).map((key) => {
-		  	tabs[key].style.display = 'none';
-    });
+  //   let tabs = document.querySelectorAll('.show-tabbar');
+  // 	if (tabs !== null) {
+	//   	Object.keys(tabs).map((key) => {
+	// 	  	tabs[key].style.display = 'none';
+  //   });
+  // }
   }
-}
 
   presentAlert() {
     let alert = this.alertCtrl.create({

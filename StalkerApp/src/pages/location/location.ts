@@ -28,10 +28,12 @@ import { AlertController } from 'ionic-angular';
 })
 export class LocationPage {
 
+
   picName: string = 'something';
   tempName: string;
   myPhoto: any;
   position: any;
+
   latlng: any;
 
   options: CameraOptions = {
@@ -43,6 +45,7 @@ export class LocationPage {
     encodingType: this.camera.EncodingType.JPEG,
     saveToPhotoAlbum: false
   }
+
 
   constructor(
     public navCtrl: NavController,
@@ -78,6 +81,7 @@ export class LocationPage {
 
       await this.database.userAddTag(this.auth.uid, this.picName,
         this.position.lat, this.position.lng, filename);
+
 
     } catch (e) {
       console.log(e);

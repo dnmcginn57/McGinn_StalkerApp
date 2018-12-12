@@ -58,7 +58,9 @@ export class MyApp {
       else {
         this.rootPage = LoginPage;
       }
+      
     },
+    
       error => console.log(error));
   }
 }
