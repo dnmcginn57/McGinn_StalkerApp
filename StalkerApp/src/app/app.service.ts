@@ -5,23 +5,23 @@ import {
 } from "angularfire2/firestore";
 import { User, Chat } from "./app.models";
 import { FIREBASE_CONFIG } from "./credentials";
+import { async } from "rxjs/internal/scheduler/async";
 
+import { DatabaseProvider } from '../providers/database/database';
 @Injectable()
 export class ChatService {
   users: AngularFirestoreCollection<User>;
-
   chats: AngularFirestoreCollection<Chat>;
 
   //The pair string for the two users currently chatting
   currentChatPairId;
   currentChatPartner;
-
+  currentUser;
+  
   constructor(private db: AngularFirestore) {
-    
     this.users = db.collection<User>( FIREBASE_CONFIG.users_endpoint);
     this.chats = db.collection<Chat>( FIREBASE_CONFIG.chats_endpoint);
   }
-
   addUser(payload) {
     return this.users.add(payload);
   } //addUser
