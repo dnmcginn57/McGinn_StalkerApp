@@ -3,7 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
+import {IonicStorageModule} from '@ionic/storage';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
 
@@ -16,6 +17,9 @@ import { LocationPage } from '../pages/location/location';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
 import { AllUsersPage } from '../pages/all-users/all-users';
+import { PersonalchatPage } from '../pages/personalchat/personalchat';
+import {FriendProfilePage} from '../pages/friend-profile/friend-profile';
+
 
 
 //Firebase team imports
@@ -30,6 +34,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Facebook } from '@ionic-native/facebook';
 import {LocationTracker} from '../providers/location-tracker/location-tracker';
+import { ChatService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -41,14 +46,17 @@ import {LocationTracker} from '../providers/location-tracker/location-tracker';
     LocationPage,
     LoginPage,
     RegisterPage,
-    AllUsersPage
+    AllUsersPage,
+    PersonalchatPage,
+    FriendProfilePage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG.config),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,11 +68,14 @@ import {LocationTracker} from '../providers/location-tracker/location-tracker';
     LocationPage,
     LoginPage,
     RegisterPage,
-    AllUsersPage
+    AllUsersPage,
+    PersonalchatPage,
+    FriendProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    BackgroundGeolocation,
     Geolocation,
     Facebook,
     TwitterConnect,
@@ -75,8 +86,11 @@ import {LocationTracker} from '../providers/location-tracker/location-tracker';
     GooglePlus,
     AuthProvider,
     TwitterConnect,
-    LocationTracker
-    
+    LocationTracker,
+    ChatService,
+   // Storage
+ 
+
   ]
 })
 export class AppModule {}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, UrlSerializer } from 'ionic-angular';
 
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -63,7 +63,9 @@ export class RegisterPage {
       this.successMessage="Your account has been created.";
       console.log(this.successMessage);
 
-      this.goLoginPage();
+
+        this.goLoginPage();
+
     }
     catch(e){
       console.log(e);

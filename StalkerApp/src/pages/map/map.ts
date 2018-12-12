@@ -457,17 +457,17 @@ export class MapPage {
       [33.8669,98.5382],
     ];
         
-    var marker;
-   for (var i = 0; i < Markerlocations.length; i++) {
+    //var marker;
+   // for (var i = 0; i < Markerlocations.length; i++) {
 
-      var latitud = Markerlocations[i];
-      var longitud = Markerlocations[i];
-      var latLng = new google.maps.LatLng(latitud, longitud);
-      marker = new google.maps.Marker({
-        //map: $scope.map,
-        position: latLng
-      });
-    }
+    //   var latitud = Markerlocations[i];
+    //   var longitud = Markerlocations[i];
+    //   var latLng = new google.maps.LatLng(latitud, longitud);
+    //   marker = new google.maps.Marker({
+    //     //map: $scope.map,
+    //     position: latLng
+    //   });
+    // }
 
     var j;
     

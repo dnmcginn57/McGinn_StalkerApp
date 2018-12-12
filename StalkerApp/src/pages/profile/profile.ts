@@ -62,12 +62,26 @@ export class ProfilePage {
     private alertCtrl: AlertController,
     private app:App,
   ) {
+    database.userGetPic(auth.uid).then((pic) => { this.myPhoto = pic; });
+    console.log(this.myPhoto);
+    database.userPendingFriends(auth.uid).then((requests) =>
+    {
+      //this only returns ids
+      for(var request in requests)
+      { 
+        this.Request.push({key:request,user:requests[request]});
+      }
+      console.log(this.Request);
+    });
+
       this.getCurrentUserInfo();
   }
+
   ionViewWillLoad()
   {
     this.getPendingFriends();
   }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
@@ -205,16 +219,47 @@ export class ProfilePage {
     alert.present();
   }
 
-  Logout() {
-    this.auth.logout();
-    this.app.getRootNav().setRoot(LoginPage);
+  async Logout() {
+    try{
+      await this.auth.logout();
+      this.app.getRootNav().setRoot(LoginPage);
+    }catch(e)
+    {
+      console.log(e);
+    }
+
   }
 
-  
+  async tryLinkWithGoogle(){
+    try{
+      await this.auth.linkWithGoogle();
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+
+    async tryLinkWithTwitter(){
+    try{
+      await this.auth.linkWithTwitter();
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+  async tryLinkWithFacebook(){
+    try{
+      await this.auth.linkWithFacebook();
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+
 
   async tagLoc() {
     try {
-      await this.database.userAddTag(this.auth.uid, 100, 100);
+      await this.database.userAddTag(this.auth.uid, "name",100, 100);
     } catch (e) {
       console.log(e);
     }
