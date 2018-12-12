@@ -1,13 +1,14 @@
-
+import { DatabaseProvider } from './../../providers/database/database';
+import { AuthProvider } from '../../providers/auth/auth';
 import { Component, } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-//import { ViewChild, ElementRef } from '@angular/core';
-import { LocationTracker } from '../../providers/location-tracker/location-tracker';
-import {DatabaseProvider} from '../../providers/database/database'
-
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
+import { AlertController } from 'ionic-angular';
 
-declare var google;
+
+
+
 
 /**
  * Generated class for the LocationPage page.
@@ -27,135 +28,83 @@ declare var google;
 })
 export class LocationPage {
 
-  Destination: any = '';
-  MyLocation: any;
-  trackingState: string = "Stop Tracking"
+  public auth: AuthProvider;
+  picName: string = 'something';
+  tempName: string;
+  myPhoto: any;
+  public database: DatabaseProvider;
+  position: any;
+  latlng: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation, public locationTracker: LocationTracker, private firebase: DatabaseProvider) {
+  options: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    sourceType: this.camera.PictureSourceType.CAMERA,
+    mediaType: this.camera.MediaType.PICTURE,
+    allowEdit: false,
+    encodingType: this.camera.EncodingType.JPEG,
+    saveToPhotoAlbum: false
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LocationPage');
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public geolocation: Geolocation, private alertCtrl: AlertController,public camera:Camera) {}
 
-  calculateAndDisplayRoute() {
-    let that = this;
-    let directionsService = new google.maps.DirectionsService;
-    let directionsDisplay = new google.maps.DirectionsRenderer;
-    const map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 7,
-      center: {lat: 41.85, lng: -87.65}
-    });
-    directionsDisplay.setMap(map);
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
+  async takePicture() {
+    try {
+      //takes the picture and saves it to a string v
+      let imageData: string = await this.camera.getPicture();
+      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+      // Prompts the user to name the picture v
+      await this.presentPrompt();
+      // gets the current location of user
+      await navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-        map.setCenter(pos);
-        that.MyLocation = new google.maps.LatLng(pos);
-
-      }, function() {
-
       });
-    } else {
-      // Browser doesn't support Geolocation
+      // adds the picture, name and location to the database v
+      await this.database.userAddTag(this.auth.uid, this.picName,
+       this.position.coords.latitude , this.position.coords.longitude,this.myPhoto);
+    } catch (e) {
+      console.log(e);
     }
-
-    directionsService.route({
-    origin: this.MyLocation,
-    destination: this.Destination,
-    travelMode: 'DRIVING'
-  }, function(response, status) {
-    if (status === 'OK') {
-      directionsDisplay.setDirections(response);
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
-  });
-}
-toggleTracking() {
-  if (this.trackingState == "Start Tracking") 
-  {
-    this.trackingState = "Stop Tracking";
-    this.start();
   }
-  else 
-  {
-    this.trackingState = "Start Tracking";
-    this.stop();
-  }
-}
-
-// posttodb(){
-// this.geolocation.getCurrentPosition().then((resp) => {
-//   var coord
-//   {
-//   lat1 : resp.coords.latitude
-//   lon1:  resp.coords.longitude
-//   }
-//   this.firebase.postLocation(coord);
-//  }).catch((error) => {
-//    console.log('Error getting location', error);
-//  });
- 
-//  let watch = this.geolocation.watchPosition();
-//  watch.subscribe((data) => {
-//   // data can be a set of coordinates, or an error (if an error occurred).
-//   lat2: data.coords.latitude
-//   lon2: data.coords.longitude
-//  });
-
-// }
-
-
-start(){
-  console.log("before");
-  this.locationTracker.startTracking();
-  //this.posttodb();
-
-
-  // var coord = {
-  //          lat: position.coords.latitude,
-  //          lng: position.coords.longitude
-  //        };
-
-  // this.MyLocation = new google.maps.LatLng(coord);
-  //      var myloc = this.MyLocation = new google.maps.LatLng(coord);
-  //  this.firebase.postLocation(myloc);
-
- 
-  
-  // const map = new google.maps.Map(document.getElementById('map'), {
-  //   zoom: 7,
-  //   center: {lat: 41.85, lng: -87.65}
-  // });
-
-  // if (navigator.geolocation) {
-  //   navigator.geolocation.getCurrentPosition(function(position) {
-  //     var coord = {
-  //       lat: position.coords.latitude,
-  //       lng: position.coords.longitude
-  //     };
-  //     //map.setCenter(coord);
-  //     this.MyLocation = new google.maps.LatLng(coord);
-  //     var myloc = this.MyLocation = new google.maps.LatLng(coord);
-  // this.firebase.postLocation(myloc);
-
-  //   }, function() {
-
-  //   });
-  // } else {
-  //   // Browser doesn't support Geolocation
-  // }  
 
   
-  console.log("after");
-}
 
-stop(){
-  this.locationTracker.stopTracking();
-}
-}
+
+// Prompts the user to enter the name of the picture
+  presentPrompt() {
+    let alert = this.alertCtrl.create({
+      title: 'Save Picture As',
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Untitled'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: data => {
+            this.picName = data.name;
+            //console.log(this.picName)
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+    ionViewDidLoad() {
+      console.log('ionViewDidLoad LocationPage');
+    }
+  }

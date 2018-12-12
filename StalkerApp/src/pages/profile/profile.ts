@@ -257,13 +257,13 @@ export class ProfilePage {
 
 
 
-  async tagLoc() {
+ /* async tagLoc() {
     try {
       await this.database.userAddTag(this.auth.uid, 100, 100);
     } catch (e) {
       console.log(e);
     }
-  }
+  }*/
 
   addFriend(key)
   {

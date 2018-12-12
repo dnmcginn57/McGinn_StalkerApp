@@ -160,7 +160,7 @@ export class DatabaseProvider {
    *     tag_name: the name/message for the tag
    *     lat: the latitude of the location
    *     lon: the longitude of the location
-   *     img: optional, the base 64 encoded image associated with the tag
+   *     img: optional, file name of the image in "images/"
    * Returns: None
    */
   async userAddTag(id: string, tag_name: string, lat: number, lon: number, img?: string) {
