@@ -160,7 +160,7 @@ export class DatabaseProvider {
    *     tag_name: the name/message for the tag
    *     lat: the latitude of the location
    *     lon: the longitude of the location
-   *     img: optional, the base 64 encoded image associated with the tag
+   *     img: optional, name of the file in the 'images/' folder in storage
    * Returns: None
    */
   async userAddTag(id: string, tag_name: string, lat: number, lon: number, img?: string) {
@@ -169,7 +169,15 @@ export class DatabaseProvider {
       temp["Name"] = tag_name;
       temp["Time"] = new Date();
       temp["Location"] = [lat, lon];
-      temp["Image"] = img || "";
+      temp["Image"] = "images/" + img || "";
+      //If the tag has an image
+      if (temp["Image"] != "") {
+        //Get the download url of the file listed as its picture
+        this.store.storage.ref(temp["Image"]).getDownloadURL().then((url) => {
+          //Store that url in an object, keyed with the name of the file
+          this.image_urls[temp["Image"]] = url;
+        });
+      }
       await this.db.collection("Users").doc(id).collection("Tags").add(temp);
     } catch (e) {
       throw e;

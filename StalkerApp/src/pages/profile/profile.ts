@@ -6,6 +6,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AlertController } from 'ionic-angular';
 import {App} from 'ionic-angular';
+import { LocationTracker } from '../../providers/location-tracker/location-tracker';
 
 
 /**
@@ -61,6 +62,7 @@ export class ProfilePage {
     public database: DatabaseProvider,
     private alertCtrl: AlertController,
     private app:App,
+    private lt: LocationTracker
   ) {
     database.userGetPic(auth.uid).then((pic) => { this.myPhoto = pic; });
     console.log(this.myPhoto);
@@ -219,9 +221,35 @@ export class ProfilePage {
     alert.present();
   }
 
+  //Presents a prompt to user
+  //Allows user to edit and save their last name
+  presentPromptDelete() {
+    let alert = this.alertCtrl.create({
+      title: 'Are you sure you want to delete your account?',
+      subTitle: 'This action is irreversible and all data will be lost',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Yes, I am sure',
+          handler: data => {
+            this.deleteUser();
+            console.log("Account deleted");
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
   async Logout() {
     try{
       await this.auth.logout();
+      this.lt.stopTracking();
       this.app.getRootNav().setRoot(LoginPage);
     }catch(e)
     {
@@ -257,13 +285,13 @@ export class ProfilePage {
 
 
 
-  async tagLoc() {
+ /* async tagLoc() {
     try {
       await this.database.userAddTag(this.auth.uid, "name",100, 100);
     } catch (e) {
       console.log(e);
     }
-  }
+  }*/
 
   addFriend(key)
   {
@@ -276,6 +304,18 @@ export class ProfilePage {
     console.log(key);
     this.database.userDeclineFriendRequest(this.auth.uid,key);
     this.navCtrl.setRoot(this.navCtrl.getActive().component);
+  }
+
+  async deleteUser()
+  {
+    try{
+      await this.auth.deleteUser();
+      this.lt.stopTracking()
+      this.app.getRootNav().setRoot(LoginPage);
+    }catch(e)
+    {
+
+    }
   }
 
 }
