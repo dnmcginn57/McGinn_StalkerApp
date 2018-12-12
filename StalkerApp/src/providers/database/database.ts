@@ -163,21 +163,18 @@ export class DatabaseProvider {
    *     img: optional, name of the file in the 'images/' folder in storage
    * Returns: None
    */
-  async userAddTag(id: string, tag_name: string, lat: number, lon: number, img?: string) {
+  async userAddTag(id: string, tag_name: string, lat: number, lon: number, img: string) {
     try {
-      let temp = {};
+      var temp = {};
       temp["Name"] = tag_name;
       temp["Time"] = new Date();
       temp["Location"] = [lat, lon];
-      temp["Image"] = "images/" + img || "";
-      //If the tag has an image
-      if (temp["Image"] != "") {
-        //Get the download url of the file listed as its picture
-        this.store.storage.ref(temp["Image"]).getDownloadURL().then((url) => {
-          //Store that url in an object, keyed with the name of the file
-          this.image_urls[temp["Image"]] = url;
-        });
-      }
+      temp["Image"] = "images/" + img;
+      //Get the download url of the file listed as its picture
+      this.store.storage.ref(temp["Image"]).getDownloadURL().then((url) => {
+        //Store that url in an object, keyed with the name of the file
+        this.image_urls[temp["Image"]] = url;
+      });
       await this.db.collection("Users").doc(id).collection("Tags").add(temp);
     } catch (e) {
       throw e;
