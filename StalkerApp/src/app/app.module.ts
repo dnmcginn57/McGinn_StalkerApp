@@ -15,7 +15,6 @@ import { FriendPage } from '../pages/friend/friend';
 import { LocationPage } from '../pages/location/location';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage} from '../pages/register/register';
-import { ResetpassPage } from '../pages/resetpass/resetpass';
 import { AllUsersPage } from '../pages/all-users/all-users';
 import { PersonalchatPage } from '../pages/personalchat/personalchat';
 import {FriendProfilePage} from '../pages/friend-profile/friend-profile';
@@ -46,7 +45,6 @@ import { ChatService } from './app.service';
     LocationPage,
     LoginPage,
     RegisterPage,
-    ResetpassPage,
     AllUsersPage,
     PersonalchatPage,
     FriendProfilePage
@@ -69,7 +67,6 @@ import { ChatService } from './app.service';
     LocationPage,
     LoginPage,
     RegisterPage,
-    ResetpassPage,
     AllUsersPage,
     PersonalchatPage,
     FriendProfilePage
