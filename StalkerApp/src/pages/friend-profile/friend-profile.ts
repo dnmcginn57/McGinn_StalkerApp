@@ -16,7 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class FriendProfilePage {
 
   activeFriend;
-  testImage = "../../assets/imgs/frens.png";
+  testImage = "assets/imgs/frens.png";
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.activeFriend = navParams.data;
     console.log(this.activeFriend);

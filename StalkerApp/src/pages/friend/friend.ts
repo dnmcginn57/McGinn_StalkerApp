@@ -20,7 +20,7 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'friend.html',
 })
 export class FriendPage {
-  testImage = "../../assets/imgs/frens.png";
+  testImage = "assets/imgs/frens.png";
   Friends=[];
  // theirPhoto:any='../../assets/imgs/logo.png';
 
