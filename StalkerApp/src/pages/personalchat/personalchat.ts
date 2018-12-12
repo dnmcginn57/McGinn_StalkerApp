@@ -57,14 +57,8 @@ export class PersonalchatPage implements OnInit {
   } //ngOnInit
 
   addChat() {
-<<<<<<< HEAD
-    if (this.message && this.message !== "") {
-      console.log(this.chatuser);
-      
-=======
    /* if (this.message && this.message !== "") {
       console.log(this.message);
->>>>>>> 1de92e64df0495c824662a59012abe518bb948c5
       this.chatPayload = {
         message: this.message,
         sender: this.chatuser.email,
