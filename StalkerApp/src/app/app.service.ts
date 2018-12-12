@@ -32,10 +32,15 @@ export class ChatService {
 
   createPairId(user1, user2) {
     let pairId;
+//console.log("Pairing ID:" + user2.email);
     if (user1.time < user2.time) {
-      pairId = `${user1.email}|${user2.email}`;
+      
+      pairId =`${user1.time}|${user2.time}`
+
+      console.log ("Pair ID is: " + pairId);
     } else {
-      pairId = `${user2.email}|${user1.email}`;
+      pairId = `${user2.time}|${user1.time}`;
+      console.log ("Pair ID is: "+pairId);
     }
 
     return pairId;

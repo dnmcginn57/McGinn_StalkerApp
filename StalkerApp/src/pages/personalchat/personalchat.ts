@@ -28,7 +28,7 @@ export class PersonalchatPage implements OnInit {
   ) {
     this.chatpartner = this.chatService.currentChatPartner;
     this .chatuser = this.chatService.currentUser;
-    console.log ("Username: "+this.chatuser.first);
+    console.log ("Username: "+this.chatpartner.first);
   }
 
 
