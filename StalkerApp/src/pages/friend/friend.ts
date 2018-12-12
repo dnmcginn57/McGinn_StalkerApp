@@ -5,8 +5,10 @@ import { FriendProfilePage } from '../friend-profile/friend-profile';
 import { PersonalchatPage } from '../personalchat/personalchat';
 import { DatabaseProvider } from '../../providers/database/database';
 import { AuthProvider } from '../../providers/auth/auth';
-
-
+import { ChatService } from "../../app/app.service";
+import { FIREBASE_CONFIG } from '../../app/credentials';
+import { AngularFirestore } from "angularfire2/firestore";
+import * as firebase from 'firebase/app';
 /**
  * Generated class for the FriendPage page.
  *
@@ -22,11 +24,17 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class FriendPage {
   testImage = "../../assets/imgs/frens.png";
   Friends=[];
+  chatuser:any;
  // theirPhoto:any='../../assets/imgs/logo.png';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public db:DatabaseProvider,
-    public auth:AuthProvider) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public db:DatabaseProvider,
+              public auth:AuthProvider,
+              private data: AngularFirestore,
+              private chatService: ChatService) {
       this.getFriends();
+    
   }
   ionViewWillLoad()
   {
@@ -61,15 +69,40 @@ export class FriendPage {
 
   goFriendProfile(friend)
   {
-    console.log(friend);
+    //console.log(friend);
     this.navCtrl.push(FriendProfilePage,friend)
 
   }
-  goPersonalChat(friend){
-    console.log(friend);
-    this.navCtrl.push(PersonalchatPage,friend)
-
-
+  async goPersonalChat(friend){
+ 
+    // Tries to pair user to friend to start chat
+    try {
+    
+      // Gets users from the database   
+    let users =  await this.db.usersObject();
+      
+      // Sets the friend selected as the users current chat partner
+      this.chatService.currentChatPartner = friend.user;
+      
+      // Gets the current user
+      this.chatuser = users[this.auth.uid];
+      
+      //Sets the current user
+      this.chatService.currentUser= this.chatuser;
+      console.log( this.chatuser.first+ " is signed in");
+      // Calls the chatService to pair the chat participants
+      this.chatService.currentChatPairId = this.chatService.createPairId(
+      this.chatuser,
+      friend.user);
+      
+      //Opens the chat
+      this.navCtrl.push(PersonalchatPage);
+    }
+    // Catches error if getting the users fail
+    catch (e) 
+    {
+      console.log(e);
+    }
   }
-
+ 
 }
