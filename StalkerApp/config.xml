@@ -116,4 +116,5 @@
     <plugin name="cordova-plugin-mauron85-background-geolocation" spec="~2.3.6" />
     <engine name="ios" spec="^4.5.5" />
     <engine name="android" spec="7.0.0" />
+    <plugin name="cordova-sqlite-storage" spec="2.5.2" />
 </widget>

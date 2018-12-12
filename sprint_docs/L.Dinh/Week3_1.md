@@ -1,15 +1,15 @@
 ### Name: Luong Dinh
-### Date: 11/29
+### Date: 12/4
 
 ## Files Worked On
-https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/map/map.ts
+https://github.com/bluefire8421/StalkerApp/blob/master/StalkerApp/src/pages/location/location.ts
 
 ## Approximate Time Worked
 
 | Description                             | Hrs  |
 | :---------------------------------------| ---: |
-| Work on map.ts file                     | 1    |
+| Work on location.ts file                | 1.5  |
 
 
 ## Description of Sprint
-Continue to work on map.ts, attempt to fix click issue.
+Implementing takePicture(), and uploading pictures to firebase.

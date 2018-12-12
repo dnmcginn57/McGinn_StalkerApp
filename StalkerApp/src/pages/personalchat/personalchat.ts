@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
-import { AngularFirestore } from "angularfire2/firestore";
-import { Chat } from "../../app/app.models";
-import { FIREBASE_CONFIG } from "../../app/credentials";
-import { ChatService } from "../../app/app.service";
-import { Storage } from "@ionic/Storage";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Chat } from '../../app/app.models';
+import { FIREBASE_CONFIG } from '../../app/credentials';
+import { ChatService } from '../../app/app.service';
+import { Storage } from '@ionic/storage';
 
 
 
