@@ -55,7 +55,8 @@ export class PersonalchatPage implements OnInit {
 
   addChat() {
     if (this.message && this.message !== "") {
-      console.log(this.message);
+      console.log(this.chatuser);
+      
       this.chatPayload = {
         message: this.message,
         sender: this.chatuser.email,
