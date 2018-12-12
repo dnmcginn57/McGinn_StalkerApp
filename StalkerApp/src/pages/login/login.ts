@@ -4,7 +4,6 @@ import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { RegisterPage } from '../register/register';
-import { ResetpassPage } from '../resetpass/resetpass';
 import { TabsPage } from '../tabs/tabs';
 import { AuthProvider } from '../../providers/auth/auth';
 import { AlertController } from 'ionic-angular';
@@ -35,7 +34,6 @@ export class LoginPage {
       password: new FormControl(),
     });
   }
-
 
   presentAlert() {
     let alert = this.alertCtrl.create({
@@ -157,13 +155,8 @@ export class LoginPage {
     }
   }
 
-  goToResetPassPage(){
-    this.navCtrl.push(ResetpassPage);
-    }
-  
   goRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
-
 
 }
