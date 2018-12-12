@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Password Reset</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class = "background">
+    <ion-list>
+        <ion-item>
+            <ion-input type="email" [(ngModel)]="email" placeholder="Email"></ion-input>
+        </ion-item>
+        <button ion-button block round outline color="dark" style="color:white" (click)="reset()">Reset Password</button>
+        <button ion-button block round outline color="dark" style="color:white"  (click)="goLoginPage()">Go Back</button>
+
+    </ion-list>
+
+</ion-content>

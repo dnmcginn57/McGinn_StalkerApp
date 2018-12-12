@@ -21,39 +21,34 @@
     <button ion-button full class="submit-button" type="submit" (click)=tryLogin(loginForm.value)>
       Login
     </button>
-    <label class="error-message">{{errorMessage}}</label>
+    <label class="error-message">{{errorMessage}}</label> 
 
-    <button ion-button full class="register-button" (click)="goRegisterPage()">
+    <button ion-button full class = "register-button" (click)="goRegisterPage()">
       Register
     </button>
-    <!--
-    <ion-row>
-      <ion-col text-center>
-        <button ion-button clear color="light" (click)="onForgotPassword()">
-          Forgot your password?
-        </button>
-      </ion-col>
-    </ion-row>
-    -->
 
+    <button ion-button full class = "forgot-button" (click)="goToResetPassPage()">
+      Forgot Password
+    </button>
+    
     <br>
     <br>
 
     <ion-fab bottom left>
       <ion-row>
         <ion-col>
-          <button ion-fab color=light (click)='tryLoginWithFacebook()'>
-            <ion-icon name="logo-facebook"></ion-icon>
+          <button ion-fab color = light (click)='tryLoginWithFacebook()'>
+            <ion-icon name = "logo-facebook"></ion-icon>
           </button>
         </ion-col>
         <ion-col>
-          <button ion-fab color=light (click)='tryLoginWithGoogle()'>
-            <ion-icon name="logo-google"></ion-icon>
+          <button ion-fab color = light (click)='tryLoginWithGoogle()'>
+            <ion-icon name = "logo-google"></ion-icon>
           </button>
         </ion-col>
         <ion-col>
-          <button ion-fab color=light (click)='tryLoginWithTwitter()'>
-            <ion-icon name="logo-twitter"></ion-icon>
+          <button ion-fab color = light (click)='tryLoginWithTwitter()'>
+            <ion-icon name = "logo-twitter"></ion-icon>
           </button>
         </ion-col>
       </ion-row>

@@ -93,7 +93,6 @@
             <string>need photo library access to save pictures there</string>
         </edit-config>
     </platform>
-    <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
@@ -107,7 +106,6 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.733520227387-jvsr894cig1o3o8t13ojpkj0lqpnnpje" />
     </plugin>
     <plugin name="com-badrit-base64" spec="0.2.0" />
-    <plugin name="cordova-plugin-camera" spec="4.0.3" />
     <plugin name="cordova-plugin-facebook4" spec="^3.2.0">
         <variable name="APP_ID" value="1086394971523153" />
         <variable name="APP_NAME" value="StalkerApp" />
@@ -115,6 +113,8 @@
     </plugin>
     <plugin name="cordova-plugin-mauron85-background-geolocation" spec="~2.3.6" />
     <plugin name="cordova-sqlite-storage" spec="2.5.2" />
-    <engine name="ios" spec="^4.5.5" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <engine name="android" spec="7.0.0" />
+    <engine name="ios" spec="4.5.5" />
 </widget>
