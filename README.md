@@ -1,4 +1,10 @@
 # StalkerApp
+# Note
+This is a mirror of the original project repository. <br>
+I have mirrored the repository for the purpose of displaying my personal contributions <br>
+As such, I have left the origan Sprint Docs as they are to provide proper credit to all my team members who worked on it together <br>
+<br>
+David McGinn
 # Map
   - User Location
   - Other Friends/Group Location
